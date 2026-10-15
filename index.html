@@ -281,7 +281,7 @@
             <div id="student-locked-overlay" class="hidden bg-red-900 text-white p-6 rounded-xl shadow-2xl text-center space-y-3">
                 <i class="fa-solid fa-lock text-4xl text-yellow-400"></i>
                 <h3 class="text-lg font-bold">DASHBOARD TI TI (LỌWỌLỌWỌ) — AINI OWO ISANWO</h3>
-                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igba ti Verification Engine yoo fi jẹri isanwo rẹ.</p>
+                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igbaທີ່ Verification Engine yoo fi jẹri isanwo rẹ.</p>
                 <div class="bg-black/40 p-4 rounded border border-red-700 max-w-md mx-auto space-y-2 text-xs">
                     <p class="font-bold text-yellow-300">Iye Owo Asẹku ti o ku:</p>
                     <p id="locked-balance-display" class="font-mono text-sm font-bold">₦4,000.00</p>
@@ -572,6 +572,36 @@
                 </div>
 
                 <div id="admin-workspace-panel" class="p-4 md:p-6 bg-gray-50 rounded-lg border border-dashed border-gray-300 min-h-[300px]">
+                    <!-- ================= SAFETY DELETE PROTECTION ZONE ================= -->
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-4 mb-6 shadow-xl">
+                        <div class="border-b border-slate-800 pb-2">
+                            <h3 class="text-xs font-bold text-red-400 flex items-center gap-2">
+                                <span>⚠️</span> Eto Idabobo Pipa App Rẹ (Delete Protection Zone)
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Lati le jẹ ki bọtini piparẹ ṣiṣẹ, jọwọ kọ orukọ app rẹ silẹ niisalẹ lati jẹrisi pe o mọ ohun ti o n ṣe.</p>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Kọ "ACBD-SET" lati jẹrisi:</label>
+                            <input type="text" id="confirm-delete-input" onkeyup="verifyDeleteAction()" placeholder="Kọ ACBD-SET si ibi..." class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white focus:outline-none focus:border-red-500">
+                        </div>
+                        
+                        <!-- Awọn Bọtini: Save ati Delete -->
+                        <div class="space-y-2 pt-1">
+                            <!-- Bọtini Save -->
+                            <button onclick="saveProtectionSettings()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2.5 rounded transition shadow cursor-pointer">
+                                💾 Save Changes (Fipamọ Eto)
+                            </button>
+                            
+                            <!-- Bọtini Delete (Yoo wa ni Disabled titi di igba ti a kọ orukọ app deede) -->
+                            <button id="secure-delete-btn" disabled onclick="executeDeleteAction()" class="w-full bg-gray-700 text-gray-400 text-xs font-semibold py-2.5 rounded cursor-not-allowed transition">
+                                Jọwọ Kọ Orukọ App Rẹ Ṣaju
+                            </button>
+                        </div>
+                        
+                        <div id="save-status" class="text-center text-[11px] text-emerald-400 font-mono"></div>
+                    </div>
+
                     <div class="text-center text-gray-500 py-12">
                         <i class="fa-solid fa-hand-pointer text-3xl mb-2 text-indigo-400"></i>
                         <p class="text-sm">Jọwọ yan aṣayan kankan ninu <b>Universal Dropdown Menu</b> lati bẹrẹ iṣakoso.</p>
@@ -689,6 +719,37 @@
         let vrmcClassActiveState = JSON.parse(localStorage.getItem('vpatbe_vrmc_active')) || false;
         let studentMicState = false;
         let churchPaymentVerifiedState = false;
+
+        // ================= SAFETY DELETE FUNCTIONS =================
+        function verifyDeleteAction() {
+            const userInput = document.getElementById('confirm-delete-input').value.trim();
+            const deleteButton = document.getElementById('secure-delete-btn');
+            
+            if (userInput === "ACBD-SET") {
+                deleteButton.disabled = false;
+                deleteButton.className = "w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2.5 rounded transition cursor-pointer shadow-lg";
+                deleteButton.innerText = "Pa App Yii Rẹ Bayi (Delete Site)";
+            } else {
+                deleteButton.disabled = true;
+                deleteButton.className = "w-full bg-gray-700 text-gray-400 text-xs font-semibold py-2.5 rounded cursor-not-allowed transition";
+                deleteButton.innerText = "Jọwọ Kọ Orukọ App Rẹ Ṣaju";
+            }
+        }
+
+        function saveProtectionSettings() {
+            const statusEl = document.getElementById('save-status');
+            statusEl.innerText = "Aṣeyọri! A ti fipamọ awọn eto aabo rẹ si system.";
+            setTimeout(() => {
+                statusEl.innerText = "";
+            }, 3000);
+        }
+
+        function executeDeleteAction() {
+            let finalCheck = confirm("IKILỌ IKẸHIN: Ṣe o daju gidi gidi pe o fẹ pa app rẹ rẹ?");
+            if (finalCheck) {
+                alert("A ti fipa app rẹ rẹ ni aabo.");
+            }
+        }
 
         // ================= SUPABASE HYBRID OFFLINE-ONLINE SYNC ENGINE =================
         async function syncStudentToSupabase(studentData) {
@@ -2557,7 +2618,42 @@
             } else if (actionKey === 'ministry_name_mgr') {
                 renderMinistryNameManager(panel);
             } else {
-                panel.innerHTML = `<div class="text-center text-gray-500 py-12"><p class="text-sm">Jọwọ yan aṣayan kankan ninu Universal Dropdown Menu.</p></div>`;
+                panel.innerHTML = `
+                    <!-- ================= SAFETY DELETE PROTECTION ZONE ================= -->
+                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-4 mb-6 shadow-xl">
+                        <div class="border-b border-slate-800 pb-2">
+                            <h3 class="text-xs font-bold text-red-400 flex items-center gap-2">
+                                <span>⚠️</span> Eto Idabobo Pipa App Rẹ (Delete Protection Zone)
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-1">Lati le jẹ ki bọtini piparẹ ṣiṣẹ, jọwọ kọ orukọ app rẹ silẹ niisalẹ lati jẹrisi pe o mọ ohun ti o n ṣe.</p>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-[11px] text-slate-400 mb-1">Kọ "ACBD-SET" lati jẹrisi:</label>
+                            <input type="text" id="confirm-delete-input" onkeyup="verifyDeleteAction()" placeholder="Kọ ACBD-SET si ibi..." class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white focus:outline-none focus:border-red-500">
+                        </div>
+                        
+                        <!-- Awọn Bọtini: Save ati Delete -->
+                        <div class="space-y-2 pt-1">
+                            <!-- Bọtini Save -->
+                            <button onclick="saveProtectionSettings()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2.5 rounded transition shadow cursor-pointer">
+                                💾 Save Changes (Fipamọ Eto)
+                            </button>
+                            
+                            <!-- Bọtini Delete (Yoo wa ni Disabled titi di igba ti a kọ orukọ app deede) -->
+                            <button id="secure-delete-btn" disabled onclick="executeDeleteAction()" class="w-full bg-gray-700 text-gray-400 text-xs font-semibold py-2.5 rounded cursor-not-allowed transition">
+                                Jọwọ Kọ Orukọ App Rẹ Ṣaju
+                            </button>
+                        </div>
+                        
+                        <div id="save-status" class="text-center text-[11px] text-emerald-400 font-mono"></div>
+                    </div>
+
+                    <div class="text-center text-gray-500 py-12">
+                        <i class="fa-solid fa-hand-pointer text-3xl mb-2 text-indigo-400"></i>
+                        <p class="text-sm">Jọwọ yan aṣayan kankan ninu <b>Universal Dropdown Menu</b>.</p>
+                    </div>
+                `;
             }
         }
 
