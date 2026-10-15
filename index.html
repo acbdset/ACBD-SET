@@ -281,7 +281,7 @@
             <div id="student-locked-overlay" class="hidden bg-red-900 text-white p-6 rounded-xl shadow-2xl text-center space-y-3">
                 <i class="fa-solid fa-lock text-4xl text-yellow-400"></i>
                 <h3 class="text-lg font-bold">DASHBOARD TI TI (LỌWỌLỌWỌ) — AINI OWO ISANWO</h3>
-                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igbaທີ່ Verification Engine yoo fi jẹri isanwo rẹ.</p>
+                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igba tí Verification Engine yoo fi jẹri isanwo rẹ.</p>
                 <div class="bg-black/40 p-4 rounded border border-red-700 max-w-md mx-auto space-y-2 text-xs">
                     <p class="font-bold text-yellow-300">Iye Owo Asẹku ti o ku:</p>
                     <p id="locked-balance-display" class="font-mono text-sm font-bold">₦4,000.00</p>
@@ -913,7 +913,8 @@
             alert('A ti daakọ Payment Code rẹ!');
         }
 
-        function executeAdvancedVerificationEngine() {
+        // SUPABASE HYBRID CLOUD SYNC FOR TRANSACTION ID & PENDING VERIFICATIONS
+        async function executeAdvancedVerificationEngine() {
             const txIdInput = document.getElementById('srf-input-transaction-id').value.trim();
             const bankInput = document.getElementById('srf-input-bank-name').value;
             const statusBox = document.getElementById('verification-engine-status');
@@ -925,26 +926,52 @@
                 return;
             }
 
-            let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
             const studentTempData = {
                 name: document.getElementById('srf-name').value || "Akẹkọ Tuntun",
                 phone: document.getElementById('srf-phone').value || "",
                 address: document.getElementById('srf-address').value || "",
                 church: hasChurchState ? document.getElementById('srf-church-name').value : "Independent",
-                txId: txIdInput,
-                bank: bankInput,
-                payCode: generatedPaymentCode,
+                tx_id: txIdInput,
+                bank_name: bankInput,
+                pay_code: generatedPaymentCode,
                 passport: currentCapturedPassport,
-                paymentMode: currentPaymentMode,
-                seen: false
+                payment_mode: currentPaymentMode,
+                seen: false,
+                created_at: new Date().toISOString()
             };
-            pendingVerifications.push(studentTempData);
-            localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
 
-            statusBox.className = "text-[11px] text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center";
-            statusBox.innerHTML = `<i class="fa-solid fa-clock mr-2"></i> Jọwọ duro de Ifọwọsi owo tio san lati ọdọ ILE-ISE WA (Super Admin Pending SEEN Approval).`;
-            
-            alert('A ti firanṣẹ ẹri isanwo rẹ si Super Admin Control Center. Jọwọ duro titi ti admin yoo fi tẹ SEEN.');
+            try {
+                const { data, error } = await _supabase
+                    .from('vpatbe_pending_verifications')
+                    .insert([studentTempData]);
+
+                if (error) throw error;
+
+                statusBox.className = "text-[11px] text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center";
+                statusBox.innerHTML = `<i class="fa-solid fa-clock mr-2"></i> Jọwọ duro de Ifọwọsi owo tio san lati ọdọ ILE-ISE WA (Cloud Verified Pending SEEN).`;
+                
+                alert('A ti firanṣẹ ẹri isanwo rẹ si Cloud Server taara. Admin le ri lati eyikeyi foonu!');
+            } catch (err) {
+                console.log('Supabase Cloud Error, falling back to local storage:', err);
+                let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+                pendingVerifications.push(studentTempData);
+                localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
+                alert('A ti fi isọfunni pamọ (Offline Hybrid Mode).');
+            }
+        }
+
+        async function fetchPendingVerificationsFromCloud() {
+            try {
+                const { data, error } = await _supabase
+                    .from('vpatbe_pending_verifications')
+                    .select('*');
+                if (error) throw error;
+                if (data) {
+                    localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(data));
+                }
+            } catch (err) {
+                console.log('Error fetching from cloud:', err);
+            }
         }
 
         function churchToggleCompanyAccountDisplay() {
@@ -952,7 +979,7 @@
             if(box) box.classList.toggle('hidden');
         }
 
-        function churchExecuteVerifyPayment() {
+        async function churchExecuteVerifyPayment() {
             const txId = document.getElementById('cb-student-txid').value.trim();
             const bank = document.getElementById('cb-student-bank-name').value;
             const statusBox = document.getElementById('cb-verification-status-box');
@@ -962,22 +989,28 @@
             if(!txId) { alert('Jọwọ tẹ Transaction ID rẹ.'); return; }
             if(!bank) { alert('Jọwọ yan Banki rẹ.'); return; }
 
-            let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
             const church = churchGroupsList[currentLoggedInChurchIndex];
-
-            pendingVerifications.push({
+            const churchTempData = {
                 name: studentName,
                 phone: document.getElementById('cb-student-phone').value,
                 address: document.getElementById('cb-student-address').value,
                 church: church.name,
-                txId: txId,
-                bank: bank,
-                payCode: "CHUR-PAY-" + Math.floor(100000 + Math.random() * 900000),
+                tx_id: txId,
+                bank_name: bank,
+                pay_code: "CHUR-PAY-" + Math.floor(100000 + Math.random() * 900000),
                 passport: "",
-                paymentMode: "Church Group Batch",
-                seen: false
-            });
-            localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
+                payment_mode: "Church Group Batch",
+                seen: false,
+                created_at: new Date().toISOString()
+            };
+
+            try {
+                await _supabase.from('vpatbe_pending_verifications').insert([churchTempData]);
+            } catch(e) {
+                let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+                pendingVerifications.push(churchTempData);
+                localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
+            }
 
             statusBox.className = "p-2 bg-amber-50 text-amber-800 rounded border border-amber-200 text-[11px] flex items-center";
             statusBox.innerHTML = `<i class="fa-solid fa-clock mr-1"></i> A ti fi isọfunni isanwo rẹ ranṣẹ si SEEN button ninu Super Admin Control Center. Jọwọ duro de ifọwọsi.`;
@@ -1053,7 +1086,6 @@
             localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
             localStorage.setItem('acb_registered_students', JSON.stringify(studentsList));
             
-            // Sync to Supabase Cloud asynchronously
             syncStudentToSupabase(newStudent);
 
             currentLoggedInStudentIndex = studentsList.length - 1;
@@ -2160,7 +2192,6 @@
             currentMinistryName = newName;
             localStorage.setItem('vpatbe_ministry_name', newName);
             
-            // Update UI headers instantly
             const topNavTitle = document.getElementById('top-navbar-ministry-title');
             const authTitle = document.getElementById('auth-page-ministry-title');
             const ministryBanner = document.getElementById('ministry-title-banner');
@@ -2168,8 +2199,6 @@
             if(topNavTitle) topNavTitle.innerText = newName;
             if(authTitle) authTitle.innerText = newName;
             if(ministryBanner) {
-                const partnershipAppend = document.getElementById('partnership-church-append');
-                const churchText = partnershipAppend ? partnershipAppend.outerHTML : '';
                 ministryBanner.innerHTML = `${newName} <span id="partnership-church-append" class="font-semibold text-indigo-700"></span>`;
             }
 
@@ -2248,23 +2277,32 @@
                     </div>
                 `;
             } else if (actionKey === 'verify_payment_mgr') {
+                fetchPendingVerificationsFromCloud().then(() => {
+                    const pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+                    const workspace = document.getElementById('admin-workspace-panel');
+                    if(workspace && actionKey === 'verify_payment_mgr') {
+                        // Re-render to show cloud data
+                        handleAdminDropdownChange('verify_payment_mgr');
+                    }
+                });
+
                 const pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
                 panel.innerHTML = `
                     <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-receipt text-indigo-600 mr-2"></i>Verify My Payment Engine (SEEN Approval & Status Control + Delete)</h4>
-                    <p class="text-xs text-gray-600 mb-3">Nibi ni o le ri Transaction ID, Banki, ati isọfunni isanwo lati ọdọ awọn akẹkọ tabi Church groups. Tẹ SEEN lati fọwọsi, tabi Delete lati pa rẹ.</p>
+                    <p class="text-xs text-gray-600 mb-3">Nibi ni o le ri Transaction ID, Banki, ati isọfunni isanwo lati ori foonu eyikeyi. Tẹ SEEN lati fọwọsi, tabi Delete lati pa rẹ.</p>
                     <div class="space-y-3">
                         ${pendingVers.length === 0 ? '<p class="text-xs text-gray-500 italic">Ko tii si ẹri isanwo kankan ti o duro de ifọwọsi.</p>' : ''}
                         ${pendingVers.map((pv, idx) => `
                             <div class="p-3 bg-white rounded border space-y-2 text-xs shadow-sm">
                                 <div class="flex justify-between items-center font-bold text-indigo-900 border-b pb-1">
                                     <span>${pv.name} (${pv.church})</span>
-                                    <span class="font-mono text-cyan-700">${pv.payCode}</span>
+                                    <span class="font-mono text-cyan-700">${pv.pay_code || pv.payCode}</span>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2 text-gray-700">
                                     <p><b>Phone:</b> ${pv.phone}</p>
-                                    <p><b>Bank:</b> ${pv.bank}</p>
-                                    <p><b>Transaction ID:</b> ${pv.txId}</p>
-                                    <p><b>Mode:</b> ${pv.paymentMode}</p>
+                                    <p><b>Bank:</b> ${pv.bank_name || pv.bank}</p>
+                                    <p><b>Transaction ID:</b> ${pv.tx_id || pv.txId}</p>
+                                    <p><b>Mode:</b> ${pv.payment_mode || pv.paymentMode}</p>
                                 </div>
                                 <div class="flex justify-between items-center pt-2 border-t">
                                     <span class="font-bold ${pv.seen ? 'text-green-600' : 'text-amber-600'}">${pv.seen ? 'Status: Approved (SEEN Clicked)' : 'Status: Pending Approval'}</span>
@@ -2754,11 +2792,24 @@
             }
         }
 
-        function approveVerificationSeen(index) {
+        async function approveVerificationSeen(index) {
             let pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
             if(pendingVers[index]) {
                 pendingVers[index].seen = true;
                 localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVers));
+
+                try {
+                    const target = pendingVers[index];
+                    if (target.tx_id || target.txId) {
+                        await _supabase
+                            .from('vpatbe_pending_verifications')
+                            .update({ seen: true })
+                            .eq('tx_id', target.tx_id || target.txId);
+                    }
+                } catch(e) {
+                    console.log('Cloud update error:', e);
+                }
+
                 paymentVerifiedState = true;
                 churchPaymentVerifiedState = true;
                 
@@ -3013,13 +3064,11 @@
         async function initApp() {
             updateDateTime();
             
-            // Sync initial ministry title across UI
             const topNavTitle = document.getElementById('top-navbar-ministry-title');
             const authTitle = document.getElementById('auth-page-ministry-title');
             if(topNavTitle) topNavTitle.innerText = currentMinistryName;
             if(authTitle) authTitle.innerText = currentMinistryName;
 
-            // Register PWA Service Worker for Offline Mode
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
                     navigator.serviceWorker.register('./sw.js')
@@ -3028,8 +3077,8 @@
                 });
             }
 
-            // Fetch latest data from Supabase Cloud
             await fetchStudentsFromSupabase();
+            await fetchPendingVerificationsFromCloud();
 
             const savedAcc = localStorage.getItem('vpatbe_company_account');
             if (savedAcc && document.getElementById('srf-company-account-display')) {
