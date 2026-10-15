@@ -1,0 +1,2968 @@
+<!DOCTYPE html>
+<html lang="yo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Christ Believers Drama Set Baptism School - VPATBE</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- html2pdf Library for Real PDF Generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Supabase JS Client CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        .signature-img {
+            max-width: 150px;
+            max-height: 60px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+        .modal-zoom-img {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .modal-zoom-img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans" onload="initApp()">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-indigo-900 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-water text-2xl text-cyan-400"></i>
+                <div>
+                    <h1 id="top-navbar-ministry-title" class="text-xs md:text-sm font-bold tracking-wide">ALL CHRIST BELIEVERS DRAMA SET BAPTISM SCHOOL</h1>
+                    <p class="text-xs text-indigo-200">VPATBE Engine & SRF System (High-Speed Cloud Hybrid)</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3 flex-wrap">
+                <div class="hidden sm:flex flex-col text-right text-xs bg-indigo-800 px-3 py-1 rounded">
+                    <span id="live-date" class="font-semibold text-yellow-300">--/--/----</span>
+                    <span id="live-clock" class="font-mono">--:--:--</span>
+                </div>
+
+                <div id="admin-badge-box" class="hidden flex items-center space-x-2 bg-indigo-800 px-3 py-1.5 rounded border border-indigo-600">
+                    <span class="text-xs text-yellow-300 font-bold"><i class="fa-solid fa-shield-halved mr-1"></i> Admin & Founder Logged In</span>
+                    <button onclick="logoutAdmin()" class="text-[10px] bg-red-700 hover:bg-red-600 px-2 py-0.5 rounded text-white font-bold cursor-pointer">Log Out</button>
+                </div>
+
+                <select id="language-selector" onchange="changeLanguage()" class="bg-indigo-700 text-white text-xs px-3 py-1.5 rounded border border-indigo-600 focus:outline-none font-medium cursor-pointer">
+                    <option value="yo">Yorùbá</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-4 py-6 max-w-6xl">
+
+        <!-- ================= WELCOME / SIGN IN / REGISTRATION PAGE ================= -->
+        <section id="auth-page" class="space-y-6">
+            <div class="max-w-xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-xl border border-gray-200 space-y-6">
+                <div class="text-center space-y-2">
+                    <i class="fa-solid fa-church text-4xl text-indigo-900"></i>
+                    <h2 id="auth-page-ministry-title" class="text-xl md:text-2xl font-extrabold text-indigo-900">ALL CHRIST BELIEVERS DRAMA SET BAPTISM SCHOOL</h2>
+                    <p class="text-xs text-gray-600">Kaabo si Eto Iribọmi ati Ikẹkọọ Ọlọrun.</p>
+                </div>
+
+                <!-- Welcome Page Smart Plasma TV Advert Space (Cycles dynamically) -->
+                <div id="welcome-media-display-container" class="w-full bg-black rounded-lg overflow-hidden border-2 border-gray-800 shadow-2xl flex items-center justify-center min-h-[200px] relative aspect-video">
+                    <div id="welcome-advert-display-space" class="w-full h-full flex items-center justify-center">
+                        <p class="text-xs text-gray-400 italic">[Welcome Page Smart Plasma TV Advert Space]</p>
+                    </div>
+                </div>
+
+                <!-- Tabs: Sign In / Register SRF / Church Group Reg -->
+                <div class="flex rounded-lg bg-gray-100 p-1 flex-wrap gap-1">
+                    <button id="tab-signin-btn" onclick="switchAuthTab('signin')" class="flex-1 py-2 text-[11px] font-bold rounded-md bg-indigo-900 text-white shadow transition cursor-pointer">Sign In</button>
+                    <button id="tab-srf-btn" onclick="switchAuthTab('srf')" class="flex-1 py-2 text-[11px] font-bold rounded-md text-gray-700 hover:text-indigo-900 transition cursor-pointer">Student SRF</button>
+                    <button id="tab-church-reg-btn" onclick="switchAuthTab('church_reg')" class="flex-1 py-2 text-[11px] font-bold rounded-md text-gray-700 hover:text-indigo-900 transition cursor-pointer">Church Group</button>
+                </div>
+
+                <!-- SIGN IN FORM -->
+                <div id="signin-container" class="space-y-4">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-gray-700">Orukọ Kikun / Church Group Name (Sign In):</label>
+                        <input type="text" id="signin-name" placeholder="Apeere: Timothy Oluwalayomi / Grace Church" class="w-full p-3 border rounded-lg bg-gray-50 text-xs focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <div class="space-y-1 relative">
+                        <label class="block text-xs font-bold text-gray-700">ID/NO / Church Password (Security Code):</label>
+                        <input type="password" id="signin-idno" placeholder="KỌ ID/NO" class="w-full p-3 border rounded-lg bg-gray-50 text-xs focus:ring-2 focus:ring-indigo-500">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-7 text-gray-500 hover:text-indigo-900 cursor-pointer text-xs">
+                            <i id="eye-icon" class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <button onclick="processSignIn()" class="w-full py-3 bg-indigo-900 hover:bg-indigo-800 text-white rounded-lg text-xs font-bold shadow transition cursor-pointer">Sign In to Dashboard</button>
+                </div>
+
+                <!-- CHURCH GROUP REGISTRATION FORM -->
+                <div id="church-reg-container" class="hidden space-y-4">
+                    <form id="church-reg-form" onsubmit="submitChurchRegistration(event)" class="space-y-4 text-xs">
+                        <div class="p-3 bg-indigo-50 rounded border border-indigo-200">
+                            <p class="font-bold text-indigo-900"><i class="fa-solid fa-circle-info mr-1"></i> Church Group Registration (<span id="church-fee-display-text">₦5,000</span> per student fee structured)</p>
+                            <p class="text-[11px] text-gray-600 mt-1">Awọn Pastor ti wọn fẹ duro gẹgẹ bi agbẹ́rẹ́ fún wa le ṣe registration ijọ wọn nibi lati kọ́ awọn ọmọ ijọ wọn.</p>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">1. Orukọ Church (Church Name):</label>
+                            <input type="text" id="reg-church-name" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Apeere: All Souls Baptist Church">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">2. Address Church:</label>
+                            <input type="text" id="reg-church-address" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Adiresi ijọ naa">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">3. Pastor Name:</label>
+                            <input type="text" id="reg-pastor-name" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Orukọ pastor agbẹ́rẹ́">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">4. Pastor Phone Number:</label>
+                            <input type="tel" id="reg-pastor-phone" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Nọmba tẹlifoonu pastor">
+                        </div>
+                        <button type="submit" class="w-full py-3 bg-indigo-900 hover:bg-indigo-800 text-white rounded-lg font-bold cursor-pointer transition">
+                            SUBMIT & GENERATE CHURCH PASSWORD
+                        </button>
+                    </form>
+                </div>
+
+                <!-- STUDENT REGISTRATION FORM (SRF) -->
+                <div id="srf-container" class="hidden space-y-4">
+                    <form id="srf-form" onsubmit="submitRegistrationForm(event)" class="space-y-4 text-xs">
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">1. Oruko Kikun (Full Name):</label>
+                            <input type="text" id="srf-name" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Kọ orukọ rẹ ni kikun">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">2. Phone Number:</label>
+                            <input type="tel" id="srf-phone" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Nọmba tẹlifoonu rẹ">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">3. Address Ibugbe (Residential Address):</label>
+                            <input type="text" id="srf-address" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Adiresi ibugbe rẹ">
+                        </div>
+
+                        <div class="space-y-2 pt-2 border-t">
+                            <label class="block font-bold text-gray-800">4. Button Asayan - Ṣe o ni Ijọ ti o n lọ?</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <button type="button" id="btn-has-church" onclick="selectChurchOption('yes')" class="py-2.5 px-3 border rounded font-bold bg-indigo-50 text-indigo-900 border-indigo-300 cursor-pointer text-center">MO NI</button>
+                                <button type="button" id="btn-no-church" onclick="selectChurchOption('no')" class="py-2.5 px-3 border rounded font-bold bg-gray-100 text-gray-700 border-gray-300 cursor-pointer text-center">MIO NI RARA</button>
+                            </div>
+                        </div>
+
+                        <div id="church-details-box" class="space-y-3 p-3 bg-indigo-50/50 rounded border border-indigo-100">
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">6. Orukọ Ijọ:</label>
+                                <input type="text" id="srf-church-name" class="w-full p-2 border rounded bg-white" placeholder="Oruko ijọ ti o n lọ">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">7. Address Ijọ:</label>
+                                <input type="text" id="srf-church-address" class="w-full p-2 border rounded bg-white" placeholder="Adiresi ijọ naa">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-gray-700 mb-1">8. Phone Number Pastor Ijọ Naa:</label>
+                                <input type="tel" id="srf-church-pastor" class="w-full p-2 border rounded bg-white" placeholder="Nọmba pastor">
+                            </div>
+                        </div>
+
+                        <div id="no-church-warning" class="hidden p-3 bg-amber-50 rounded border border-amber-300 text-amber-900 space-y-1">
+                            <p class="font-bold"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Akiyesi Pataki:</p>
+                            <p class="text-[11px] leading-relaxed">Ọpọndandan kio darapọmọ ijọ kan kio le rọrun fún ọ la ṣe iribọmi. Bi o ba ti ri ijọ tio tẹ ọ lọrun, jọwọ jẹ ki a mọ ni kiakia kio si fi nọmba pastor ati orukọ ijọ pẹlu Address ijọ na ranṣẹ si wa.</p>
+                        </div>
+
+                        <div class="space-y-2 pt-2 border-t">
+                            <label class="block font-bold text-gray-800">9. Live Passport Camera (2x2 Frame)</label>
+                            <div class="flex flex-col items-center space-y-2 bg-gray-900 p-4 rounded-xl">
+                                <div class="w-32 h-32 border-4 border-dashed border-cyan-400 rounded-lg overflow-hidden relative flex items-center justify-center bg-black">
+                                    <video id="camera-preview" autoplay playsinline class="w-full h-full object-cover"></video>
+                                    <canvas id="camera-canvas" class="hidden"></canvas>
+                                    <img id="captured-passport-img" src="" loading="lazy" alt="Passport" class="hidden w-full h-full object-cover absolute inset-0">
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button type="button" onclick="startCamera()" class="px-3 py-1.5 bg-cyan-600 text-white rounded font-bold cursor-pointer text-[10px]"><i class="fa-solid fa-camera mr-1"></i> Tan Kamera</button>
+                                    <button type="button" onclick="capturePassport()" class="px-3 py-1.5 bg-green-600 text-white rounded font-bold cursor-pointer text-[10px]"><i class="fa-solid fa-circle-dot mr-1"></i> Ya Passport</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2 border-t">
+                            <label class="block font-bold text-gray-800">10. Sanwo & Advanced Payment Verification Engine</label>
+                            
+                            <!-- Interactive Opay Guide with Click-to-Zoom Modal Feature (Lazy Loaded) -->
+                            <div class="p-3 bg-indigo-50 rounded-lg border border-indigo-200 space-y-2">
+                                <span class="text-[11px] font-bold text-indigo-900 block"><i class="fa-solid fa-circle-info mr-1"></i> Bii O Se Yẹ Ki O Ko Amount ati Remark (PAY CODE) Sori Bank App Rẹ:</span>
+                                <div class="w-full flex justify-center bg-white p-2 rounded border cursor-pointer" onclick="openOpayZoomModal()">
+                                    <img src="1000225872.jpg" loading="lazy" alt="Bank Transfer Reference Guide" class="w-full max-w-xs rounded shadow-md object-contain modal-zoom-img" onerror="this.src='https://via.placeholder.com/300x150?text=Opay+Payment+Guide+Click+To+Zoom'">
+                                </div>
+                                <p class="text-[10px] text-gray-600 text-center">Ranti lati fi PAY CODE rẹ si abala <b>Remark / Narration</b> gẹgẹ bi o ṣe han ninu aworan yii. (Tẹ aworan na lati gbooro si)</p>
+                            </div>
+
+                            <div class="p-3 bg-gray-100 rounded border space-y-2">
+                                <span class="text-[10px] font-bold text-gray-700 block">Yan Ọna Isanwo (Payment Mode):</span>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button type="button" id="pay-mode-full" onclick="setPaymentMode('full')" class="py-2 px-2 bg-indigo-900 text-white rounded font-bold text-[10px] cursor-pointer">San Lapapọ (Full Payment)</button>
+                                    <button type="button" id="pay-mode-half" onclick="setPaymentMode('half')" class="py-2 px-2 bg-white text-gray-700 border rounded font-bold text-[10px] cursor-pointer">San Idaji Lọwọlọwọ (Installment)</button>
+                                </div>
+                                <p id="srf-amount-payable-display" class="text-xs font-bold text-indigo-900 pt-1">Iye owo ti yoo san: ₦8,000.00</p>
+                            </div>
+
+                            <div class="bg-gray-100 p-3 rounded border flex justify-between items-center">
+                                <div>
+                                    <span class="text-[10px] text-gray-500 block">Payment Code Yẹ:</span>
+                                    <span id="srf-generated-payment-code" class="font-mono font-bold text-indigo-900 text-sm">Ya passport kọṣẹ lati ri code</span>
+                                </div>
+                                <button type="button" onclick="copyPaymentCode()" class="px-2.5 py-1 bg-indigo-200 text-indigo-900 rounded font-bold text-[10px] cursor-pointer">Copy Code</button>
+                            </div>
+
+                            <div class="p-3 bg-indigo-50/60 rounded border border-indigo-200 space-y-3">
+                                <span class="text-xs font-bold text-indigo-900 block"><i class="fa-solid fa-receipt mr-1"></i> Fọọmu Ẹri Isanwo Banki (Transaction Details):</span>
+                                <div>
+                                    <label class="block font-bold text-gray-700 mb-1 text-[11px]">Transaction ID / Reference Number:</label>
+                                    <input type="text" id="srf-input-transaction-id" placeholder="Apeere: TXN-99482105..." class="w-full p-2.5 border rounded bg-white text-xs font-mono">
+                                </div>
+                                <div>
+                                    <label class="block font-bold text-gray-700 mb-1 text-[11px]">Banki Tio Sanwo Si (Company Bank Name):</label>
+                                    <select id="srf-input-bank-name" class="w-full p-2.5 border rounded bg-white text-xs font-medium cursor-pointer">
+                                        <option value="">-- Yan Banki --</option>
+                                        <option value="Moniepoint">Moniepoint Microfinance Bank</option>
+                                        <option value="Opay">Opay Digital Services</option>
+                                        <option value="Kuda">Kuda Bank</option>
+                                        <option value="Access">Access Bank</option>
+                                        <option value="GTBank">Guaranty Trust Bank (GTB)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="bg-indigo-900 text-white p-3 rounded space-y-1">
+                                <span class="text-[10px] text-indigo-200 block font-bold">Company Bank Account (Active Engine Monitor):</span>
+                                <div id="srf-company-account-display" class="font-mono text-xs text-yellow-300 font-bold">
+                                    Bank: Moniepoint | Acct: 7069344855 | Name: TIMOTHY OLUWALAYOMI ADEWALE
+                                </div>
+                            </div>
+
+                            <div class="p-3 bg-gray-50 rounded border space-y-2">
+                                <span class="text-[10px] font-bold text-gray-700 block">Verification Engine Deep AI Status:</span>
+                                <div id="verification-engine-status" class="text-[11px] text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center">
+                                    <i class="fa-solid fa-triangle-exclamation mr-2"></i> Jọwọ tẹ Transaction ID ati Banki rẹ ṣaju.
+                                </div>
+                                <button type="button" id="verify-my-payment-btn" onclick="executeAdvancedVerificationEngine()" class="w-full py-2 bg-indigo-700 hover:bg-indigo-800 text-white rounded font-bold cursor-pointer text-xs transition">
+                                    <i class="fa-solid fa-shield-halved mr-1"></i> Verify My Payment (Durowo Ifọwọsi)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" id="srf-submit-btn" disabled class="w-full py-3 bg-gray-400 text-white rounded-lg font-bold cursor-not-allowed transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-lock" id="srf-submit-lock-icon"></i>
+                                <span>SUBMIT (Requires Super Admin SEEN Approval)</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= STUDENT DASHBOARD ================= -->
+        <section id="student-dashboard" class="hidden space-y-6">
+            <div id="student-installment-banner" class="hidden bg-amber-100 border-l-4 border-amber-600 text-amber-900 p-4 rounded-r-xl shadow-md flex justify-between items-center text-xs">
+                <div>
+                    <span class="font-bold block text-sm"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Akiyesi Asẹku Owo Igbaniwọle (Installment Balance):</span>
+                    <p id="student-balance-text">O ni asẹku owo ti o ku lati san. Jọwọ san a ṣaju ọsẹ keje (Week 7).</p>
+                    <div id="student-balance-pay-box" class="mt-2 font-mono font-bold text-indigo-900"></div>
+                </div>
+                <button onclick="closeInstallmentBanner()" class="px-2.5 py-1 bg-amber-800 text-white rounded text-xs font-bold cursor-pointer">Close</button>
+            </div>
+
+            <div id="student-locked-overlay" class="hidden bg-red-900 text-white p-6 rounded-xl shadow-2xl text-center space-y-3">
+                <i class="fa-solid fa-lock text-4xl text-yellow-400"></i>
+                <h3 class="text-lg font-bold">DASHBOARD TI TI (LỌWỌLỌWỌ) — AINI OWO ISANWO</h3>
+                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igba ti Verification Engine yoo fi jẹri isanwo rẹ.</p>
+                <div class="bg-black/40 p-4 rounded border border-red-700 max-w-md mx-auto space-y-2 text-xs">
+                    <p class="font-bold text-yellow-300">Iye Owo Asẹku ti o ku:</p>
+                    <p id="locked-balance-display" class="font-mono text-sm font-bold">₦4,000.00</p>
+                    <p class="font-bold text-yellow-300">Payment Code Rẹ:</p>
+                    <p id="locked-paycode-display" class="font-mono text-sm font-bold">PAY-999999</p>
+                    <button onclick="simulateBalancePayment()" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded font-bold cursor-pointer text-xs">Simulate Balance Payment Now</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 md:p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs bg-cyan-100 text-cyan-800 font-semibold px-2.5 py-0.5 rounded" id="student-id-badge">ID/NO BAP/56638</span>
+                    <h2 class="text-xl md:text-2xl font-bold mt-1 text-indigo-900" id="welcome-text">Kaabo, Akẹkọ Iribọmi Olufe!</h2>
+                    <p class="text-xs font-extrabold text-indigo-950 mt-1" id="ministry-title-banner">
+                        ALL CHRIST BELIEVERS DRAMA SET BAPTISM SCHOOL <span id="partnership-church-append" class="font-semibold text-indigo-700"></span>
+                    </p>
+                    <p class="text-xs md:text-sm text-gray-600 mt-1" id="current-lesson-info">VPATBE Engine Status: <span class="font-medium text-gray-800">Ọsẹ <span id="display-week-num">1</span> / 9</span></p>
+                </div>
+                
+                <div class="flex items-center space-x-2 w-full md:w-auto flex-wrap gap-2">
+                    <select id="student-universal-dropdown" onchange="handleStudentDropdownChange(this.value)" class="bg-indigo-900 text-white text-xs px-3 py-2 rounded-lg font-bold shadow cursor-pointer focus:outline-none">
+                        <option value="">⚙️ Student Menu (Aṣayan)</option>
+                        <option value="setileyi">1. Setileyi (Settings & Profile)</option>
+                        <option value="send_passport">2. Fi Passport Ransẹ si Super Admin</option>
+                        <option value="week9_cert">3. Iwe-Ẹri ni Ọsẹ Kẹsan (Download Certificate)</option>
+                    </select>
+
+                    <button onclick="openStudentVrmcRoom()" id="student-join-vrmc-btn" class="bg-cyan-700 hover:bg-cyan-600 text-white px-3 py-2 rounded-lg text-xs font-bold shadow transition cursor-pointer flex items-center space-x-1">
+                        <i class="fa-solid fa-headset"></i>
+                        <span id="student-vrmc-btn-text">Join Live VRMC Class</span>
+                    </button>
+                    <button onclick="logoutStudent()" class="px-3 py-2.5 bg-red-100 hover:bg-red-200 text-red-800 rounded-lg text-xs font-bold cursor-pointer">Logout</button>
+                </div>
+            </div>
+
+            <!-- Main Student Portal Screen (VPATBE Television Engine) -->
+            <div id="main-student-portal-area" class="space-y-6">
+                <div class="flex flex-col items-center">
+                    <div class="w-full max-w-4xl bg-gray-950 p-4 md:p-6 rounded-2xl shadow-2xl border-4 border-gray-800 relative">
+                        <div class="text-center pb-3 flex justify-between items-center px-2">
+                            <span class="text-[10px] md:text-xs font-bold tracking-widest text-gray-400 uppercase">VPATBE TELEVISION ENGINE</span>
+                            <div class="flex items-center space-x-2">
+                                <div class="flex bg-gray-900 border border-gray-700 rounded overflow-hidden text-[10px]">
+                                    <button onclick="changeFontSize(18)" class="px-2 py-0.5 text-gray-300 hover:bg-indigo-900 hover:text-white cursor-pointer font-bold">18</button>
+                                    <button onclick="changeFontSize(20)" class="px-2 py-0.5 text-gray-300 hover:bg-indigo-900 hover:text-white cursor-pointer font-bold border-x border-gray-700">20</button>
+                                    <button onclick="changeFontSize(22)" class="px-2 py-0.5 text-gray-300 hover:bg-indigo-900 hover:text-white cursor-pointer font-bold">22</button>
+                                </div>
+                                <span id="page-counter-badge" class="text-[10px] bg-indigo-900 text-cyan-300 px-2 py-0.5 rounded font-mono">Page 1 / 1</span>
+                            </div>
+                        </div>
+
+                        <div id="vpatbe-screen" class="w-full aspect-video bg-black rounded-lg overflow-hidden relative flex items-center justify-center border border-gray-800 shadow-inner">
+                            <div id="screen-off-msg" class="text-gray-600 text-xs md:text-sm font-mono tracking-wider">
+                                [ TV IS OFF - Lọwọlọwọ Bọọdu Ti Pa ]
+                            </div>
+                            <div id="screen-content-box" class="hidden w-full h-full p-6 flex items-center justify-center text-center text-white relative overflow-y-auto"></div>
+                        </div>
+
+                        <div class="flex items-center justify-between mt-3 px-2">
+                            <button onclick="togglePlayPauseVideo()" id="tv-playpause-btn" class="px-3 py-1 bg-gray-800 hover:bg-gray-700 text-cyan-400 rounded text-xs font-bold cursor-pointer">
+                                <i class="fa-solid fa-play mr-1"></i> Play / Pause
+                            </button>
+                            <span id="vpatbe-media-type-badge" class="text-[10px] text-gray-400 font-mono">Mode: Television Engine</span>
+                        </div>
+
+                        <div id="student-feedback-display-box" class="mt-4 p-3 bg-gray-900 rounded-lg border border-indigo-900 text-xs space-y-2">
+                            <span class="text-yellow-400 font-bold block"><i class="fa-solid fa-award mr-1"></i> Abajade Mark ati Atunṣe (Admin Feedback & Grade):</span>
+                            <div id="student-personal-grade-status" class="p-2 bg-gray-950 text-gray-200 rounded border border-gray-800">
+                                <span class="text-gray-400 italic">Ko tii si mark tabi atunṣe lati ọdọ admin fun awọn idahun rẹ.</span>
+                            </div>
+                        </div>
+
+                        <div id="lesson-quiz-box" class="mt-4 p-3 bg-gray-900 rounded-lg border border-gray-800 text-xs space-y-2">
+                            <span class="text-cyan-400 font-bold block"><i class="fa-solid fa-pen-to-square mr-1"></i> Dahun Ibeere Ẹkọ yii (Student Answer Box):</span>
+                            <textarea id="student-lesson-answer-input" rows="2" class="w-full p-2 bg-gray-950 text-white border border-gray-700 rounded focus:outline-none" placeholder="Kọ idahun rẹ si ibi..."></textarea>
+                            <button onclick="submitStudentLessonAnswer()" class="px-3 py-1.5 bg-cyan-600 hover:bg-cyan-500 text-white rounded font-bold cursor-pointer">Fi Idahun Ranṣẹ si Admin</button>
+                        </div>
+
+                        <div id="story-review-engine-box" class="mt-4 p-3 bg-indigo-950 border border-indigo-700 rounded-lg text-xs space-y-2">
+                            <span class="text-yellow-300 font-bold block"><i class="fa-solid fa-book-open mr-1"></i> ITAN ENGINE & Past Lessons Archive Review:</span>
+                            <p class="text-indigo-200 text-[11px]">Akẹkọ le wo awọn ẹ̀kọ́ ati itan lati awọn ọsẹ sẹyin nipa lilo Next / Previous tabi bọtini yi:</p>
+                            <button onclick="openStoryReviewModal()" class="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-bold cursor-pointer">
+                                <i class="fa-solid fa-list mr-1"></i> Ṣii Itan Engine (Review Past Lessons)
+                            </button>
+                        </div>
+
+                        <div id="student-sifiry-widget-space"></div>
+
+                        <div class="flex flex-wrap justify-between items-center mt-4 pt-3 border-t border-gray-800 gap-3">
+                            <button id="tv-power-btn" onclick="toggleTvPower()" class="px-3 py-2 bg-red-700 hover:bg-red-600 text-white rounded text-xs font-bold shadow transition flex items-center space-x-1.5 cursor-pointer">
+                                <i class="fa-solid fa-power-off"></i>
+                                <span id="power-btn-text">TAN</span>
+                            </button>
+
+                            <div class="flex items-center space-x-2">
+                                <button onclick="vpatbePrevious()" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-cyan-400 rounded text-xs font-semibold shadow transition flex items-center space-x-1 cursor-pointer">
+                                    <i class="fa-solid fa-backward-step"></i>
+                                    <span>Previous</span>
+                                </button>
+                                <button onclick="vpatbeNext()" class="px-3 py-2 bg-gray-800 hover:bg-gray-700 text-cyan-400 rounded text-xs font-semibold shadow transition flex items-center space-x-1 cursor-pointer">
+                                    <span>Next</span>
+                                    <i class="fa-solid fa-forward-step"></i>
+                                </button>
+                            </div>
+
+                            <span class="text-[10px] text-green-400 font-mono font-bold"><i class="fa-solid fa-robot mr-1"></i> Automatic Weekly Engine Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CHURCH ADMIN DASHBOARD ================= -->
+        <section id="church-admin-dashboard" class="hidden space-y-6">
+            <div class="bg-indigo-900 text-white p-6 rounded-xl shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs bg-cyan-400 text-indigo-950 font-bold px-2.5 py-0.5 rounded">CHURCH ADMIN DASHBOARD</span>
+                    <h2 class="text-xl md:text-2xl font-bold mt-1" id="church-dash-title">All Christ Believers Drama Set Baptism School</h2>
+                    <p class="text-xs text-indigo-200">Ajọṣepọ: <span id="church-dash-partnership" class="font-bold text-yellow-300">Solear Light of the Bible Network</span> - <span id="church-dash-name">Grace Baptist Church</span></p>
+                </div>
+                <button onclick="logoutChurchAdmin()" class="bg-red-700 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-xs font-bold cursor-pointer">Log Out</button>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-indigo-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <div>
+                    <span class="text-xs text-gray-500 block">Church Group Password Rẹ (Yoo tun ṣiṣẹ bi Church ID/NO):</span>
+                    <span id="church-dash-pass-display" class="font-mono text-base font-bold text-indigo-900">CHUR-12345</span>
+                </div>
+                <button onclick="toggleShowChurchPassword()" class="px-4 py-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-900 rounded font-bold text-xs cursor-pointer">
+                    <i class="fa-solid fa-eye mr-1"></i> Safihan / Pa Password
+                </button>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-indigo-200 space-y-3">
+                <h3 class="text-sm font-bold text-indigo-900 flex items-center">
+                    <i class="fa-solid fa-envelope text-indigo-600 mr-2"></i> Awọn Ifiranṣẹ & Iwe Atuyẹwo Lati Super Admin Control Center
+                </h3>
+                <div id="church-inbox-messages" class="p-3 bg-gray-50 rounded border text-xs space-y-2 max-h-40 overflow-y-auto">
+                    <p class="text-gray-500 italic">Ko tii si ifiranṣẹ tabi iwe atuyẹwo kankan ti o de lati super admin.</p>
+                </div>
+                <div class="space-y-2 pt-2 border-t">
+                    <label class="block font-bold text-gray-700 text-xs">Fesi si Admin (Church Reply):</label>
+                    <textarea id="church-admin-reply-input" rows="2" class="w-full p-2 border rounded bg-gray-50 text-xs" placeholder="Kọ esi rẹ si super admin..."></textarea>
+                    <button onclick="sendChurchAdminReply()" class="px-4 py-2 bg-indigo-900 hover:bg-indigo-800 text-white rounded font-bold text-xs cursor-pointer">Fi Esi Ranṣẹ si Super Admin</button>
+                </div>
+            </div>
+
+            <!-- CHURCH GROUP STUDENT REGISTRATION FORM -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-indigo-200 space-y-4">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-base font-bold text-indigo-900 flex items-center">
+                        <i class="fa-solid fa-users text-indigo-600 mr-2"></i> Student Registration Forms (Church Group Batch Manager)
+                    </h3>
+                    <span id="church-slots-counter" class="text-xs bg-indigo-100 text-indigo-800 font-bold px-3 py-1 rounded">Slots To Ku: 100 / 100</span>
+                </div>
+                <p class="text-xs text-gray-600">Fọọmu yii máa ń dinku (slot yoo dinku) nígbàkígbà tí o bá forúkọ sílẹ̀ fún ọmọ ijọ kan pẹlu iye owo ti a seto.</p>
+                
+                <form id="church-batch-reg-form" onsubmit="submitChurchBatchStudent(event)" class="space-y-4 p-4 bg-gray-50 rounded border text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">Orukọ Ọmọ Ijọ Kikun:</label>
+                            <input type="text" id="cb-student-name" required class="w-full p-2 border rounded bg-white" placeholder="Orukọ akẹkọ">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">Nọmba Tẹlifoonu:</label>
+                            <input type="tel" id="cb-student-phone" required class="w-full p-2 border rounded bg-white" placeholder="080...">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-bold text-gray-700 mb-1">Address Ibugbe:</label>
+                        <input type="text" id="cb-student-address" required class="w-full p-2 border rounded bg-white" placeholder="Adiresi">
+                    </div>
+
+                    <div class="space-y-2 pt-2 border-t">
+                        <button type="button" onclick="churchToggleCompanyAccountDisplay()" class="w-full py-2 bg-indigo-800 text-white rounded font-bold cursor-pointer text-xs">
+                            <i class="fa-solid fa-building-columns mr-1"></i> Gbe Company Bank Account Number Jade (Show Bank Details)
+                        </button>
+                        <div id="church-company-account-box" class="hidden p-3 bg-indigo-50 rounded border text-xs font-mono text-indigo-900 font-bold">
+                            Bank: Moniepoint | Acct: 7069344855 | Name: TIMOTHY OLUWALAYOMI ADEWALE
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t">
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">Yan Banki Tio Wa Ni Nigeria (All Nigerian Banks):</label>
+                            <select id="cb-student-bank-name" class="w-full p-2 border rounded bg-white font-medium cursor-pointer">
+                                <option value="">-- Yan Banki rẹ --</option>
+                                <option value="Moniepoint MFB">Moniepoint Microfinance Bank</option>
+                                <option value="Opay">Opay Digital Services</option>
+                                <option value="Kuda Bank">Kuda Bank</option>
+                                <option value="Access Bank">Access Bank</option>
+                                <option value="GTBank">Guaranty Trust Bank (GTB)</option>
+                                <option value="First Bank">First Bank of Nigeria</option>
+                                <option value="Zenith Bank">Zenith Bank</option>
+                                <option value="UBA">United Bank for Africa (UBA)</option>
+                                <option value="Fidelity Bank">Fidelity Bank</option>
+                                <option value="Stanbic IBTC">Stanbic IBTC Bank</option>
+                                <option value="Polaris Bank">Polaris Bank</option>
+                                <option value="Union Bank">Union Bank</option>
+                                <option value="Wema Bank">Wema Bank</option>
+                                <option value="Sterling Bank">Sterling Bank</option>
+                                <option value="Palmpay">Palmpay</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">Transaction ID / Reference Number:</label>
+                            <input type="text" id="cb-student-txid" placeholder="Apeere: TXN-8849102..." class="w-full p-2 border rounded bg-white font-mono">
+                        </div>
+                    </div>
+
+                    <div class="p-3 bg-indigo-50 rounded border border-indigo-200 space-y-2">
+                        <span class="font-bold text-indigo-900 block text-[11px]">Verification Engine Status:</span>
+                        <div id="cb-verification-status-box" class="p-2 bg-amber-50 text-amber-800 rounded border border-amber-200 text-[11px] flex items-center">
+                            <i class="fa-solid fa-triangle-exclamation mr-1"></i> Durowo Ifọwọsi (Pending Super Admin SEEN Approval).
+                        </div>
+                        <button type="button" onclick="churchExecuteVerifyPayment()" class="w-full py-2 bg-indigo-700 hover:bg-indigo-800 text-white rounded font-bold cursor-pointer transition">
+                            <i class="fa-solid fa-shield-halved mr-1"></i> Verify My Payment (Fi ranṣẹ si Super Admin SEEN)
+                        </button>
+                    </div>
+
+                    <button type="submit" id="cb-submit-btn" disabled class="w-full py-3 bg-gray-400 text-white rounded-lg font-bold cursor-not-allowed transition flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-lock" id="cb-submit-lock-icon"></i>
+                        <span>FORÚKỌ ỌMỌ IJỌ SILẸ (Requires Super Admin SEEN Approval)</span>
+                    </button>
+                </form>
+
+                <div class="space-y-2 pt-3 border-t">
+                    <h4 class="font-bold text-indigo-900 text-xs">Akojọ Awọn Ọmọ Ijọ ti a ti Forúkọ sílẹ̀:</h4>
+                    <div id="church-registered-students-list" class="space-y-2">
+                        <p class="text-xs text-gray-500 italic">Ko tii si ọmọ ijọ kankan ti a forúkọ sílẹ̀.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Church Group Certificate Gallery -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-indigo-200 space-y-4">
+                <h3 class="text-base font-bold text-indigo-900 flex items-center">
+                    <i class="fa-solid fa-certificate text-indigo-600 mr-2"></i> Church Group Certificate Engine & Gallery
+                </h3>
+                <p class="text-xs text-gray-600">Nibi ni gbogbo iwe-ẹri awọn ọmọ ijọ rẹ de si lẹhin ti super admin ba ti ranṣẹ lati Super Admin Control Center. O le ṣe Preview, Download PDF, tabi fi ranṣẹ taara si WhatsApp akẹkọ pẹlu iwe-ẹri rẹ.</p>
+                <div id="church-certificates-gallery" class="space-y-3">
+                    <p class="text-xs text-gray-500 italic">Ko tii si iwe-ẹri kankan ti o de lati ọdọ super admin.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ADMIN CONTROL CENTER DASHBOARD ================= -->
+        <section id="admin-dashboard" class="hidden space-y-6">
+            <div class="bg-indigo-900 text-white p-6 rounded-xl shadow-md flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs bg-yellow-400 text-indigo-950 font-bold px-2.5 py-0.5 rounded">SUPER ADMIN CONTROL CENTER</span>
+                    <h2 class="text-xl md:text-2xl font-bold mt-1">VPATBE Master Engine Dashboard</h2>
+                    <p class="text-xs text-indigo-200">Ṣakoso SRF Fee, Installment Engine, SRF Database, Church Groups & Certificate Engine.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="openStudentPortalFromAdmin()" class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-2 rounded-lg text-xs font-bold shadow transition cursor-pointer">
+                        <i class="fa-solid fa-eye mr-1"></i> Wọle si Student Dashboard
+                    </button>
+                    <button onclick="logoutAdmin()" class="bg-red-700 hover:bg-red-600 text-white px-3 py-2 rounded-lg text-xs font-bold cursor-pointer">Log Out</button>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200 space-y-4">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b pb-4">
+                    <h3 class="font-bold text-base md:text-lg text-gray-800 flex items-center">
+                        <i class="fa-solid fa-bars-staggered text-indigo-600 mr-2"></i> Universal Dropdown Menu Button
+                    </h3>
+                    
+                    <div class="w-full md:w-80">
+                        <select id="admin-universal-dropdown" onchange="handleAdminDropdownChange(this.value)" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg p-2.5 focus:ring-indigo-500 focus:border-indigo-500 font-medium cursor-pointer">
+                            <option value="">-- Yan Ohun ti o fẹ ṣe (Select Action) --</option>
+                            <option value="srf_fee_mgr">1. SRF Registration Fee Manager (Yi Iye Owo Independent & Church Group Pada)</option>
+                            <option value="srf_database">2. SRF Database & Registration Forms (Akẹkọ kọọkan pẹlu Delete/Delete All)</option>
+                            <option value="church_groups_mgr">3. ⛪ Church Groups Manager & Send Messages / Delete Church Group</option>
+                            <option value="student_quiz_grading">4. Student Quiz Answers, Mark Grading & Correction</option>
+                            <option value="vpatbe_engine_mgr">5. VPATBE Engine Manager & Itan Engine (Video, Text, Preview, GSGP, Replace)</option>
+                            <option value="story_engine_mgr">6. Story Button & reEdit Engine (Bọtini Itan)</option>
+                            <option value="certificate_engine">7. Certificate Engine & Gallery (Passport, Edit, Send, PDF, Preview)</option>
+                            <option value="verify_payment_mgr">8. 🧾 Verify My Payment Engine (SEEN Approval & Status Control + Delete)</option>
+                            <option value="company_account_mgr">9. Company Account & Payment Settings</option>
+                            <option value="whatsapp_auto_engine">10. 📱 WhatsApp Invitation, Auto Engine & Restart Automatic Engine</option>
+                            <option value="archive_search_mgr">11. 📦 Archive Search Engine & Session Reset (Bẹ̀rẹ̀ Ṣaa Tuntun)</option>
+                            <option value="vrmc_engine_mgr">12. 🎙️ Voice Record Meeting Class (VRMC Engine)</option>
+                            <option value="welcome_advert_mgr">13. 🖼️ Welcome Page Advert Space Manager (50 Slots + Timer + Delete)</option>
+                            <option value="ministry_name_mgr">14. 🏢 Ministry & Company Name Change Engine (Yi Orukọ Ile-iṣẹ Pada)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="admin-workspace-panel" class="p-4 md:p-6 bg-gray-50 rounded-lg border border-dashed border-gray-300 min-h-[300px]">
+                    <div class="text-center text-gray-500 py-12">
+                        <i class="fa-solid fa-hand-pointer text-3xl mb-2 text-indigo-400"></i>
+                        <p class="text-sm">Jọwọ yan aṣayan kankan ninu <b>Universal Dropdown Menu</b> lati bẹrẹ iṣakoso.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Certificate Template for PDF Generation and Preview -->
+    <div id="certificate-template" class="hidden">
+        <div style="width: 800px; padding: 40px; background: #fff; border: 10px solid #312e81; font-family: Arial, sans-serif; text-align: center; margin: 0 auto; position: relative;">
+            <div style="position: absolute; top: 40px; right: 40px; width: 90px; height: 110px; border: 2px solid #312e81; background: #f3f4f6; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                <img id="cert-display-passport" src="" loading="lazy" alt="Passport" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/90x110?text=Passport'">
+            </div>
+            <div id="cert-display-ministry-title" style="font-size: 20px; font-weight: bold; color: #312e81; margin-bottom: 5px;">ALL CHRIST BELIEVERS DRAMA SET BAPTISM SCHOOL</div>
+            <div id="cert-display-church-subtitle" style="font-size: 14px; font-weight: bold; color: #4f46e5; margin-bottom: 25px;">Solear Light of the Bible Network</div>
+            <h1 style="font-size: 28px; color: #1e1b4b; margin-bottom: 10px;">IWẸ-ẸRI IRIROBMI (CERTIFICATE)</h1>
+            <p style="font-size: 15px; color: #4b5563; margin-bottom: 15px;">A n jẹri si eyi pe:</p>
+            <h2 id="cert-display-name" style="font-size: 26px; color: #312e81; border-bottom: 2px solid #cbd5e1; display: inline-block; padding-bottom: 5px; margin-bottom: 15px;">Teminijah Adewale</h2>
+            <p id="cert-display-church-text" style="font-size: 13px; font-weight: bold; color: #4f46e5; margin-bottom: 10px;">(Church Group: Independent)</p>
+            <p style="font-size: 14px; color: #4b5563; line-height: 1.5; max-width: 580px; margin: 0 auto 30px auto;">ti pari gbogbo awọn ẹ̀kọ́ iribọmi pataki fun ọsẹ mẹsan-an (9 Weeks) ni ile-iwe wa gẹgẹ bi aṣẹ Oluwa Jesu Kristi.</p>
+            <div style="display: flex; justify-content: space-between; margin-top: 40px; padding: 0 30px; align-items: flex-end;">
+                <div style="text-align: left;">
+                    <img id="cert-saved-signature" src="" loading="lazy" class="signature-img" alt="Signature" style="display:none; margin-bottom: 5px;">
+                    <div style="border-top: 1px solid #000; width: 180px; margin-bottom: 5px;"></div>
+                    <p style="font-size: 13px; font-weight: bold; color: #1f2937;">Oludari Ile-iwe (Director)</p>
+                </div>
+                <div>
+                    <div style="border-top: 1px solid #000; width: 180px; margin-bottom: 5px;"></div>
+                    <p id="cert-display-date" style="font-size: 13px; font-weight: bold; color: #1f2937;">2026-10-09</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Opay Guide Zoom Modal -->
+    <div id="opay-zoom-modal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-4 rounded-xl max-w-lg w-full text-center space-y-3">
+            <h4 class="font-bold text-indigo-900 text-sm">Aworan Ọna Isanwo Opay & Payment Code Guide</h4>
+            <div class="overflow-auto max-h-[70vh]">
+                <img src="1000225872.jpg" loading="lazy" alt="Zoomed Opay Guide" class="w-full rounded shadow" onerror="this.src='https://via.placeholder.com/600x400?text=Opay+Guide+Large'">
+            </div>
+            <button onclick="document.getElementById('opay-zoom-modal').classList.add('hidden')" class="px-4 py-2 bg-indigo-900 text-white rounded font-bold text-xs cursor-pointer">Pa (Close)</button>
+        </div>
+    </div>
+
+    <!-- Story Review Modal for Students -->
+    <div id="story-review-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+        <div class="bg-gray-950 text-white p-6 rounded-2xl border-2 border-indigo-700 max-w-2xl w-full space-y-4 text-xs max-h-[85vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                <h4 class="font-bold text-yellow-300 text-sm"><i class="fa-solid fa-book-open mr-2"></i>Itan Engine & Past Lessons Archive Review</h4>
+                <button onclick="document.getElementById('story-review-modal').classList.add('hidden')" class="px-3 py-1 bg-red-700 text-white rounded font-bold cursor-pointer">Pa (Close)</button>
+            </div>
+            <div id="story-review-modal-content" class="space-y-3"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript Complete Logic with Hybrid Supabase Cloud & Offline PWA Sync -->
+    <script>
+        const SUPABASE_URL = "https://zobqitknderzdtydcgtk.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_vpyNVcsngvlf-NkAVQ_tUQ_jrhVRF57";
+        const { createClient } = supabase;
+        const _supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Global Ministry / Company Name Engine
+        let currentMinistryName = localStorage.getItem('vpatbe_ministry_name') || "ALL CHRIST BELIEVERS DRAMA SET BAPTISM SCHOOL";
+
+        let currentWeek = parseInt(localStorage.getItem('cb_currentWeek')) || 1;
+        let tvPowerState = false;
+        let activeContentType = localStorage.getItem('vpatbe_content_type') || 'text';
+        let activeContentPayload = localStorage.getItem('vpatbe_payload') || "Ninu ẹ̀kọ́ iribọmi yìí, a ma kọ́ nipa pataki iribọmi ninu omi gẹgẹ bi aṣẹ Oluwa Jesu Kristi.";
+        let activeVideoUrl = localStorage.getItem('vpatbe_video_url') || "";
+        let welcomeVideoUrl = localStorage.getItem('vpatbe_welcome_video_url') || "";
+        let contentPages = [activeContentPayload];
+        let currentPageIndex = 0;
+        let currentTextFontSize = 16;
+
+        let vpatbeItanVideos = JSON.parse(localStorage.getItem('vpatbe_itan_videos')) || [];
+
+        let studentsList = JSON.parse(localStorage.getItem('vpatbe_students')) || [
+            { id: 1, name: "Teminijah Adewale", code: "BAP/56638", passport: "", date: "", selected: true, sent: false, design: "classic-navy", phone: "08012345678", address: "Imeko Afon", church: "Grace Baptist Church", pastorPhone: "08098765432", balanceDue: 4000, installmentPaid: false, paymentVerified: true },
+            { id: 2, name: "Oluwalayomi Adewale", code: "BAP/56639", passport: "", date: "", selected: true, sent: false, design: "classic-navy", phone: "08087654321", address: "Imeko", church: "Independent", pastorPhone: "08011112222", balanceDue: 0, installmentPaid: true, paymentVerified: true }
+        ];
+
+        let churchGroupsList = JSON.parse(localStorage.getItem('vpatbe_church_groups')) || [
+            { id: 1, name: "Grace Baptist Church", address: "Imeko Road", pastorName: "Rev. Samuel", pastorPhone: "08098765432", password: "CHUR-9999", slotsLeft: 98, students: [], messages: [], certificates: [] }
+        ];
+
+        let currentLoggedInStudentIndex = 0;
+        let currentLoggedInChurchIndex = null;
+
+        let studentQuizSubmissions = JSON.parse(localStorage.getItem('vpatbe_quiz_submissions')) || [];
+        let storyButtonStories = JSON.parse(localStorage.getItem('vpatbe_story_database')) || [
+            { id: 1, title: "Itan Akọkọ: Ọrọ Kọbọ Kan", content: "Eyi ni itan akọkọ ti a pèsè fun akẹkọ ni ọsẹ kẹsan lati mọ bi o ṣe nṣe dada ni ninu ẹkọ rẹ.", week: 9 }
+        ];
+
+        let companyAccountInfo = localStorage.getItem('vpatbe_company_account') || "Bank: Moniepoint | Acct: 7069344855 | Name: TIMOTHY OLUWALAYOMI ADEWALE";
+        let directorSignatureData = localStorage.getItem('vpatbe_director_signature') || "";
+        
+        let independentSrfFee = parseFloat(localStorage.getItem('vpatbe_ind_srf_fee')) || 8000;
+        let churchGroupStudentFee = parseFloat(localStorage.getItem('vpatbe_church_student_fee')) || 5000;
+        let srfTotalFee = independentSrfFee;
+        let currentPaymentMode = 'full';
+
+        let currentCapturedPassport = "";
+        let generatedPaymentCode = "";
+        let paymentVerifiedState = false;
+        let hasChurchState = true;
+
+        let archivalDatabase = JSON.parse(localStorage.getItem('vpatbe_archive_db')) || [];
+        let welcomeAdvertsList = JSON.parse(localStorage.getItem('vpatbe_welcome_adverts')) || [];
+
+        let vrmcClassActiveState = JSON.parse(localStorage.getItem('vpatbe_vrmc_active')) || false;
+        let studentMicState = false;
+        let churchPaymentVerifiedState = false;
+
+        // ================= SUPABASE HYBRID OFFLINE-ONLINE SYNC ENGINE =================
+        async function syncStudentToSupabase(studentData) {
+            try {
+                const { data, error } = await _supabase
+                    .from('vpatbe_students')
+                    .insert([studentData]);
+                if (error) throw error;
+                console.log('Supabase Sync Success:', data);
+            } catch (err) {
+                console.log('Offline mode active or sync pending. Saved locally.', err);
+            }
+        }
+
+        async function fetchStudentsFromSupabase() {
+            try {
+                const { data, error } = await _supabase
+                    .from('vpatbe_students')
+                    .select('*');
+                if (error) throw error;
+                if (data && data.length > 0) {
+                    studentsList = data;
+                    localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
+                }
+            } catch (err) {
+                console.log('Using local cached students data due to offline status.');
+            }
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            const clockEl = document.getElementById('live-clock');
+            const dateEl = document.getElementById('live-date');
+            if(clockEl) clockEl.innerText = String(now.getHours()).padStart(2, '0') + ":" + String(now.getMinutes()).padStart(2, '0') + ":" + String(now.getSeconds()).padStart(2, '0');
+            if(dateEl) dateEl.innerText = String(now.getDate()).padStart(2, '0') + "/" + String(now.getMonth() + 1).padStart(2, '0') + "/" + now.getFullYear();
+        }
+        setInterval(updateDateTime, 1000);
+
+        function openOpayZoomModal() {
+            const modal = document.getElementById('opay-zoom-modal');
+            if(modal) modal.classList.remove('hidden');
+        }
+
+        function switchAuthTab(tab) {
+            const signinBtn = document.getElementById('tab-signin-btn');
+            const srfBtn = document.getElementById('tab-srf-btn');
+            const churchRegBtn = document.getElementById('tab-church-reg-btn');
+            
+            const signinBox = document.getElementById('signin-container');
+            const srfBox = document.getElementById('srf-container');
+            const churchRegBox = document.getElementById('church-reg-container');
+
+            signinBtn.className = "flex-1 py-2 text-[11px] font-bold rounded-md text-gray-700 hover:text-indigo-900 transition cursor-pointer";
+            srfBtn.className = "flex-1 py-2 text-[11px] font-bold rounded-md text-gray-700 hover:text-indigo-900 transition cursor-pointer";
+            churchRegBtn.className = "flex-1 py-2 text-[11px] font-bold rounded-md text-gray-700 hover:text-indigo-900 transition cursor-pointer";
+
+            signinBox.classList.add('hidden');
+            srfBox.classList.add('hidden');
+            churchRegBox.classList.add('hidden');
+
+            if (tab === 'signin') {
+                signinBtn.className = "flex-1 py-2 text-[11px] font-bold rounded-md bg-indigo-900 text-white shadow transition cursor-pointer";
+                signinBox.classList.remove('hidden');
+            } else if (tab === 'srf') {
+                srfBtn.className = "flex-1 py-2 text-[11px] font-bold rounded-md bg-indigo-900 text-white shadow transition cursor-pointer";
+                srfBox.classList.remove('hidden');
+            } else if (tab === 'church_reg') {
+                churchRegBtn.className = "flex-1 py-2 text-[11px] font-bold rounded-md bg-indigo-900 text-white shadow transition cursor-pointer";
+                churchRegBox.classList.remove('hidden');
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const input = document.getElementById('signin-idno');
+            const icon = document.getElementById('eye-icon');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = "fa-solid fa-eye-slash";
+            } else {
+                input.type = 'password';
+                icon.className = "fa-solid fa-eye";
+            }
+        }
+
+        function setPaymentMode(mode) {
+            currentPaymentMode = mode;
+            srfTotalFee = independentSrfFee;
+            const btnFull = document.getElementById('pay-mode-full');
+            const btnHalf = document.getElementById('pay-mode-half');
+            const display = document.getElementById('srf-amount-payable-display');
+
+            if (mode === 'full') {
+                btnFull.className = "py-2 px-2 bg-indigo-900 text-white rounded font-bold text-[10px] cursor-pointer";
+                btnHalf.className = "py-2 px-2 bg-white text-gray-700 border rounded font-bold text-[10px] cursor-pointer";
+                display.innerText = `Iye owo ti yoo san lapapọ: ₦${srfTotalFee.toLocaleString()}.00`;
+            } else {
+                btnHalf.className = "py-2 px-2 bg-indigo-900 text-white rounded font-bold text-[10px] cursor-pointer";
+                btnFull.className = "py-2 px-2 bg-white text-gray-700 border rounded font-bold text-[10px] cursor-pointer";
+                const halfFee = srfTotalFee / 2;
+                display.innerText = `Iye owo idaji ti yoo san bayii (Installment): ₦${halfFee.toLocaleString()}.00 (Asẹku yoo ku: ₦${halfFee.toLocaleString()}.00)`;
+            }
+        }
+
+        function selectChurchOption(type) {
+            hasChurchState = (type === 'yes');
+            const btnYes = document.getElementById('btn-has-church');
+            const btnNo = document.getElementById('btn-no-church');
+            const churchBox = document.getElementById('church-details-box');
+            const warnBox = document.getElementById('no-church-warning');
+
+            if (hasChurchState) {
+                btnYes.className = "py-2.5 px-3 border rounded font-bold bg-indigo-50 text-indigo-900 border-indigo-300 cursor-pointer text-center";
+                btnNo.className = "py-2.5 px-3 border rounded font-bold bg-gray-100 text-gray-700 border-gray-300 cursor-pointer text-center";
+                churchBox.classList.remove('hidden');
+                warnBox.classList.add('hidden');
+            } else {
+                btnNo.className = "py-2.5 px-3 border rounded font-bold bg-amber-600 text-white border-amber-700 cursor-pointer text-center";
+                btnYes.className = "py-2.5 px-3 border rounded font-bold bg-gray-100 text-gray-700 border-gray-300 cursor-pointer text-center";
+                churchBox.classList.add('hidden');
+                warnBox.classList.remove('hidden');
+            }
+        }
+
+        let cameraStream = null;
+        async function startCamera() {
+            try {
+                const video = document.getElementById('camera-preview');
+                cameraStream = await navigator.mediaDevices.getUserMedia({ video: { width: 400, height: 400 } });
+                video.srcObject = cameraStream;
+            } catch (err) {
+                alert('Ko le fi agbara ṣii kamera. Jọwọ fun app ni aye.');
+            }
+        }
+
+        function capturePassport() {
+            const video = document.getElementById('camera-preview');
+            const canvas = document.getElementById('camera-canvas');
+            const img = document.getElementById('captured-passport-img');
+
+            canvas.width = video.videoWidth || 300;
+            canvas.height = video.videoHeight || 300;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            currentCapturedPassport = canvas.toDataURL('image/png');
+
+            img.src = currentCapturedPassport;
+            img.classList.remove('hidden');
+            video.classList.add('hidden');
+
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(track => track.stop());
+            }
+
+            generatedPaymentCode = "PAY-" + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('srf-generated-payment-code').innerText = generatedPaymentCode;
+            alert('Aṣeyọri! A ya passport 2x2 rẹ, a si ti fun ọ ni Payment Code: ' + generatedPaymentCode);
+        }
+
+        function copyPaymentCode() {
+            navigator.clipboard.writeText(generatedPaymentCode);
+            alert('A ti daakọ Payment Code rẹ!');
+        }
+
+        function executeAdvancedVerificationEngine() {
+            const txIdInput = document.getElementById('srf-input-transaction-id').value.trim();
+            const bankInput = document.getElementById('srf-input-bank-name').value;
+            const statusBox = document.getElementById('verification-engine-status');
+
+            if (!txIdInput) { alert('Jọwọ tẹ Transaction ID tabi Reference Number rẹ.'); return; }
+            if (!bankInput) { alert('Jọwọ yan banki ti o fi san owo na si.'); return; }
+            if (!generatedPaymentCode || generatedPaymentCode.includes('Ya passport')) {
+                alert('Jọwọ ya passport rẹ kọkọ lati sẹda Payment Code (PAY-XXXXXX).');
+                return;
+            }
+
+            let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+            const studentTempData = {
+                name: document.getElementById('srf-name').value || "Akẹkọ Tuntun",
+                phone: document.getElementById('srf-phone').value || "",
+                address: document.getElementById('srf-address').value || "",
+                church: hasChurchState ? document.getElementById('srf-church-name').value : "Independent",
+                txId: txIdInput,
+                bank: bankInput,
+                payCode: generatedPaymentCode,
+                passport: currentCapturedPassport,
+                paymentMode: currentPaymentMode,
+                seen: false
+            };
+            pendingVerifications.push(studentTempData);
+            localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
+
+            statusBox.className = "text-[11px] text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center";
+            statusBox.innerHTML = `<i class="fa-solid fa-clock mr-2"></i> Jọwọ duro de Ifọwọsi owo tio san lati ọdọ ILE-ISE WA (Super Admin Pending SEEN Approval).`;
+            
+            alert('A ti firanṣẹ ẹri isanwo rẹ si Super Admin Control Center. Jọwọ duro titi ti admin yoo fi tẹ SEEN.');
+        }
+
+        function churchToggleCompanyAccountDisplay() {
+            const box = document.getElementById('church-company-account-box');
+            if(box) box.classList.toggle('hidden');
+        }
+
+        function churchExecuteVerifyPayment() {
+            const txId = document.getElementById('cb-student-txid').value.trim();
+            const bank = document.getElementById('cb-student-bank-name').value;
+            const statusBox = document.getElementById('cb-verification-status-box');
+            const studentName = document.getElementById('cb-student-name').value.trim();
+
+            if(!studentName) { alert('Jọwọ tẹ orukọ ọmọ ijọ kọkọ.'); return; }
+            if(!txId) { alert('Jọwọ tẹ Transaction ID rẹ.'); return; }
+            if(!bank) { alert('Jọwọ yan Banki rẹ.'); return; }
+
+            let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+            const church = churchGroupsList[currentLoggedInChurchIndex];
+
+            pendingVerifications.push({
+                name: studentName,
+                phone: document.getElementById('cb-student-phone').value,
+                address: document.getElementById('cb-student-address').value,
+                church: church.name,
+                txId: txId,
+                bank: bank,
+                payCode: "CHUR-PAY-" + Math.floor(100000 + Math.random() * 900000),
+                passport: "",
+                paymentMode: "Church Group Batch",
+                seen: false
+            });
+            localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
+
+            statusBox.className = "p-2 bg-amber-50 text-amber-800 rounded border border-amber-200 text-[11px] flex items-center";
+            statusBox.innerHTML = `<i class="fa-solid fa-clock mr-1"></i> A ti fi isọfunni isanwo rẹ ranṣẹ si SEEN button ninu Super Admin Control Center. Jọwọ duro de ifọwọsi.`;
+            alert('Aṣeyọri! A ti fi Transaction ID, Banki, ati isọfunni rẹ ranṣẹ si bọtini SEEN ninu Super Admin Control Center.');
+        }
+
+        function submitChurchRegistration(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-church-name').value.trim();
+            const address = document.getElementById('reg-church-address').value.trim();
+            const pastorName = document.getElementById('reg-pastor-name').value.trim();
+            const pastorPhone = document.getElementById('reg-pastor-phone').value.trim();
+
+            const password = "CHUR-" + Math.floor(1000 + Math.random() * 9000);
+            const newChurchGroup = {
+                id: churchGroupsList.length + 1,
+                name: name,
+                address: address,
+                pastorName: pastorName,
+                pastorPhone: pastorPhone,
+                password: password,
+                slotsLeft: 100,
+                students: [],
+                messages: [],
+                certificates: []
+            };
+
+            churchGroupsList.push(newChurchGroup);
+            localStorage.setItem('vpatbe_church_groups', JSON.stringify(churchGroupsList));
+            
+            currentLoggedInChurchIndex = churchGroupsList.length - 1;
+            alert(`Aṣeyọri gidi! A ti sẹda Church Group ID/NO ati Password: ${password}. Lọwọlọwọ a gbe ọ wọle si Church Admin Dashboard rẹ.`);
+            openChurchAdminDashboard(newChurchGroup);
+        }
+
+        function submitRegistrationForm(e) {
+            e.preventDefault();
+            if (!paymentVerifiedState) {
+                alert('Verification Engine ko tii ni ifọwọsi (SEEN) lati ọdọ Super Admin!');
+                return;
+            }
+
+            const name = document.getElementById('srf-name').value;
+            const phone = document.getElementById('srf-phone').value;
+            const address = document.getElementById('srf-address').value;
+            const churchName = hasChurchState ? document.getElementById('srf-church-name').value : "Independent";
+            const churchAddr = hasChurchState ? document.getElementById('srf-church-address').value : "N/A";
+            const pastorPhone = hasChurchState ? document.getElementById('srf-church-pastor').value : "N/A";
+
+            const newIdNo = "BAP/" + Math.floor(10000 + Math.random() * 90000);
+            const balanceDue = (currentPaymentMode === 'half') ? (srfTotalFee / 2) : 0;
+
+            const newStudent = {
+                id: studentsList.length + 1,
+                name: name,
+                code: newIdNo,
+                passport: currentCapturedPassport,
+                date: "",
+                selected: true,
+                sent: false,
+                design: "classic-navy",
+                phone: phone,
+                address: address,
+                church: churchName,
+                churchAddress: churchAddr,
+                pastorPhone: pastorPhone,
+                balanceDue: balanceDue,
+                installmentPaid: (balanceDue === 0),
+                paymentVerified: true
+            };
+
+            studentsList.push(newStudent);
+            localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
+            localStorage.setItem('acb_registered_students', JSON.stringify(studentsList));
+            
+            // Sync to Supabase Cloud asynchronously
+            syncStudentToSupabase(newStudent);
+
+            currentLoggedInStudentIndex = studentsList.length - 1;
+
+            alert(`Aṣeyọri gidi! A ti sẹda ID/NO rẹ: ${newIdNo}.`);
+            
+            document.getElementById('auth-page').classList.add('hidden');
+            document.getElementById('student-dashboard').classList.remove('hidden');
+            document.getElementById('student-id-badge').innerText = "ID/NO: " + newIdNo;
+            document.getElementById('welcome-text').innerText = "Kaabo, " + name + "!";
+            
+            setupStudentDashboardView(newStudent);
+        }
+
+        function setupStudentDashboardView(student) {
+            const isChurchStudent = (student.church && student.church.toLowerCase() !== "independent" && student.church.toLowerCase() !== "n/a");
+            const appendEl = document.getElementById('partnership-church-append');
+            if (isChurchStudent) {
+                if(appendEl) appendEl.innerText = `pẹlu ifọwọsowọpọ (${student.church})`;
+            } else {
+                if(appendEl) appendEl.innerText = "";
+            }
+            checkStudentInstallmentStatus(student);
+            updateStudentVrmcButtonState();
+        }
+
+        function processSignIn() {
+            const name = document.getElementById('signin-name').value.trim();
+            const idno = document.getElementById('signin-idno').value.trim();
+
+            if (!name || !idno) {
+                alert('Jọwọ tẹ orukọ rẹ ati Password/ID rẹ kọkọ.');
+                return;
+            }
+
+            if (name.toLowerCase() === "timothy oluwalayomi adewale" && idno === "128312/Ay") {
+                document.getElementById('auth-page').classList.add('hidden');
+                document.getElementById('admin-dashboard').classList.remove('hidden');
+                document.getElementById('admin-badge-box').classList.remove('hidden');
+                alert('Kaabo, Timothy Oluwalayomi Adewale (Founder & Admin)!');
+                handleAdminDropdownChange('vpatbe_engine_mgr');
+                return;
+            }
+
+            const foundChurchIndex = churchGroupsList.findIndex(c => c.name.toLowerCase() === name.toLowerCase() && c.password === idno);
+            if (foundChurchIndex !== -1) {
+                currentLoggedInChurchIndex = foundChurchIndex;
+                document.getElementById('auth-page').classList.add('hidden');
+                openChurchAdminDashboard(churchGroupsList[foundChurchIndex]);
+                alert('Kaabo si Church Admin Dashboard, ' + churchGroupsList[foundChurchIndex].name + '!');
+                return;
+            }
+
+            const foundIndex = studentsList.findIndex(s => s.name.toLowerCase() === name.toLowerCase() && s.code === idno);
+            if (foundIndex !== -1) {
+                currentLoggedInStudentIndex = foundIndex;
+                const found = studentsList[foundIndex];
+                document.getElementById('auth-page').classList.add('hidden');
+                document.getElementById('student-dashboard').classList.remove('hidden');
+                document.getElementById('student-id-badge').innerText = "ID/NO: " + found.code;
+                document.getElementById('welcome-text').innerText = "Kaabo, " + found.name + "!";
+                
+                setupStudentDashboardView(found);
+                loadStudentFeedback(found.name);
+                alert('Aṣeyọri! Wọle si Student Portal rẹ.');
+            } else {
+                alert('Orukọ tabi ID/NO / Church Password ko tọ tabi ko tii wa ninu eto.');
+            }
+        }
+
+        function openChurchAdminDashboard(churchObj) {
+            document.getElementById('auth-page').classList.add('hidden');
+            document.getElementById('church-admin-dashboard').classList.remove('hidden');
+
+            document.getElementById('church-dash-title').innerText = churchObj.name;
+            document.getElementById('church-dash-name').innerText = churchObj.name;
+            document.getElementById('church-dash-pass-display').innerText = churchObj.password;
+            
+            updateChurchSlotsUI(churchObj);
+            renderChurchStudentsList(churchObj);
+            renderChurchInboxMessages(churchObj);
+            renderChurchCertificatesGallery(churchObj);
+        }
+
+        function logoutChurchAdmin() {
+            document.getElementById('church-admin-dashboard').classList.add('hidden');
+            document.getElementById('auth-page').classList.remove('hidden');
+        }
+
+        function toggleShowChurchPassword() {
+            const passEl = document.getElementById('church-dash-pass-display');
+            const church = churchGroupsList[currentLoggedInChurchIndex];
+            if (passEl.innerText === "••••••••") {
+                passEl.innerText = church.password;
+            } else {
+                passEl.innerText = "••••••••";
+            }
+        }
+
+        function updateChurchSlotsUI(church) {
+            const counter = document.getElementById('church-slots-counter');
+            if(counter) counter.innerText = `Slots To Ku: ${church.slotsLeft} / 100`;
+        }
+
+        function submitChurchBatchStudent(e) {
+            e.preventDefault();
+            const church = churchGroupsList[currentLoggedInChurchIndex];
+            if (church.slotsLeft <= 0) {
+                alert('Gbogbo 100 slots fọọmu rẹ ti tan!');
+                return;
+            }
+
+            if (!churchPaymentVerifiedState) {
+                alert('Jọwọ ri pe Super Admin ti tẹ SEEN lori isanwo rẹ ṣaju ki o to tẹ submit!');
+                return;
+            }
+
+            const name = document.getElementById('cb-student-name').value.trim();
+            const phone = document.getElementById('cb-student-phone').value.trim();
+            const address = document.getElementById('cb-student-address').value.trim();
+
+            const newIdNo = "BAP/" + Math.floor(10000 + Math.random() * 90000);
+            const newStudent = {
+                id: studentsList.length + 1,
+                name: name,
+                code: newIdNo,
+                passport: "",
+                date: "",
+                selected: true,
+                sent: false,
+                design: "classic-navy",
+                phone: phone,
+                address: address,
+                church: church.name,
+                churchAddress: church.address,
+                pastorPhone: church.pastorPhone,
+                balanceDue: 0,
+                installmentPaid: true,
+                paymentVerified: true
+            };
+
+            church.slotsLeft--;
+            church.students.push(newStudent);
+            studentsList.push(newStudent);
+
+            localStorage.setItem('vpatbe_church_groups', JSON.stringify(churchGroupsList));
+            localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
+            syncStudentToSupabase(newStudent);
+
+            updateChurchSlotsUI(church);
+            renderChurchStudentsList(church);
+            document.getElementById('church-batch-reg-form').reset();
+            churchPaymentVerifiedState = false;
+            document.getElementById('cb-submit-btn').disabled = true;
+            document.getElementById('cb-submit-btn').className = "w-full py-3 bg-gray-400 text-white rounded-lg font-bold cursor-not-allowed transition flex items-center justify-center space-x-2";
+            
+            alert(`Aṣeyọri! A ti sẹda Student ID/NO ati Password fún ọmọ ijọ ${name}: ${newIdNo} (Fee: ₦${churchGroupStudentFee.toLocaleString()}).`);
+        }
+
+        function renderChurchStudentsList(church) {
+            const listContainer = document.getElementById('church-registered-students-list');
+            if (!church.students || church.students.length === 0) {
+                listContainer.innerHTML = `<p class="text-xs text-gray-500 italic">Ko tii si ọmọ ijọ kankan ti a forúkọ sílẹ̀.</p>`;
+                return;
+            }
+
+            listContainer.innerHTML = church.students.map((st, i) => `
+                <div class="p-2.5 bg-white rounded border flex justify-between items-center text-xs">
+                    <div>
+                        <span class="font-bold text-indigo-900">${st.name} (${st.code})</span>
+                        <p class="text-[10px] text-gray-600">Phone: ${st.phone} | Addr: ${st.address}</p>
+                    </div>
+                    <span class="bg-green-100 text-green-800 px-2 py-0.5 rounded font-bold text-[10px]">₦${churchGroupStudentFee.toLocaleString()} Paid</span>
+                </div>
+            `).join('');
+        }
+
+        function renderChurchInboxMessages(church) {
+            const inbox = document.getElementById('church-inbox-messages');
+            if (!church.messages || church.messages.length === 0) {
+                inbox.innerHTML = `<p class="text-xs text-gray-500 italic">Ko tii si ifiranṣẹ kankan ti o de lati super admin.</p>`;
+                return;
+            }
+
+            inbox.innerHTML = church.messages.map((m, idx) => `
+                <div class="p-2 bg-indigo-50 rounded border border-indigo-200">
+                    <span class="font-bold text-indigo-900 block">${m.sender}:</span>
+                    <p class="text-gray-800">${m.text}</p>
+                    <span class="text-[9px] text-gray-500">${m.date}</span>
+                </div>
+            `).join('');
+        }
+
+        function sendChurchAdminReply() {
+            const replyInput = document.getElementById('church-admin-reply-input');
+            const replyText = replyInput.value.trim();
+            if(!replyText) { alert('Jọwọ kọ esi rẹ mọ.'); return; }
+
+            const church = churchGroupsList[currentLoggedInChurchIndex];
+            if(!church.replies) church.replies = [];
+            church.replies.push({ text: replyText, date: new Date().toLocaleString() });
+            localStorage.setItem('vpatbe_church_groups', JSON.stringify(churchGroupsList));
+            
+            alert('Aṣeyọri! A ti fi esi rẹ ranṣẹ si Super Admin Control Center.');
+            replyInput.value = "";
+        }
+
+        function renderChurchCertificatesGallery(church) {
+            const gallery = document.getElementById('church-certificates-gallery');
+            if (!church.certificates || church.certificates.length === 0) {
+                gallery.innerHTML = `<p class="text-xs text-gray-500 italic">Ko tii si iwe-ẹri kankan ti o de lati ọdọ super admin.</p>`;
+                return;
+            }
+
+            gallery.innerHTML = church.certificates.map((cert, idx) => `
+                <div class="p-3 bg-indigo-50 rounded border border-indigo-200 flex justify-between items-center text-xs">
+                    <div>
+                        <span class="font-bold text-indigo-900 text-sm">${cert.studentName}</span>
+                        <p class="text-[10px] text-gray-600">Iwe-ẹri Iribọmi ti ṣetan fún igbasilẹ pẹlu orukọ ijọ ${cert.churchName}.</p>
+                    </div>
+                    <div class="flex gap-2 flex-wrap">
+                        <button onclick='previewChurchCertificate(${JSON.stringify(cert)})' class="px-3 py-1.5 bg-indigo-900 text-white rounded font-bold cursor-pointer">Preview</button>
+                        <button onclick='downloadChurchCertificatePDF(${JSON.stringify(cert)})' class="px-3 py-1.5 bg-green-600 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-download mr-1"></i> PDF</button>
+                        <button onclick='sendChurchCertificateWhatsApp(${JSON.stringify(cert)})' class="px-3 py-1.5 bg-emerald-600 text-white rounded font-bold cursor-pointer"><i class="fa-brands fa-whatsapp mr-1"></i> Send WA</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function sendChurchCertificateWhatsApp(cert) {
+            const cleanPhone = String(cert.studentPhone || "2348000000000").replace(/\D/g, '');
+            const msg = encodeURIComponent(`Ẹ n lẹ o ${cert.studentName}! Lati ọdọ ${currentMinistryName} ati ${cert.churchName}. Eyi ni Iwe-ẹri Iribọmi rẹ pẹlu agbara PDF.`);
+            window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
+        }
+
+        function previewChurchCertificate(cert) {
+            document.getElementById('cert-display-name').innerText = cert.studentName;
+            document.getElementById('cert-display-date').innerText = cert.date || new Date().toISOString().split('T')[0];
+            document.getElementById('cert-display-ministry-title').innerText = currentMinistryName;
+            document.getElementById('cert-display-church-subtitle').innerText = `${currentMinistryName} pẹlu ifọwọsowọpọ (${cert.churchName})`;
+            document.getElementById('cert-display-church-text').innerText = `(Church Group: ${cert.churchName})`;
+            if(cert.passport) document.getElementById('cert-display-passport').src = cert.passport;
+            if(directorSignatureData) {
+                const sig = document.getElementById('cert-saved-signature');
+                sig.src = directorSignatureData;
+                sig.style.display = 'block';
+            }
+            const el = document.getElementById('certificate-template');
+            el.classList.remove('hidden');
+            setTimeout(() => { el.classList.add('hidden'); }, 4000);
+            alert('Iwe-ẹri n bọ si oju-iwe fún akoko diẹ (Preview).');
+        }
+
+        function downloadChurchCertificatePDF(cert) {
+            document.getElementById('cert-display-name').innerText = cert.studentName;
+            document.getElementById('cert-display-date').innerText = cert.date || new Date().toISOString().split('T')[0];
+            document.getElementById('cert-display-ministry-title').innerText = currentMinistryName;
+            document.getElementById('cert-display-church-subtitle').innerText = `${currentMinistryName} pẹlu ifọwọsowọpọ (${cert.churchName})`;
+            document.getElementById('cert-display-church-text').innerText = `(Church Group: ${cert.churchName})`;
+            if(cert.passport) document.getElementById('cert-display-passport').src = cert.passport;
+            if(directorSignatureData) {
+                const sig = document.getElementById('cert-saved-signature');
+                sig.src = directorSignatureData;
+                sig.style.display = 'block';
+            }
+            const element = document.getElementById('certificate-template');
+            element.classList.remove('hidden');
+            const opt = {
+                margin: 1,
+                filename: `${cert.studentName.replace(/\s+/g, '_')}_Baptism_Certificate.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+            };
+            html2pdf().from(element).set(opt).save().then(() => {
+                element.classList.add('hidden');
+            });
+        }
+
+        function handleStudentDropdownChange(val) {
+            if (val === 'setileyi') {
+                alert('Student Settings & Profile: O le wo orukọ, ID, ati church affiliation rẹ nibi.');
+            } else if (val === 'send_passport') {
+                const fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = 'image/*';
+                fileInput.onchange = e => {
+                    const f = e.target.files[0];
+                    if(f) {
+                        const r = new FileReader();
+                        r.onload = event => {
+                            studentsList[currentLoggedInStudentIndex].passport = event.target.result;
+                            localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
+                            alert('Aṣeyọri! A ti fi passport rẹ ranṣẹ si super admin lẹsẹkẹsẹ.');
+                        };
+                        r.readAsDataURL(f);
+                    }
+                };
+                fileInput.click();
+            } else if (val === 'week9_cert') {
+                downloadStudentCertificate();
+            }
+            const dd = document.getElementById('student-universal-dropdown');
+            if(dd) dd.value = "";
+        }
+
+        function checkStudentInstallmentStatus(student) {
+            const banner = document.getElementById('student-installment-banner');
+            const lockedOverlay = document.getElementById('student-locked-overlay');
+            const portalArea = document.getElementById('main-student-portal-area');
+
+            const weekNumEl = document.getElementById('display-week-num');
+            if(weekNumEl) weekNumEl.innerText = currentWeek;
+
+            if (student.balanceDue && student.balanceDue > 0) {
+                if (currentWeek >= 4 && currentWeek < 7) {
+                    banner.classList.remove('hidden');
+                    document.getElementById('student-balance-text').innerText = `O ni asẹku owo ti ₦${student.balanceDue.toLocaleString()} ti ko tii san. Jọwọ san a ṣaju ọsẹ keje (Week 7).`;
+                    document.getElementById('student-balance-pay-box').innerHTML = `Pay Code Asẹku Rẹ: PAY-BAL-${student.code.replace('/', '')}`;
+                } else if (currentWeek >= 7) {
+                    if (!student.installmentPaid) {
+                        lockedOverlay.classList.remove('hidden');
+                        portalArea.classList.add('hidden');
+                        document.getElementById('locked-balance-display').innerText = `₦${student.balanceDue.toLocaleString()}.00`;
+                        document.getElementById('locked-paycode-display').innerText = `PAY-BAL-${student.code.replace('/', '')}`;
+                    }
+                }
+            }
+        }
+
+        function loadStudentFeedback(studentName) {
+            const feedbackBox = document.getElementById('student-personal-grade-status');
+            const studentSubs = studentQuizSubmissions.filter(sub => sub.studentName.toLowerCase() === studentName.toLowerCase());
+            
+            if (studentSubs.length === 0) {
+                feedbackBox.innerHTML = `<span class="text-gray-400 italic">Ko tii si idahun tabi mark ti a ti ṣe fun ọ.</span>`;
+                return;
+            }
+
+            feedbackBox.innerHTML = studentSubs.map(sub => `
+                <div class="mb-2 pb-2 border-b border-gray-800 text-[11px]">
+                    <p class="font-bold text-cyan-300">Ọsẹ ${sub.week} (Page ${sub.page}):</p>
+                    <p class="text-gray-300">Idahun rẹ: ${sub.answer}</p>
+                    <p class="text-green-400 font-bold mt-1">Mark: ${sub.graded ? sub.mark : 'Pending'}</p>
+                    <p class="text-yellow-300 italic">Atunṣe Admin: ${sub.correction || 'Ko si atunṣe pataki.'}</p>
+                </div>
+            `).join('');
+        }
+
+        function closeInstallmentBanner() {
+            document.getElementById('student-installment-banner').classList.add('hidden');
+        }
+
+        function simulateBalancePayment() {
+            const student = studentsList[currentLoggedInStudentIndex];
+            student.balanceDue = 0;
+            student.installmentPaid = true;
+            localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
+            alert('Aṣeyọri! Verification Engine ti jẹrisi isanwo asẹku rẹ. A ti ṣii dashboard rẹ patapata!');
+            document.getElementById('student-locked-overlay').classList.add('hidden');
+            document.getElementById('main-student-portal-area').classList.remove('hidden');
+        }
+
+        function openStudentPortalFromAdmin() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('student-dashboard').classList.remove('hidden');
+            currentLoggedInStudentIndex = 0;
+            setupStudentDashboardView(studentsList[0]);
+        }
+
+        function logoutAdmin() {
+            document.getElementById('admin-dashboard').classList.add('hidden');
+            document.getElementById('admin-badge-box').classList.add('hidden');
+            document.getElementById('auth-page').classList.remove('hidden');
+        }
+
+        function logoutStudent() {
+            document.getElementById('student-dashboard').classList.add('hidden');
+            document.getElementById('auth-page').classList.remove('hidden');
+        }
+
+        function toggleTvPower() {
+            tvPowerState = !tvPowerState;
+            const offMsg = document.getElementById('screen-off-msg');
+            const contentBox = document.getElementById('screen-content-box');
+            const powerBtn = document.getElementById('tv-power-btn');
+            const powerText = document.getElementById('power-btn-text');
+
+            if (tvPowerState) {
+                powerBtn.className = "px-3 py-2 bg-green-600 hover:bg-green-500 text-white rounded text-xs font-bold shadow transition flex items-center space-x-1.5 cursor-pointer";
+                powerText.innerText = "PAA";
+                offMsg.classList.add('hidden');
+                contentBox.classList.remove('hidden');
+                renderVpatbeContent();
+            } else {
+                powerBtn.className = "px-3 py-2 bg-red-700 hover:bg-red-600 text-white rounded text-xs font-bold shadow transition flex items-center space-x-1.5 cursor-pointer";
+                powerText.innerText = "TAN";
+                contentBox.classList.add('hidden');
+                offMsg.classList.remove('hidden');
+            }
+        }
+
+        function renderVpatbeContent() {
+            const contentBox = document.getElementById('screen-content-box');
+            document.getElementById('page-counter-badge').innerText = `Page ${currentPageIndex + 1} / ${contentPages.length}`;
+            
+            if (currentPageIndex === 0 && welcomeVideoUrl) {
+                document.getElementById('vpatbe-media-type-badge').innerText = "Mode: Welcome Video Engine (Priority)";
+                contentBox.innerHTML = `
+                    <video id="vpatbe-welcome-video-element" src="${welcomeVideoUrl}" controls autoplay class="w-full h-full object-contain"></video>
+                `;
+                return;
+            }
+
+            if (activeContentType === 'video' && activeVideoUrl) {
+                document.getElementById('vpatbe-media-type-badge').innerText = "Mode: Lesson Video Player Engine";
+                contentBox.innerHTML = `
+                    <video id="vpatbe-video-element" src="${activeVideoUrl}" controls autoplay class="w-full h-full object-contain"></video>
+                `;
+            } else {
+                document.getElementById('vpatbe-media-type-badge').innerText = "Mode: Television Text Engine";
+                const currentTxt = contentPages[currentPageIndex] || activeContentPayload;
+                contentBox.innerHTML = `
+                    <div class="text-left p-4 bg-gray-900 rounded border border-gray-800 w-full h-full overflow-y-auto" style="font-size: ${currentTextFontSize}px;">
+                        <span class="text-[10px] bg-indigo-900 text-indigo-200 px-2 py-0.5 rounded font-bold block mb-2">VPATBE TV BOARD (Ọsẹ ${currentWeek} - Page ${currentPageIndex + 1})</span>
+                        <p class="leading-relaxed">${currentTxt}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function changeFontSize(size) {
+            currentTextFontSize = size;
+            renderVpatbeContent();
+        }
+
+        function togglePlayPauseVideo() {
+            const videoEl = document.getElementById('vpatbe-video-element') || document.getElementById('vpatbe-welcome-video-element');
+            if (videoEl) {
+                if (videoEl.paused) { 
+                    videoEl.play(); 
+                    alert('Video ti bẹrẹ (Playing).');
+                } else { 
+                    videoEl.pause(); 
+                    alert('Video ti sinmi (Paused).');
+                }
+            } else {
+                alert('Ko si video kankan ti o nṣiṣẹ lọwọlọwọ lori bọọdu yii.');
+            }
+        }
+
+        function vpatbeNext() {
+            if (currentPageIndex < contentPages.length - 1) {
+                currentPageIndex++;
+                renderVpatbeContent();
+            } else {
+                alert('O ti de opin oju-iwe yii.');
+            }
+        }
+
+        function vpatbePrevious() {
+            if (currentPageIndex > 0) {
+                currentPageIndex--;
+                renderVpatbeContent();
+            } else {
+                alert('Eyi ni oju-iwe akọkọ.');
+            }
+        }
+
+        function submitStudentLessonAnswer() {
+            const answer = document.getElementById('student-lesson-answer-input').value;
+            if (!answer.trim()) { alert('Jọwọ kọ idahun rẹ si ibi.'); return; }
+
+            const submission = {
+                studentName: studentsList[currentLoggedInStudentIndex].name,
+                week: currentWeek,
+                page: currentPageIndex + 1,
+                answer: answer,
+                graded: false,
+                mark: "",
+                correction: ""
+            };
+
+            studentQuizSubmissions.push(submission);
+            localStorage.setItem('vpatbe_quiz_submissions', JSON.stringify(studentQuizSubmissions));
+            alert('Aṣeyọri! A ti fi idahun rẹ ranṣẹ si Admin.');
+            document.getElementById('student-lesson-answer-input').value = "";
+        }
+
+        function openStoryReviewModal() {
+            const modal = document.getElementById('story-review-modal');
+            const container = document.getElementById('story-review-modal-content');
+            if(!modal || !container) return;
+
+            container.innerHTML = storyButtonStories.map(st => `
+                <div class="p-3 bg-gray-900 rounded border border-indigo-800 space-y-1">
+                    <span class="text-cyan-300 font-bold block">${st.title} (Ọsẹ ${st.week || 9})</span>
+                    <p class="text-gray-300">${st.content}</p>
+                </div>
+            `).join('');
+
+            modal.classList.remove('hidden');
+        }
+
+        function initAutomaticWeeklyMarker() {
+            setInterval(() => {
+                const autoActive = localStorage.getItem('vpatbe_auto_marker_active') !== 'false';
+                if(!autoActive) return;
+
+                const lastCheck = localStorage.getItem('vpatbe_last_auto_check') || "";
+                const now = new Date().toDateString();
+
+                if (lastCheck !== now) {
+                    let storedWeek = parseInt(localStorage.getItem('cb_currentWeek')) || 1;
+                    if (storedWeek < 9) {
+                        storedWeek++;
+                        currentWeek = storedWeek;
+                        localStorage.setItem('cb_currentWeek', currentWeek);
+                        localStorage.setItem('vpatbe_last_auto_check', now);
+                        
+                        if (vpatbeItanVideos.length >= storedWeek) {
+                            const targetVid = vpatbeItanVideos[storedWeek - 1];
+                            activeContentType = 'video';
+                            activeVideoUrl = targetVid.url;
+                            localStorage.setItem('vpatbe_content_type', 'video');
+                            localStorage.setItem('vpatbe_video_url', activeVideoUrl);
+                        }
+                    }
+                }
+            }, 60000);
+        }
+
+        function restartAutomaticWeeklyEngine() {
+            currentWeek = 1;
+            localStorage.setItem('cb_currentWeek', 1);
+            localStorage.setItem('vpatbe_auto_marker_active', 'true');
+            localStorage.removeItem('vpatbe_last_auto_check');
+            alert('Aṣeyọri gidi! A ti bẹrẹ Automatic Weekly Engine si Ọsẹ 1 (Restart Automatic Engine successful).');
+        }
+
+        function downloadStudentCertificate() {
+            const student = studentsList[currentLoggedInStudentIndex];
+            if (currentWeek >= 9 || student.sent) {
+                document.getElementById('cert-display-name').innerText = student.name;
+                document.getElementById('cert-display-date').innerText = student.date || new Date().toISOString().split('T')[0];
+                document.getElementById('cert-display-ministry-title').innerText = currentMinistryName;
+                
+                const isChurchStudent = (student.church && student.church.toLowerCase() !== "independent" && student.church.toLowerCase() !== "n/a");
+                if (isChurchStudent) {
+                    document.getElementById('cert-display-church-subtitle').innerText = `${currentMinistryName} pẹlu ifọwọsowọpọ (${student.church})`;
+                    document.getElementById('cert-display-church-text').innerText = `(Church Group: ${student.church})`;
+                } else {
+                    document.getElementById('cert-display-church-subtitle').innerText = "Solear Light of the Bible Network";
+                    document.getElementById('cert-display-church-text').innerText = "(Church Group: Independent)";
+                }
+
+                if (student.passport) document.getElementById('cert-display-passport').src = student.passport;
+                
+                if (directorSignatureData) {
+                    const sigEl = document.getElementById('cert-saved-signature');
+                    sigEl.src = directorSignatureData;
+                    sigEl.style.display = 'block';
+                }
+
+                const element = document.getElementById('certificate-template');
+                element.classList.remove('hidden');
+                const opt = {
+                    margin: 1,
+                    filename: `${student.name.replace(/\s+/g, '_')}_Baptism_Certificate.pdf`,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: { scale: 2 },
+                    jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+                };
+                html2pdf().from(element).set(opt).save().then(() => {
+                    element.classList.add('hidden');
+                    alert('Aṣeyọri! A ti gba iwe-ẹri rẹ silẹ sori foonu rẹ gẹgẹ bi PDF.');
+                });
+            } else {
+                alert('Iwe-ẹri rẹ ko tii ṣii (Titi di Ọsẹ 9).');
+            }
+        }
+
+        let waLinkEditableState = false;
+
+        function getAppFreedropLink() {
+            return window.location.origin + window.location.pathname; 
+        }
+
+        function toggleWaLinkEditLock() {
+            waLinkEditableState = !waLinkEditableState;
+            const displayBox = document.getElementById('detectedAppLinkDisplay');
+            const toggleBtn = document.getElementById('wa-edit-lock-btn');
+            if(!displayBox || !toggleBtn) return;
+
+            if (waLinkEditableState) {
+                displayBox.removeAttribute('readonly');
+                displayBox.style.background = '#fff';
+                toggleBtn.innerHTML = `<i class="fa-solid fa-lock-open mr-1"></i> Lock Link (Tii)`;
+                toggleBtn.style.background = '#d9534f';
+                alert('A ti ṣii Freedrop link fún Edit. Ranti lati tẹ Lock lẹhin ti o ba pari.');
+            } else {
+                displayBox.setAttribute('readonly', 'true');
+                displayBox.style.background = '#f9f9f9';
+                toggleBtn.innerHTML = `<i class="fa-solid fa-lock mr-1"></i> Edit Link (Ṣii)`;
+                toggleBtn.style.background = '#075e54';
+                alert('A ti tii Freedrop link lailewu (Locked).');
+            }
+        }
+
+        function detectAndCopyFreedropLink() {
+            const displayBox = document.getElementById('detectedAppLinkDisplay');
+            const link = displayBox && displayBox.value ? displayBox.value : getAppFreedropLink();
+            if(displayBox) {
+                displayBox.value = link;
+                displayBox.select();
+            }
+            navigator.clipboard.writeText(link);
+            alert("A ti daakọ link app rẹ: \n" + link);
+        }
+
+        function addMorePhoneField() {
+            const container = document.getElementById('phoneInputsContainer');
+            if(!container) return;
+            const newRow = document.createElement('div');
+            newRow.className = 'phone-input-row';
+            newRow.style.cssText = 'display: flex; gap: 6px; margin-bottom: 6px;';
+            newRow.innerHTML = `
+                <input type="tel" class="waNumberInput" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
+                <button type="button" onclick="this.parentElement.remove()" style="background: #ff4d4d; color: white; border: none; padding: 0 10px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px;">X</button>
+            `;
+            container.appendChild(newRow);
+        }
+
+        function sendToMultipleWhatsApp() {
+            const inputs = document.querySelectorAll('.waNumberInput');
+            const baseMessageEl = document.getElementById('waMessage');
+            const baseMessage = baseMessageEl ? baseMessageEl.value.trim() : "";
+            const displayBox = document.getElementById('detectedAppLinkDisplay');
+            const appLink = displayBox && displayBox.value ? displayBox.value : getAppFreedropLink();
+            
+            const fullMessageText = baseMessage + " " + appLink;
+            const message = encodeURIComponent(fullMessageText);
+
+            let validNumbers = [];
+            inputs.forEach(input => {
+                let phone = input.value.trim();
+                if (phone) {
+                    phone = phone.replace(/\D/g, '');
+                    if (phone.startsWith('0')) {
+                        phone = '234' + phone.substring(1);
+                    } else if (!phone.startsWith('234')) {
+                        phone = '234' + phone;
+                    }
+                    validNumbers.push(phone);
+                }
+            });
+
+            if (validNumbers.length === 0) {
+                alert("Jọwọ tẹ o kere ju nọmba WhatsApp kan si aaye ti a pese.");
+                return;
+            }
+
+            validNumbers.forEach((phone, index) => {
+                setTimeout(() => {
+                    const waURL = `https://wa.me/${phone}?text=${message}`;
+                    window.open(waURL, '_blank');
+                }, index * 1200);
+            });
+
+            setTimeout(() => {
+                inputs.forEach(input => input.value = '');
+            }, validNumbers.length * 1200);
+        }
+
+        function saveAutoScheduleSettings() {
+            const dayEl = document.getElementById('scheduleDay');
+            const timeEl = document.getElementById('scheduleTime');
+            const msgEl = document.getElementById('autoScheduleMessage');
+
+            const day = dayEl ? dayEl.value : 'Monday';
+            const time = timeEl ? timeEl.value : '10:00';
+            const msg = msgEl ? msgEl.value.trim() : '';
+            
+            const settings = { day: day, time: time, message: msg };
+            localStorage.setItem('acb_autoschedule', JSON.stringify(settings));
+            alert("A ti fipamọ iṣẹto ọsọsẹ ati message ipeni wọle rẹ daradara!\nỌjọ: " + day + "\nAago: " + time);
+        }
+
+        function triggerNewSessionEngine() {
+            if (confirm("Ṣe o ni idaniloju pe o fẹ bẹrẹ Ṣaa Tuntun? Eyi yoo pa awọn akọṣile atijọ mọ patapata ninu Database, ṣugbọn a o fi agbara nla save wọn si Archive Search.")) {
+                const snapshot = {
+                    date: new Date().toLocaleString(),
+                    students: [...studentsList],
+                    churchGroups: [...churchGroupsList],
+                    quizzes: [...studentQuizSubmissions]
+                };
+                archivalDatabase.push(snapshot);
+                localStorage.setItem('vpatbe_archive_db', JSON.stringify(archivalDatabase));
+
+                studentsList = [];
+                churchGroupsList = [];
+                studentQuizSubmissions = [];
+
+                localStorage.removeItem('vpatbe_students');
+                localStorage.removeItem('vpatbe_church_groups');
+                localStorage.removeItem('vpatbe_quiz_submissions');
+                localStorage.removeItem('acb_registered_students');
+
+                alert('Aṣeyọri gidi! A ti bẹrẹ Ṣaa Tuntun fún akẹkọ tuntun lati wọle nísinsìnyí.');
+                location.reload();
+            }
+        }
+
+        function executeArchiveSearch() {
+            const query = document.getElementById('archive-search-query').value.toLowerCase().trim();
+            const resultBox = document.getElementById('archive-search-results');
+            if(!query) { alert('Jọwọ kọ orukọ tabi ID akẹkọ.'); return; }
+
+            let foundItems = [];
+            archivalDatabase.forEach(arch => {
+                arch.students.forEach(st => {
+                    if(st.name.toLowerCase().includes(query) || st.code.toLowerCase().includes(query)) {
+                        foundItems.push(st);
+                    }
+                });
+            });
+
+            if(foundItems.length === 0) {
+                resultBox.innerHTML = `<p class="text-gray-500 italic">Ko si akẹkọ ti a ri pẹlu orukọ yẹn ninu archive atijọ.</p>`;
+                return;
+            }
+
+            resultBox.innerHTML = foundItems.map(st => `
+                <div class="p-3 bg-indigo-50 rounded border border-indigo-200 flex justify-between items-center text-xs">
+                    <div>
+                        <span class="font-bold text-indigo-900">${st.name} (${st.code})</span>
+                        <p class="text-[10px] text-gray-600">Church: ${st.church || 'Independent'} | Phone: ${st.phone}</p>
+                    </div>
+                    <button onclick='downloadArchivedStudentData(${JSON.stringify(st)})' class="px-3 py-1.5 bg-green-600 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-download mr-1"></i> Download</button>
+                </div>
+            `).join('');
+        }
+
+        function downloadArchivedStudentData(st) {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(st, null, 2));
+            const dlAnchor = document.createElement('a');
+            dlAnchor.setAttribute("href", dataStr);
+            dlAnchor.setAttribute("download", `${st.name.replace(/\s+/g, '_')}_Archive_Record.json`);
+            document.body.appendChild(dlAnchor);
+            dlAnchor.click();
+            dlAnchor.remove();
+        }
+
+        let vrmcRecordingState = false;
+        let vrmcAudioRecorder = null;
+        let vrmcAudioChunks = [];
+
+        function toggleSuperAdminVrmcClass() {
+            vrmcClassActiveState = !vrmcClassActiveState;
+            localStorage.setItem('vpatbe_vrmc_active', JSON.stringify(vrmcClassActiveState));
+            
+            const startBtn = document.getElementById('super-admin-vrmc-toggle-class-btn');
+            if(startBtn) {
+                if (vrmcClassActiveState) {
+                    startBtn.className = "px-4 py-2 bg-green-700 hover:bg-green-600 text-white rounded font-bold cursor-pointer";
+                    startBtn.innerHTML = `<i class="fa-solid fa-signal mr-1"></i> End Class (Fopin si Class)`;
+                    alert('Aṣeyọri! Kilasi VRMC ti bẹrẹ (Class Started). Awọn akẹkọ le wọle bayii.');
+                } else {
+                    startBtn.className = "px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-white rounded font-bold cursor-pointer";
+                    startBtn.innerHTML = `<i class="fa-solid fa-play mr-1"></i> Start Class (Bẹrẹ Class)`;
+                    alert('A ti fopin si kilasi VRMC (Class Ended).');
+                }
+            }
+            updateStudentVrmcButtonState();
+        }
+
+        function updateStudentVrmcButtonState() {
+            const btn = document.getElementById('student-join-vrmc-btn');
+            const txt = document.getElementById('student-vrmc-btn-text');
+            if(!btn || !txt) return;
+
+            if (vrmcClassActiveState) {
+                btn.className = "bg-green-600 hover:bg-green-500 text-white px-3 py-2 rounded-lg text-xs font-bold shadow transition cursor-pointer flex items-center space-x-1 animate-pulse";
+                txt.innerText = "Join Live VRMC Class (Class Ti Bẹrẹ)";
+            } else {
+                btn.className = "bg-cyan-700 hover:bg-cyan-600 text-white px-3 py-2 rounded-lg text-xs font-bold shadow transition cursor-pointer flex items-center space-x-1";
+                txt.innerText = "Join Live VRMC Class";
+            }
+        }
+
+        function toggleStudentMic() {
+            studentMicState = !studentMicState;
+            const micBtn = document.getElementById('student-mic-toggle-btn');
+            const micBadge = document.getElementById('student-mic-status-badge');
+            if(!micBtn || !micBadge) return;
+
+            if (studentMicState) {
+                micBtn.className = "px-3 py-1.5 bg-green-600 text-white rounded font-bold text-[10px] cursor-pointer";
+                micBtn.innerHTML = `<i class="fa-solid fa-microphone mr-1"></i> Mic: ON`;
+                micBadge.innerText = "Mic Active (Speaking)";
+                micBadge.className = "px-2 py-0.5 bg-green-100 text-green-800 rounded font-bold text-[10px]";
+                alert('Mic rẹ ti tan (ON). Super Admin n gbo ohun rẹ lẹsẹkẹsẹ.');
+            } else {
+                micBtn.className = "px-3 py-1.5 bg-red-600 text-white rounded font-bold text-[10px] cursor-pointer";
+                micBtn.innerHTML = `<i class="fa-solid fa-microphone-slash mr-1"></i> Mic: OFF`;
+                micBadge.innerText = "Muted";
+                micBadge.className = "px-2 py-0.5 bg-red-100 text-red-800 rounded font-bold text-[10px]";
+                alert('Mic rẹ ti pa (Muted).');
+            }
+        }
+
+        async function toggleVrmcRecording() {
+            const btn = document.getElementById('vrmc-rec-toggle-btn');
+            if (!vrmcRecordingState) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    vrmcAudioChunks = [];
+                    vrmcAudioRecorder = new MediaRecorder(stream);
+                    vrmcAudioRecorder.ondataavailable = e => vrmcAudioChunks.push(e.data);
+                    vrmcAudioRecorder.onstop = () => {
+                        const audioBlob = new Blob(vrmcAudioChunks, { type: 'audio/webm' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        const dl = document.getElementById('vrmc-download-link');
+                        if(dl) {
+                            dl.href = audioUrl;
+                            dl.download = `VRMC_Meeting_Record_${Date.now()}.webm`;
+                            dl.classList.remove('hidden');
+                        }
+                        const playAud = document.getElementById('vrmc-playback-audio');
+                        if(playAud) playAud.src = audioUrl;
+                        alert('Aṣeyọri! A ti save bọtini record meeting rẹ.');
+                    };
+                    vrmcAudioRecorder.start();
+                    vrmcRecordingState = true;
+                    if(btn) {
+                        btn.className = "px-4 py-2 bg-green-700 text-white rounded font-bold cursor-pointer animate-pulse";
+                        btn.innerHTML = `<i class="fa-solid fa-stop mr-1"></i> Stop Record (OFF)`;
+                    }
+                    alert('Special Record Meeting ti bẹrẹ (ON)!');
+                } catch(err) {
+                    alert('Ko le fi agbara ṣii microphone fún Special Record.');
+                }
+            } else {
+                if(vrmcAudioRecorder) vrmcAudioRecorder.stop();
+                vrmcRecordingState = false;
+                if(btn) {
+                    btn.className = "px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded font-bold cursor-pointer";
+                    btn.innerHTML = `<i class="fa-solid fa-record-vinyl mr-1"></i> Start Record (ON)`;
+                }
+            }
+        }
+
+        function saveVrmcRecording() {
+            alert('Aṣeyọri! A ti fi igbasilẹ meeting pamọ sinu app path. O le tẹ Download lati gba sori foonu rẹ.');
+        }
+
+        function openStudentVrmcRoom() {
+            if (!vrmcClassActiveState) {
+                alert('KILASI KIO RI BẸRẸ! Super admin ko tii bẹrẹ kilasi VRMC. Jọwọ duro titi di igba ti admin yoo fi bẹrẹ class.');
+                return;
+            }
+
+            const activeStudentsCount = studentsList.length;
+
+            const modalHtml = `
+                <div id="student-vrmc-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+                    <div class="bg-gray-950 text-white p-5 rounded-2xl border-2 border-cyan-600 max-w-xl w-full space-y-4 text-xs">
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                            <div>
+                                <h4 class="font-bold text-cyan-400 text-sm"><i class="fa-solid fa-headset mr-2"></i>Live Voice Record Meeting Class (VRMC)</h4>
+                                <p class="text-[10px] text-gray-400">Awọn ti o ti join kilasi yii: <span class="font-bold text-yellow-300">${activeStudentsCount} Akẹkọ</span></p>
+                            </div>
+                            <button onclick="document.getElementById('student-vrmc-modal').remove()" class="px-3 py-1 bg-red-700 text-white rounded font-bold cursor-pointer">Pa (Close)</button>
+                        </div>
+                        
+                        <div class="p-3 bg-gray-900 rounded-lg border border-indigo-900 flex justify-between items-center">
+                            <div>
+                                <span class="font-bold text-gray-200 block text-[11px]">Ipo Mic Rẹ (Microphone Status):</span>
+                                <span id="student-mic-status-badge" class="px-2 py-0.5 bg-red-100 text-red-800 rounded font-bold text-[10px]">Muted</span>
+                            </div>
+                            <button type="button" id="student-mic-toggle-btn" onclick="toggleStudentMic()" class="px-3 py-1.5 bg-red-600 text-white rounded font-bold text-[10px] cursor-pointer">
+                                <i class="fa-solid fa-microphone-slash mr-1"></i> Mic: OFF
+                            </button>
+                        </div>
+
+                        <div class="p-3 bg-gray-900 rounded-lg border border-cyan-900 text-center space-y-2">
+                            <p class="text-cyan-300 font-bold"><i class="fa-solid fa-volume-high mr-1"></i> Ọrọ Lati Super Admin (Live Voice Class):</p>
+                            <audio id="student-vrmc-audio-stream" autoplay controls class="w-full"></audio>
+                            <p class="text-[10px] text-gray-400 italic">Super Admin n gbọ ọrọ rẹ lẹsẹkẹsẹ nigbati mic rẹ ba wa ni ON.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+        }
+
+        function renderStudentSifiryWidget() {
+            return `
+                <div class="bg-indigo-950 text-white p-4 rounded-xl shadow-lg border border-indigo-700 space-y-3 mt-4 text-xs">
+                    <span class="text-yellow-300 font-bold uppercase tracking-wide block"><i class="fa-solid fa-hand-holding-heart mr-1"></i> Ṣe Itilẹyin Fun Isẹ Ransẹ Yii (Sifiry)</span>
+                    <p class="italic text-indigo-200 text-[11px]">"MATIU 24:14 — A o si wasu ihinrere ijọba yi ni gbogbo aiye lati ṣe ẹri fun gbogbo orilẹ-ède; nigbana li opin yio si de."</p>
+                    <div class="flex gap-3 pt-1">
+                        <button onclick="handleSifiryChoice('yes')" class="flex-1 py-2 bg-green-600 hover:bg-green-500 text-white rounded font-bold cursor-pointer">BẸẸNI</button>
+                        <button onclick="handleSifiryChoice('no')" class="flex-1 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded font-bold cursor-pointer">BẸẸKỌ</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleSifiryChoice(choice) {
+            if (choice === 'yes') {
+                const payCode = "PAY-SIF-" + Math.floor(100000 + Math.random() * 900000);
+                alert(`Aṣeyọri! App ti ĭdàsílẹ̀ Payment Code fún ọ: ${payCode}.\n\nCompany Account: ${companyAccountInfo}\n\nLẹhin isanwo, Verification Engine yoo fi Lẹta Idupẹ ranṣẹ si ọ ni orukọ ${currentMinistryName}.`);
+            } else {
+                alert('A dupẹ lọwọ rẹ pupọ! A mọ riri ẹmi ifẹ ati adura rẹ.');
+            }
+        }
+
+        let currentAdvertIndex = 0;
+        function triggerWelcomePageAdvertPoll() {
+            const container = document.getElementById('welcome-advert-display-space');
+            if(!container) return;
+
+            const adverts = JSON.parse(localStorage.getItem('vpatbe_welcome_adverts')) || [];
+            if(adverts.length === 0) {
+                if (welcomeVideoUrl) {
+                    container.innerHTML = `<video src="${welcomeVideoUrl}" autoplay controls muted loop class="w-full h-full object-contain bg-black rounded shadow-inner"></video>`;
+                } else {
+                    container.innerHTML = `<p class="text-xs text-gray-400 italic">[Welcome Page Smart Plasma TV Advert Space - 50 Slots Max]</p>`;
+                }
+                return;
+            }
+
+            if (currentAdvertIndex >= adverts.length) currentAdvertIndex = 0;
+            const adv = adverts[currentAdvertIndex];
+            const intervalSec = (adv.timerMinutes || 1) * 60000;
+
+            if(adv.type === 'video') {
+                container.innerHTML = `<video src="${adv.url}" autoplay muted loop class="w-full h-full object-contain bg-black rounded shadow-inner"></video>`;
+            } else {
+                container.innerHTML = `<img src="${adv.url}" loading="lazy" class="w-full h-full object-contain bg-black rounded shadow-inner" alt="Advert">`;
+            }
+
+            setTimeout(() => {
+                currentAdvertIndex++;
+                triggerWelcomePageAdvertPoll();
+            }, intervalSec);
+        }
+
+        function saveWelcomeVideoToEngine() {
+            const fileInput = document.getElementById('admin-welcome-video-file-input');
+            if(!fileInput || !fileInput.files[0]) { alert('Jọwọ yan faili welcome video.'); return; }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                welcomeVideoUrl = e.target.result;
+                localStorage.setItem('vpatbe_welcome_video_url', welcomeVideoUrl);
+                alert('Aṣeyọri! A ti fi welcome video pamọ gẹgẹ bi Smart Plasma T.V priority.');
+                handleAdminDropdownChange('vpatbe_engine_mgr');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function saveNewAdvertToEngine() {
+            const fileInput = document.getElementById('admin-advert-file-input');
+            const timerInput = document.getElementById('admin-advert-timer-input');
+            if(!fileInput || !fileInput.files[0]) { alert('Jọwọ yan faili fidio tabi aworan banner.'); return; }
+
+            const file = fileInput.files[0];
+            const timerMin = timerInput ? parseFloat(timerInput.value) || 1 : 1;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const fileUrl = e.target.result;
+                const fileType = file.type.includes('video') ? 'video' : 'image';
+                
+                welcomeAdvertsList = JSON.parse(localStorage.getItem('vpatbe_welcome_adverts')) || [];
+                if (welcomeAdvertsList.length >= 50) {
+                    alert('Wọn ti pe 50 adverts pọ ninu Engine yi!');
+                    return;
+                }
+
+                welcomeAdvertsList.push({ type: fileType, url: fileUrl, timerMinutes: timerMin });
+                localStorage.setItem('vpatbe_welcome_adverts', JSON.stringify(welcomeAdvertsList));
+                alert('Aṣeyọri! A ti fi advert kun Welcome Page Smart Plasma TV.');
+                handleAdminDropdownChange('welcome_advert_mgr');
+                triggerWelcomePageAdvertPoll();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function deleteWelcomeAdvert(index) {
+            welcomeAdvertsList.splice(index, 1);
+            localStorage.setItem('vpatbe_welcome_adverts', JSON.stringify(welcomeAdvertsList));
+            alert('A ti pa advert na rẹ!');
+            handleAdminDropdownChange('welcome_advert_mgr');
+        }
+
+        function saveItanVideoToEngine() {
+            const fileInput = document.getElementById('admin-itan-video-file-input');
+            if(!fileInput || !fileInput.files[0]) { alert('Jọwọ yan faili video fun Itan Engine.'); return; }
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                vpatbeItanVideos.push({ id: vpatbeItanVideos.length + 1, name: file.name, url: e.target.result });
+                localStorage.setItem('vpatbe_itan_videos', JSON.stringify(vpatbeItanVideos));
+                alert('Aṣeyọri! A ti save video na sinu Itan Engine.');
+                handleAdminDropdownChange('vpatbe_engine_mgr');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function previewItanVideo(url) {
+            activeContentType = 'video';
+            activeVideoUrl = url;
+            localStorage.setItem('vpatbe_content_type', 'video');
+            localStorage.setItem('vpatbe_video_url', activeVideoUrl);
+            alert('A ti gbe video na si Preview Space lori VPATBE.');
+            renderVpatbeContent();
+        }
+
+        function downloadItanVideo(url, name) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = name || 'VPATBE_Video.mp4';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            alert('GSGP: A ti bẹrẹ download video na sori foonu rẹ.');
+        }
+
+        function deleteItanVideo(index) {
+            vpatbeItanVideos.splice(index, 1);
+            localStorage.setItem('vpatbe_itan_videos', JSON.stringify(vpatbeItanVideos));
+            alert('A ti pa video na rẹ kuro ninu Itan Engine.');
+            handleAdminDropdownChange('vpatbe_engine_mgr');
+        }
+
+        function replaceItanVideo(index) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'video/*';
+            input.onchange = e => {
+                const f = e.target.files[0];
+                if(f) {
+                    const r = new FileReader();
+                    r.onload = ev => {
+                        vpatbeItanVideos[index].name = f.name;
+                        vpatbeItanVideos[index].url = ev.target.result;
+                        localStorage.setItem('vpatbe_itan_videos', JSON.stringify(vpatbeItanVideos));
+                        alert('Aṣeyọri! A ti ropo video na.');
+                        handleAdminDropdownChange('vpatbe_engine_mgr');
+                    };
+                    r.readAsDataURL(f);
+                }
+            };
+            input.click();
+        }
+
+        function pushItanVideoToStudent(url) {
+            activeContentType = 'video';
+            activeVideoUrl = url;
+            localStorage.setItem('vpatbe_content_type', 'video');
+            localStorage.setItem('vpatbe_video_url', activeVideoUrl);
+            alert('Aṣeyọri! A ti gbe video na sori VPATBE ti o wa lori student dashboard.');
+            renderVpatbeContent();
+        }
+
+        function pushAllItanVideosToSeason() {
+            if (vpatbeItanVideos.length === 0) { alert('Ko si video kankan ninu Itan Engine.'); return; }
+            const firstVid = vpatbeItanVideos[0];
+            activeContentType = 'video';
+            activeVideoUrl = firstVid.url;
+            localStorage.setItem('vpatbe_content_type', 'video');
+            localStorage.setItem('vpatbe_video_url', activeVideoUrl);
+            alert('GGVẸKFST: A ti seto gbogbo awọn video kanka fun saa tuntun pẹlu WhatsApp link engine & Automatic marker!');
+            renderVpatbeContent();
+        }
+
+        // ================= BUTTON NO. 14: MINISTRY & COMPANY NAME CHANGE ENGINE =================
+        function renderMinistryNameManager(panel) {
+            panel.innerHTML = `
+                <div class="space-y-4 bg-white p-6 rounded-lg border shadow-sm text-xs">
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base"><i class="fa-solid fa-building text-indigo-600 mr-2"></i>14. Ministry & Company Name Change Engine</h4>
+                    <p class="text-gray-600">Nibi ni o le yipada orukọ ile-iṣẹ tabi ile-iwe rẹ. Orukọ tuntun yoo han lori gbogbo awọn headers ati certificates laifọwọyi.</p>
+                    <div class="space-y-2">
+                        <label class="block font-bold text-gray-700">Orukọ Ile-iṣẹ / Ile-iwe Lọwọlọwọ:</label>
+                        <input type="text" id="admin-new-ministry-name" value="${currentMinistryName}" class="w-full p-2.5 border rounded bg-gray-50 text-xs font-bold text-indigo-900" placeholder="Kọ orukọ tuntun...">
+                    </div>
+                    <button onclick="saveNewMinistryName()" class="px-4 py-2 bg-indigo-900 hover:bg-indigo-800 text-white rounded font-bold cursor-pointer transition">
+                        💾 Fipamọ Orukọ Tuntun (Save New Name)
+                    </button>
+                </div>
+            `;
+        }
+
+        function saveNewMinistryName() {
+            const inputEl = document.getElementById('admin-new-ministry-name');
+            if(!inputEl) return;
+            const newName = inputEl.value.trim();
+            if(!newName) { alert('Jọwọ tẹ orukọ tuntun kọkọ.'); return; }
+
+            currentMinistryName = newName;
+            localStorage.setItem('vpatbe_ministry_name', newName);
+            
+            // Update UI headers instantly
+            const topNavTitle = document.getElementById('top-navbar-ministry-title');
+            const authTitle = document.getElementById('auth-page-ministry-title');
+            const ministryBanner = document.getElementById('ministry-title-banner');
+            
+            if(topNavTitle) topNavTitle.innerText = newName;
+            if(authTitle) authTitle.innerText = newName;
+            if(ministryBanner) {
+                const partnershipAppend = document.getElementById('partnership-church-append');
+                const churchText = partnershipAppend ? partnershipAppend.outerHTML : '';
+                ministryBanner.innerHTML = `${newName} <span id="partnership-church-append" class="font-semibold text-indigo-700"></span>`;
+            }
+
+            alert('Aṣeyọri gidi! A ti yipada orukọ ile-iṣẹ rẹ si: ' + newName);
+        }
+
+        function handleAdminDropdownChange(actionKey) {
+            const panel = document.getElementById('admin-workspace-panel');
+            if(!panel) return;
+            
+            if (actionKey === 'srf_fee_mgr') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-coins text-indigo-600 mr-2"></i>SRF Registration Fee Manager (Independent & Church Group)</h4>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border space-y-4 text-xs">
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">1. Independent Student Registration Fee (₦):</label>
+                            <input type="number" id="admin-ind-fee" value="${independentSrfFee}" class="w-full p-2.5 border rounded bg-gray-50 text-xs">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-gray-700 mb-1">2. Church Group Student Fee (₦):</label>
+                            <input type="number" id="admin-church-fee" value="${churchGroupStudentFee}" class="w-full p-2.5 border rounded bg-gray-50 text-xs">
+                        </div>
+                        <button onclick="saveDynamicPricingFees()" class="px-4 py-2 bg-indigo-600 text-white rounded font-bold cursor-pointer">Fi Awọn Iye Owo Pamọ (Save Prices)</button>
+                    </div>
+                `;
+            } else if (actionKey === 'srf_database') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-address-card text-indigo-600 mr-2"></i>SRF Database & Registration Forms (Akẹkọ kọọkan)</h4>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-gray-700 text-xs">Total Registered Students: ${studentsList.length}</span>
+                            <button onclick="deleteAllStudentsDatabase()" class="px-3 py-1.5 bg-red-700 text-white rounded font-bold text-xs cursor-pointer"><i class="fa-solid fa-trash mr-1"></i> Delete All Students</button>
+                        </div>
+                        ${studentsList.map((s, idx) => `
+                            <div class="bg-white p-4 rounded-lg shadow-sm border space-y-2 text-xs relative">
+                                <div class="flex justify-between items-center border-b pb-2">
+                                    <span class="font-bold text-indigo-900 text-sm">${s.name} (${s.code})</span>
+                                    <div class="flex items-center gap-2">
+                                        <span class="bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded font-bold">Church: ${s.church || 'Independent'}</span>
+                                        <button onclick="deleteSingleStudent(${idx})" class="px-2 py-1 bg-red-600 text-white rounded font-bold cursor-pointer" title="Delete Student"><i class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-gray-700">
+                                    <p><b>Phone:</b> ${s.phone}</p>
+                                    <p><b>Address:</b> ${s.address}</p>
+                                </div>
+                                ${s.passport ? `<div class="mt-2"><img src="${s.passport}" loading="lazy" class="w-16 h-16 object-cover rounded border"></div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (actionKey === 'church_groups_mgr') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-church text-indigo-600 mr-2"></i>Church Groups Manager & Send Messages / Delete Church Group</h4>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border space-y-3 text-xs">
+                            <label class="block font-bold text-gray-800">Send Ifiranṣẹ tabi Iwe Atuyẹwo si Gbogbo Church Groups:</label>
+                            <textarea id="super-admin-msg-input" rows="3" class="w-full p-2 border rounded bg-gray-50" placeholder="Kọ ifiranṣẹ tabi iwe atuyẹwo..."></textarea>
+                            <button onclick="superAdminSendMsgToChurchGroups()" class="px-4 py-2 bg-indigo-900 text-white rounded font-bold cursor-pointer">Send si Gbogbo Church Groups</button>
+                        </div>
+                        <div class="space-y-3">
+                            ${churchGroupsList.map((cg, idx) => `
+                                <div class="bg-white p-4 rounded-lg shadow-sm border space-y-2 text-xs">
+                                    <div class="flex justify-between items-center border-b pb-2">
+                                        <span class="font-bold text-indigo-900 text-sm">${cg.name} (ID/NO Password:${cg.password})</span>
+                                        <div class="flex items-center gap-2">
+                                            <span class="bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded font-bold">Slots Left: ${cg.slotsLeft}/100</span>
+                                            <button onclick="deleteChurchGroupItem(${idx})" class="px-2.5 py-1 bg-red-600 text-white rounded font-bold cursor-pointer">Delete Church Group</button>
+                                        </div>
+                                    </div>
+                                    <p><b>Pastor:</b> ${cg.pastorName} (${cg.pastorPhone}) \vert{} <b>Address:</b>${cg.address}</p>
+                                    <p class="font-bold text-gray-700">Awọn Ọmọ Ijọ ti a forúkọ sílẹ̀: ${cg.students.length}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (actionKey === 'verify_payment_mgr') {
+                const pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-receipt text-indigo-600 mr-2"></i>Verify My Payment Engine (SEEN Approval & Status Control + Delete)</h4>
+                    <p class="text-xs text-gray-600 mb-3">Nibi ni o le ri Transaction ID, Banki, ati isọfunni isanwo lati ọdọ awọn akẹkọ tabi Church groups. Tẹ SEEN lati fọwọsi, tabi Delete lati pa rẹ.</p>
+                    <div class="space-y-3">
+                        ${pendingVers.length === 0 ? '<p class="text-xs text-gray-500 italic">Ko tii si ẹri isanwo kankan ti o duro de ifọwọsi.</p>' : ''}
+                        ${pendingVers.map((pv, idx) => `
+                            <div class="p-3 bg-white rounded border space-y-2 text-xs shadow-sm">
+                                <div class="flex justify-between items-center font-bold text-indigo-900 border-b pb-1">
+                                    <span>${pv.name} (${pv.church})</span>
+                                    <span class="font-mono text-cyan-700">${pv.payCode}</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-2 text-gray-700">
+                                    <p><b>Phone:</b> ${pv.phone}</p>
+                                    <p><b>Bank:</b> ${pv.bank}</p>
+                                    <p><b>Transaction ID:</b> ${pv.txId}</p>
+                                    <p><b>Mode:</b> ${pv.paymentMode}</p>
+                                </div>
+                                <div class="flex justify-between items-center pt-2 border-t">
+                                    <span class="font-bold ${pv.seen ? 'text-green-600' : 'text-amber-600'}">${pv.seen ? 'Status: Approved (SEEN Clicked)' : 'Status: Pending Approval'}</span>
+                                    <div class="flex gap-2">
+                                        <button onclick="deleteVerificationItem(${idx})" class="px-2.5 py-1 bg-red-600 text-white rounded font-bold cursor-pointer" title="Delete Payment Record"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                                        <button onclick="sendPaymentErrorNotice('${pv.phone}')" class="px-2.5 py-1 bg-amber-600 text-white rounded font-bold cursor-pointer">A ko ri ẹri</button>
+                                        <button onclick="approveVerificationSeen(${idx})" class="px-3 py-1 bg-green-600 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-check mr-1"></i> SEEN (Approve)</button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (actionKey === 'student_quiz_grading') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-marker text-indigo-600 mr-2"></i>Student Quiz Answers, Mark Grading & Correction</h4>
+                    <div class="space-y-3">
+                        ${studentQuizSubmissions.length === 0 ? '<p class="text-gray-500 text-xs">Ko tii si idahun ti akẹkọ fi ranṣẹ.</p>' : ''}
+                        ${studentQuizSubmissions.map((sub, idx) => `
+                            <div class="bg-white p-3 rounded-lg shadow-sm border space-y-2 text-xs">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-gray-900">${sub.studentName} (Ọsẹ ${sub.week}, Page${sub.page})</span>
+                                    <span class="px-2 py-0.5 rounded font-bold ${sub.graded ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'}">${sub.graded ? 'Graded: ' + sub.mark : 'Pending Mark'}</span>
+                                </div>
+                                <p class="bg-gray-50 p-2 rounded text-gray-800"><b>Idahun Akẹkọ:</b> ${sub.answer}</p>
+                                <div class="space-y-1 pt-1">
+                                    <label class="block font-bold text-gray-700 text-[10px]">Kọ Aami (Mark) ati Atunṣe (Correction):</label>
+                                    <div class="flex gap-2">
+                                        <input type="text" id="grade-input-${idx}" value="${sub.mark || ''}" placeholder="Aami (Apeere: A)" class="p-1.5 border rounded bg-gray-50 text-xs w-1/3">
+                                        <input type="text" id="correction-input-${idx}" value="${sub.correction || ''}" placeholder="Kọ atunṣe..." class="p-1.5 border rounded bg-gray-50 text-xs w-2/3">
+                                    </div>
+                                    <button onclick="gradeStudentQuiz(${idx})" class="mt-2 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded font-bold cursor-pointer">Mark / Send Correction</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (actionKey === 'vpatbe_engine_mgr') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-clapperboard text-indigo-600 mr-2"></i>VPATBE Engine Manager & Itan Engine</h4>
+                    <div class="space-y-4 bg-white p-4 rounded-lg border shadow-sm text-xs">
+                        <div class="p-3 bg-indigo-50 rounded border border-indigo-200 space-y-2">
+                            <label class="block font-bold text-indigo-900"><i class="fa-solid fa-video mr-1"></i> Gbe Welcome Video Wọle (Priority Play):</label>
+                            <input type="file" id="admin-welcome-video-file-input" accept="video/*" class="w-full p-2 border rounded bg-white">
+                            <button onclick="saveWelcomeVideoToEngine()" class="px-4 py-2 bg-indigo-900 text-white rounded font-bold cursor-pointer">Gbe Welcome Video Kalẹ</button>
+                            ${welcomeVideoUrl ? `<div class="mt-2"><video src="${welcomeVideoUrl}" controls class="w-full h-32 object-contain bg-black rounded"></video></div>` : ''}
+                        </div>
+                        <hr class="my-2">
+
+                        <!-- ITAN ENGINE SECTION -->
+                        <div class="p-3 bg-cyan-50 rounded border border-cyan-200 space-y-3">
+                            <h5 class="font-bold text-cyan-900 text-sm"><i class="fa-solid fa-film mr-1"></i> Engine Itan (Save & Manage Lesson Videos)</h5>
+                            <div class="space-y-2">
+                                <label class="block font-bold text-gray-700">Gbe Video Ẹkọ Wọle si Itan Engine:</label>
+                                <input type="file" id="admin-itan-video-file-input" accept="video/*" class="w-full p-2 border rounded bg-white">
+                                <button onclick="saveItanVideoToEngine()" class="px-4 py-2 bg-cyan-700 text-white rounded font-bold cursor-pointer">Gbe Video Wọle si Itan Engine</button>
+                            </div>
+                            <div class="space-y-2 pt-2 border-t border-cyan-200">
+                                <button onclick="pushAllItanVideosToSeason()" class="w-full py-2.5 bg-green-700 hover:bg-green-600 text-white rounded font-bold cursor-pointer">
+                                    <i class="fa-solid fa-calendar-days mr-1"></i> GBE GBOGBO VIDEO ẸKỌ KALA FÚN SAA TUNTUN (GGVẸKFST)
+                                </button>
+                                <p class="text-[10px] text-gray-600 italic">Bọtini yii nṣiṣẹ pọ pẹlu WhatsApp link engine & Automatic marker lati gbe awọn fidio kalẹ laifọwọyi.</p>
+                            </div>
+                            <div class="space-y-2 pt-2">
+                                <span class="font-bold text-gray-800 block">Akojọ Awọn Fidio ti o wa ninu Itan Engine:</span>
+                                ${vpatbeItanVideos.length === 0 ? '<p class="text-gray-500 italic">Ko tii si video kankan ninu Itan Engine.</p>' : ''}
+                                ${vpatbeItanVideos.map((vid, idx) => `
+                                    <div class="p-2.5 bg-white rounded border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                                        <span class="font-bold text-indigo-900 truncate max-w-xs">${idx+1}. ${vid.name}</span>
+                                        <div class="flex flex-wrap gap-1">
+                                            <button onclick="previewItanVideo('${vid.url}')" class="px-2 py-1 bg-indigo-900 text-white rounded text-[10px] font-bold cursor-pointer">Preview</button>
+                                            <button onclick="downloadItanVideo('${vid.url}', '${vid.name}')" class="px-2 py-1 bg-green-600 text-white rounded text-[10px] font-bold cursor-pointer">GSGP</button>
+                                            <button onclick="pushItanVideoToStudent('${vid.url}')" class="px-2 py-1 bg-cyan-700 text-white rounded text-[10px] font-bold cursor-pointer">Gbe si Student</button>
+                                            <button onclick="replaceItanVideo(${idx})" class="px-2 py-1 bg-amber-600 text-white rounded text-[10px] font-bold cursor-pointer">Replace</button>
+                                            <button onclick="deleteItanVideo(${idx})" class="px-2 py-1 bg-red-600 text-white rounded text-[10px] font-bold cursor-pointer">Delete</button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <hr class="my-2">
+
+                        <div class="flex space-x-4 border-b pb-2">
+                            <label class="font-bold cursor-pointer"><input type="radio" name="admin-content-mode" value="text" ${activeContentType==='text'?'checked':''} onclick="switchAdminContentType('text')"> Text Content Mode</label>
+                            <label class="font-bold cursor-pointer"><input type="radio" name="admin-content-mode" value="video" ${activeContentType==='video'?'checked':''} onclick="switchAdminContentType('video')"> Video Content Mode</label>
+                        </div>
+                        <div id="admin-text-box" class="${activeContentType==='video'?'hidden':''} space-y-2">
+                            <label class="block font-bold text-gray-700">Kọ Ọrọ Ẹkọ:</label>
+                            <textarea id="admin-text-payload" rows="5" class="w-full p-2.5 border rounded bg-gray-50">${activeContentPayload}</textarea>
+                        </div>
+                        <div id="admin-video-box" class="${activeContentType==='text'?'hidden':''} space-y-2">
+                            <label class="block font-bold text-gray-700">Gbe Video Wọle fún Ẹkọ:</label>
+                            <input type="file" id="admin-gallery-video-input" accept="video/*" onchange="previewAdminVideo(event)" class="w-full p-2 border rounded bg-gray-50">
+                        </div>
+                        <button onclick="saveVpatbeContentEngine(event)" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded font-bold cursor-pointer">Gbe Kalẹ si Student Board & Preview Space</button>
+                    </div>
+                `;
+            } else if (actionKey === 'story_engine_mgr') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-book-open text-indigo-600 mr-2"></i>Story Button & reEdit Engine (ITAN ENGINE)</h4>
+                    <div class="space-y-4 bg-white p-4 rounded-lg border shadow-sm text-xs">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-gray-700">Itan Database (Review past lessons)</span>
+                            <button onclick="deleteAllStoriesEngine()" class="px-3 py-1 bg-red-700 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-trash mr-1"></i> Delete All Stories</button>
+                        </div>
+                        <div class="space-y-2 border-b pb-3">
+                            <label class="block font-bold text-gray-700">Fi Itan Titun Kun:</label>
+                            <input type="text" id="new-story-title" placeholder="Akọle Itan..." class="w-full p-2 border rounded bg-gray-50">
+                            <textarea id="new-story-content" rows="3" placeholder="Akoonu itan..." class="w-full p-2 border rounded bg-gray-50"></textarea>
+                            <button onclick="addNewStoryItem()" class="px-4 py-2 bg-green-600 text-white rounded font-bold cursor-pointer">Fi Itan Kun</button>
+                        </div>
+                        <div class="space-y-3">
+                            ${storyButtonStories.map((st, idx) => `
+                                <div class="p-3 bg-gray-50 rounded border space-y-2 relative">
+                                    <div class="font-bold text-indigo-900">${st.title}</div>
+                                    <p class="text-gray-700">${st.content}</p>
+                                    <div class="flex gap-2 pt-1">
+                                        <button onclick="reEditStoryItem(${idx})" class="px-3 py-1 bg-amber-600 text-white rounded font-bold cursor-pointer text-[10px]">reEdit Itan</button>
+                                        <button onclick="deleteSingleStory(${idx})" class="px-3 py-1 bg-red-600 text-white rounded font-bold cursor-pointer text-[10px]">Delete</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (actionKey === 'certificate_engine') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-certificate text-indigo-600 mr-2"></i>Certificate Engine & Gallery (Passport, Edit, Send, PDF, Preview)</h4>
+                    <p class="text-xs text-gray-600 mb-3">Nibi ni o le fi iwe-ẹri ranṣẹ si awọn akẹkọ ti o wa ni abẹ Church Group wọn taara si Church Group Admin Dashboard.</p>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow-sm border space-y-2 text-xs">
+                            <label class="block font-bold text-gray-800">Gbe Digital Signature Oludari Wọle:</label>
+                            <input type="file" id="director-sig-file-input" accept="image/*" onchange="uploadDirectorSignature(event)" class="w-full p-2 border rounded bg-gray-50">
+                            ${directorSignatureData ? `<div class="mt-2"><img src="${directorSignatureData}" loading="lazy" class="signature-img" alt="Signature"></div>` : ''}
+                        </div>
+                        <div class="space-y-3">
+                            ${studentsList.map((st, i) => `
+                                <div class="bg-white p-4 rounded-lg shadow-sm border space-y-3 text-xs">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <span class="font-bold text-gray-900 text-sm block">${st.name} (${st.code})</span>
+                                            <span class="text-[10px] text-indigo-700 font-bold block">Church: ${st.church || 'Independent'}</span>
+                                            <span class="text-[10px] ${st.passport ? 'text-green-600 font-semibold' : 'text-red-600'}">${st.passport ? 'Passport uploaded successfully' : 'No passport uploaded yet'}</span>
+                                        </div>
+                                        ${st.passport ? `<img src="${st.passport}" loading="lazy" class="w-12 h-12 object-cover rounded border">` : ''}
+                                    </div>
+                                    <div class="flex flex-wrap gap-2 pt-1 border-t">
+                                        <button onclick="previewAdminCertificate(${i})" class="px-3 py-1.5 bg-indigo-900 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-eye mr-1"></i> Preview</button>
+                                        <button onclick="sendStudentCertificate(${i})" class="px-3 py-1.5 bg-green-600 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-paper-plane mr-1"></i> Send si Church Group</button>
+                                        <button onclick="adminDownloadCertificatePDF(${i})" class="px-3 py-1.5 bg-indigo-600 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-download mr-1"></i> PDF</button>
+                                        <button onclick="deleteSingleStudent(${i})" class="px-3 py-1.5 bg-red-600 text-white rounded font-bold cursor-pointer"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (actionKey === 'company_account_mgr') {
+                panel.innerHTML = `
+                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-building-columns text-indigo-600 mr-2"></i>Company Account Settings</h4>
+                    <div class="bg-white p-4 rounded-lg shadow-sm border space-y-3 text-xs">
+                        <textarea id="admin-company-acc-input" rows="3" class="w-full p-2.5 border rounded bg-gray-50">${companyAccountInfo}</textarea>
+                        <button onclick="saveCompanyAccount()" class="px-4 py-2 bg-indigo-600 text-white rounded font-bold cursor-pointer">Fi Account Pamọ</button>
+                    </div>
+                `;
+            } else if (actionKey === 'whatsapp_auto_engine') {
+                panel.innerHTML = `
+                    <div style="font-family: sans-serif; position: relative;">
+                        <h4 style="color: #075e54; margin-top: 0; text-align: center; font-size: 15px; border-bottom: 2px solid #25D366; padding-bottom: 8px;">ADMIN CONTROL CENTER - WHATSAPP & AUTO AUTOMATIC MARKER</h4>
+                        <p style="font-size: 12px; color: #666; text-align: center; margin-bottom: 15px;">Eto Ẹka Iṣakoso WhatsApp, Auto Weekly Marker & Restart Engine</p>
+                        
+                        <div style="margin-bottom: 15px; background: #fffde7; padding: 10px; border-radius: 8px; border: 1px solid #fff59d;">
+                            <label style="display: block; font-weight: bold; font-size: 12px; color: #f57f17; margin-bottom: 4px;">🤖 Restart Automatic Engine Saami:</label>
+                            <p style="font-size: 11px; color: #555; margin-bottom: 6px;">Tẹ bọtini yii lati tun Automatic Weekly Engine bẹrẹ lati Ọsẹ 1 laisi biba awọn ilana ihuwasi akẹkọ jẹ.</p>
+                            <button type="button" onclick="restartAutomaticWeeklyEngine()" style="background-color: #f57f17; color: white; border: none; padding: 8px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer; width: 100%;">
+                                🔄 Restart Automatic Engine Saami (Reset to Week 1)
+                            </button>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                <label style="font-size: 11px; font-weight: bold; color: #075e54;">Freedrop App Link:</label>
+                                <button type="button" id="wa-edit-lock-btn" onclick="toggleWaLinkEditLock()" style="background: #075e54; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; cursor: pointer;">
+                                    <i class="fa-solid fa-lock mr-1"></i> Edit Link (Ṣii)
+                                </button>
+                            </div>
+                            <button type="button" onclick="detectAndCopyFreedropLink()" style="background-color: #075e54; color: white; border: none; padding: 9px; border-radius: 6px; font-weight: bold; font-size: 12px; cursor: pointer; width: 100%; margin-bottom: 4px;">
+                                🔗 Daakọ Freedrop App Link gangan
+                            </button>
+                            <input type="text" id="detectedAppLinkDisplay" readonly value="${getAppFreedropLink()}" style="width: 100%; padding: 6px; font-size: 11px; border: 1px solid #ccc; border-radius: 4px; background: #f9f9f9; box-sizing: border-box;" placeholder="Link app yoo han nibi...">
+                        </div>
+
+                        <div style="background: #f4fcf7; border: 1px solid #c8e6c9; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                            <label style="display: block; font-weight: bold; font-size: 12px; color: #2e7d32; margin-bottom: 6px;">⚙️ Weekly Automatic & Resend Settings:</label>
+                            
+                            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                                <div style="flex: 1;">
+                                    <label style="font-size: 11px; color: #555; display: block; margin-bottom: 2px;">Ọjọ Ọsẹ (Day):</label>
+                                    <select id="scheduleDay" style="width: 100%; padding: 6px; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
+                                        <option value="Monday">Monday (Ọjọ Aje)</option>
+                                        <option value="Tuesday">Tuesday (Ọjọ Iṣẹgun)</option>
+                                        <option value="Wednesday">Wednesday (Ọjọ Ru)</option>
+                                        <option value="Thursday">Thursday (Ọjọ Bọ)</option>
+                                        <option value="Friday">Friday (Ọjọ Etì)</option>
+                                        <option value="Saturday">Saturday (Ọjọ Abamẹta)</option>
+                                        <option value="Sunday">Sunday (Ọjọ Àìkú)</option>
+                                    </select>
+                                </div>
+                                <div style="flex: 1;">
+                                    <label style="font-size: 11px; color: #555; display: block; margin-bottom: 2px;">Aago (Time):</label>
+                                    <input type="time" id="scheduleTime" value="10:00" style="width: 100%; padding: 5px; border: 1px solid #ccc; border-radius: 6px; font-size: 12px; box-sizing: border-box;">
+                                </div>
+                            </div>
+
+                            <div style="margin-bottom: 8px;">
+                                <label for="autoScheduleMessage" style="font-size: 11px; color: #555; display: block; margin-bottom: 2px;">Message Ipeni Wọle (Weekly Auto Message):</label>
+                                <textarea id="autoScheduleMessage" rows="3" style="width: 100%; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 11px;">Ẹ ku ojo yi o! Ẹ jọwọ e fi akoko yi leti lati wọle si oju-iwe welcome page app wa fun eto ọsọsẹ wa:</textarea>
+                            </div>
+
+                            <button type="button" onclick="saveAutoScheduleSettings()" style="background-color: #2e7d32; color: white; border: none; padding: 7px; border-radius: 6px; font-weight: bold; font-size: 11px; cursor: pointer; width: 100%;">
+                                💾 Fipamọ Iṣẹto Ọsọsẹ & Resend
+                            </button>
+                        </div>
+
+                        <div id="phoneInputsContainer" style="margin-bottom: 10px;">
+                            <label style="display: block; margin-bottom: 4px; font-weight: bold; font-size: 12px; color: #333;">Nọmba WhatsApp (Manual MPN):</label>
+                            <div class="phone-input-row" style="display: flex; gap: 6px; margin-bottom: 6px;">
+                                <input type="tel" class="waNumberInput" placeholder="E.g. 07069344855" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="addMorePhoneField()" style="background-color: #f0f0f0; color: #333; border: 1px dashed #075e54; padding: 6px; border-radius: 6px; font-weight: bold; font-size: 11px; cursor: pointer; width: 100%; margin-bottom: 12px;">
+                            + MORE PHONE NUMBER (MPN)
+                        </button>
+
+                        <div style="margin-bottom: 12px;">
+                            <label for="waMessage" style="display: block; margin-bottom: 4px; font-weight: bold; font-size: 12px; color: #333;">Ifiranṣẹ (Manual Message):</label>
+                            <textarea id="waMessage" rows="3" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">Ẹ nlẹ! Lati ọdọ ${currentMinistryName}. Jọwọ tẹ ọna asopọ yii lati wọle si welcome page app wa:</textarea>
+                        </div>
+
+                        <button onclick="sendToMultipleWhatsApp()" style="width: 100%; background-color: #25D366; color: white; padding: 10px; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer;">
+                            Send to WhatsApp (Manual All)
+                        </button>
+                    </div>
+                `;
+            } else if (actionKey === 'archive_search_mgr') {
+                panel.innerHTML = `
+                    <div class="space-y-4 bg-white p-4 rounded-lg border shadow-sm text-xs">
+                        <h4 class="font-bold text-indigo-900 text-sm md:text-base"><i class="fa-solid fa-box-archive text-indigo-600 mr-2"></i>Archive Search Engine & "Bẹ̀rẹ̀ Ṣaa Tuntun"</h4>
+                        <p class="text-gray-600">Tẹ bọtini yii lati bẹrẹ saa tuntun. Gbogbo akọṣile atijọ yoo wa ninu Archive Search Engine lailewu.</p>
+                        <button onclick="triggerNewSessionEngine()" class="px-4 py-2 bg-red-700 text-white rounded font-bold cursor-pointer">Bẹ̀rẹ̀ Ṣaa Tuntun (New Session Engine)</button>
+                        <div class="flex gap-2 pt-2 border-t">
+                            <input type="text" id="archive-search-query" placeholder="Kọ orukọ akẹkọ tabi ID/NO..." class="p-2 border rounded bg-gray-50 flex-1 text-xs">
+                            <button onclick="executeArchiveSearch()" class="px-4 py-2 bg-indigo-900 text-white rounded font-bold cursor-pointer">Wá (Search Archive)</button>
+                        </div>
+                        <div id="archive-search-results" class="space-y-2 mt-3"></div>
+                    </div>
+                `;
+            } else if (actionKey === 'vrmc_engine_mgr') {
+                panel.innerHTML = `
+                    <div class="space-y-4 bg-gray-950 text-white p-5 rounded-2xl border-2 border-indigo-800 text-xs">
+                        <div class="flex justify-between items-center border-b border-gray-800 pb-3">
+                            <div>
+                                <h4 class="font-bold text-cyan-400 text-sm"><i class="fa-solid fa-headset mr-2"></i>Voice Record Meeting Class (VRMC Engine)</h4>
+                                <p class="text-[10px] text-gray-400">Kọ awọn akẹkọ ni ẹ̀kọ́ nipasẹ Group Voice Meeting pẹlu Start/End Class controls.</p>
+                            </div>
+                            <div>
+                                <button id="super-admin-vrmc-toggle-class-btn" onclick="toggleSuperAdminVrmcClass()" class="px-4 py-2 ${vrmcClassActiveState ? 'bg-green-700 hover:bg-green-600' : 'bg-indigo-700 hover:bg-indigo-600'} text-white rounded font-bold cursor-pointer shadow">
+                                    <i class="fa-solid ${vrmcClassActiveState ? 'fa-signal' : 'fa-play'} mr-1"></i> ${vrmcClassActiveState ? 'End Class (Fopin si Class)' : 'Start Class (Bẹrẹ Class)'}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-2">
+                            <span class="font-bold text-gray-300 block text-[11px]">Awọn Olumulo & Akẹkọ ti nṣe wọle lọwọlọwọ (Total Joined: ${studentsList.length}):</span>
+                            
+                            <div class="flex gap-2 mb-2">
+                                <button onclick="monitorIndependentStudentsList()" class="px-3 py-1.5 bg-indigo-700 text-white rounded font-bold text-[10px] cursor-pointer">
+                                    WỌLE SI MONITOR INDEPENDENT STUDENT REGISTRATION (WSMISD)
+                                </button>
+                                <button onclick="monitorChurchGroupStudentsList()" class="px-3 py-1.5 bg-cyan-700 text-white rounded font-bold text-[10px] cursor-pointer">
+                                    WỌLE SI CHURCH GROUP MONITOR STUDENT DASHBOARD (WSCGMSD)
+                                </button>
+                            </div>
+
+                            <div id="admin-monitor-display-area" class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gray-900 p-3 rounded-lg border border-gray-800 max-h-48 overflow-y-auto">
+                                <div class="flex flex-col items-center p-2 bg-indigo-950 rounded border border-indigo-600 relative">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-yellow-400 flex items-center justify-center bg-black">
+                                        <i class="fa-solid fa-user-shield text-yellow-400 text-xl"></i>
+                                    </div>
+                                    <span class="font-bold text-yellow-300 text-[10px] mt-1 text-center">Timothy (Admin)</span>
+                                    <span class="absolute top-1 right-1 w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+                                </div>
+                                ${studentsList.map(st => `
+                                    <div class="flex flex-col items-center p-2 bg-gray-950 rounded border border-gray-800 relative">
+                                        <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-cyan-400 flex items-center justify-center bg-black">
+                                            <i class="fa-solid fa-user text-gray-400 text-lg"></i>
+                                        </div>
+                                        <span class="font-bold text-white text-[10px] mt-1 text-center truncate w-full">${st.name}</span>
+                                        <span class="text-[9px] text-cyan-400 italic">${st.church || 'Independent'}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="p-3 bg-gray-900 rounded-lg border border-indigo-900 space-y-2">
+                            <span class="font-bold text-yellow-400 block"><i class="fa-solid fa-circle-dot mr-1"></i> Special Record Meeting Button (ON/OFF) & Play/Pause Controls:</span>
+                            <div class="flex flex-wrap gap-2 items-center">
+                                <button id="vrmc-rec-toggle-btn" onclick="toggleVrmcRecording()" class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded font-bold cursor-pointer">
+                                    <i class="fa-solid fa-record-vinyl mr-1"></i> Start Record (ON)
+                                </button>
+                                <button onclick="saveVrmcRecording()" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded font-bold cursor-pointer">
+                                    <i class="fa-solid fa-floppy-disk mr-1"></i> Save Recording
+                                </button>
+                                <a id="vrmc-download-link" class="hidden px-4 py-2 bg-green-600 text-white rounded font-bold cursor-pointer">
+                                    <i class="fa-solid fa-download mr-1"></i> Download Recording to Phone
+                                </a>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-gray-800 space-y-1">
+                                <span class="text-[11px] font-bold text-cyan-300">Play / Pause Recorded Meeting (Play/P):</span>
+                                <audio id="vrmc-playback-audio" controls class="w-full"></audio>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (actionKey === 'welcome_advert_mgr') {
+                panel.innerHTML = `
+                    <div class="space-y-4 bg-white p-4 rounded-lg border shadow-sm text-xs">
+                        <h4 class="font-bold text-indigo-900 text-sm md:text-base"><i class="fa-solid fa-rectangle-ad text-indigo-600 mr-2"></i>Welcome Page Smart Plasma TV Advert Space (50 Slots + Timer + Delete)</h4>
+                        <div class="space-y-2 p-3 bg-gray-50 rounded border">
+                            <label class="block font-bold text-gray-700">Gbe Video tabi Banner Wọle si Smart Plasma TV Engine:</label>
+                            <input type="file" id="admin-advert-file-input" accept="image/*,video/*" class="w-full p-2 border rounded bg-white">
+                            
+                            <label class="block font-bold text-gray-700 mt-2">Ṣet Iye Time (Minutes) fún Advert Yíyí pada:</label>
+                            <input type="number" id="admin-advert-timer-input" value="1" class="w-full p-2 border rounded bg-white" placeholder="Apeere: 1">
+                            
+                            <div class="flex gap-2 mt-3">
+                                <button onclick="saveNewAdvertToEngine()" class="flex-1 px-4 py-2 bg-indigo-900 text-white rounded font-bold cursor-pointer">1. GBE ADVERT KALẸ</button>
+                                <button onclick="saveNewAdvertToEngine()" class="flex-1 px-4 py-2 bg-green-700 text-white rounded font-bold cursor-pointer">2. ADD MORE ADVERT</button>
+                            </div>
+                        </div>
+                        <div class="space-y-2 mt-4">
+                            <h5 class="font-bold text-gray-800">Awọn Adverts ti o wa lọwọlọwọ (${welcomeAdvertsList.length} / 50 Slots):</h5>
+                            ${welcomeAdvertsList.map((adv, idx) => `
+                                <div class="p-2.5 bg-gray-50 rounded border flex justify-between items-center">
+                                    <span class="font-medium text-gray-800">Advert #${idx+1} (${adv.type}) — Timer:${adv.timerMinutes || 1} min</span>
+                                    <button onclick="deleteWelcomeAdvert(${idx})" class="px-2.5 py-1 bg-red-600 text-white rounded font-bold text-[10px] cursor-pointer"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            } else if (actionKey === 'ministry_name_mgr') {
+                renderMinistryNameManager(panel);
+            } else {
+                panel.innerHTML = `<div class="text-center text-gray-500 py-12"><p class="text-sm">Jọwọ yan aṣayan kankan ninu Universal Dropdown Menu.</p></div>`;
+            }
+        }
+
+        function monitorIndependentStudentsList() {
+            const area = document.getElementById('admin-monitor-display-area');
+            if(!area) return;
+            const indStudents = studentsList.filter(s => !s.church || s.church.toLowerCase() === 'independent' || s.church.toLowerCase() === 'n/a');
+            area.innerHTML = indStudents.map(st => `
+                <div class="flex flex-col items-center p-2 bg-indigo-950 rounded border border-indigo-600">
+                    <span class="font-bold text-yellow-300 text-[10px] text-center">${st.name}</span>
+                    <span class="text-[9px] text-white">ID: ${st.code} (Independent)</span>
+                </div>
+            `).join('') || '<p class="text-xs text-gray-400">No Independent students found.</p>';
+            alert('Wọle si Monitor Independent Student Registration (WSMISD) aseyori!');
+        }
+
+        function monitorChurchGroupStudentsList() {
+            const area = document.getElementById('admin-monitor-display-area');
+            if(!area) return;
+            const churchStudents = studentsList.filter(s => s.church && s.church.toLowerCase() !== 'independent' && s.church.toLowerCase() !== 'n/a');
+            area.innerHTML = churchStudents.map(st => `
+                <div class="flex flex-col items-center p-2 bg-cyan-950 rounded border border-cyan-600">
+                    <span class="font-bold text-cyan-300 text-[10px] text-center">${st.name}</span>
+                    <span class="text-[9px] text-white">Church: ${st.church}</span>
+                </div>
+            `).join('') || '<p class="text-xs text-gray-400">No Church Group students found.</p>';
+            alert('Wọle si Church Group Monitor Student Dashboard (WSCGMSD) aseyori!');
+        }
+
+        function saveDynamicPricingFees() {
+            const indEl = document.getElementById('admin-ind-fee');
+            const churchEl = document.getElementById('admin-church-fee');
+            if(indEl) independentSrfFee = parseFloat(indEl.value) || 8000;
+            if(churchEl) churchGroupStudentFee = parseFloat(churchEl.value) || 5000;
+
+            localStorage.setItem('vpatbe_ind_srf_fee', independentSrfFee);
+            localStorage.setItem('vpatbe_church_student_fee', churchGroupStudentFee);
+            srfTotalFee = independentSrfFee;
+
+            const feeTxt = document.getElementById('church-fee-display-text');
+            if(feeTxt) feeTxt.innerText = `₦${churchGroupStudentFee.toLocaleString()}`;
+
+            alert(`Aṣeyọri! A ti fi awọn iye owo pamọ:\n- Independent Fee: ₦${independentSrfFee.toLocaleString()}\n- Church Group Student Fee: ₦${churchGroupStudentFee.toLocaleString()}`);
+        }
+
+        function deleteSingleStudent(index) {
+            if(confirm('Ṣe o ni idaniloju pe o fẹ pa akọsilẹ akẹkọ yii rẹ?')) {
+                studentsList.splice(index, 1);
+                localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
+                localStorage.setItem('acb_registered_students', JSON.stringify(studentsList));
+                alert('A ti pa akọsilẹ akẹkọ na rẹ!');
+                handleAdminDropdownChange('srf_database');
+            }
+        }
+
+        function deleteAllStudentsDatabase() {
+            if(confirm('Ṣe o ni idaniloju pe o fẹ pa GBOBO akọsilẹ awọn akẹkọ rẹ?')) {
+                studentsList = [];
+                localStorage.removeItem('vpatbe_students');
+                localStorage.removeItem('acb_registered_students');
+                alert('A ti pa gbogbo akọsilẹ awọn akẹkọ rẹ!');
+                handleAdminDropdownChange('srf_database');
+            }
+        }
+
+        function deleteChurchGroupItem(index) {
+            if(confirm('Ṣe o ni idaniloju pe o fẹ pa Church Group yii rẹ?')) {
+                churchGroupsList.splice(index, 1);
+                localStorage.setItem('vpatbe_church_groups', JSON.stringify(churchGroupsList));
+                alert('A ti pa Church Group na rẹ!');
+                handleAdminDropdownChange('church_groups_mgr');
+            }
+        }
+
+        function deleteAllStoriesEngine() {
+            if(confirm('Ṣe o ni idaniloju pe o fẹ pa gbogbo Itan Engine database?')) {
+                storyButtonStories = [];
+                localStorage.removeItem('vpatbe_story_database');
+                alert('A ti pa gbogbo itan rẹ!');
+                handleAdminDropdownChange('story_engine_mgr');
+            }
+        }
+
+        function deleteSingleStory(index) {
+            storyButtonStories.splice(index, 1);
+            localStorage.setItem('vpatbe_story_database', JSON.stringify(storyButtonStories));
+            alert('A ti pa itan na rẹ!');
+            handleAdminDropdownChange('story_engine_mgr');
+        }
+
+        function deleteVerificationItem(index) {
+            let pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+            if(confirm('Ṣe o ni idaniloju pe o fẹ pa isọfunni isanwo yii rẹ?')) {
+                pendingVers.splice(index, 1);
+                localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVers));
+                alert('A ti pa akọsilẹ isanwo na rẹ!');
+                handleAdminDropdownChange('verify_payment_mgr');
+            }
+        }
+
+        function approveVerificationSeen(index) {
+            let pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
+            if(pendingVers[index]) {
+                pendingVers[index].seen = true;
+                localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVers));
+                paymentVerifiedState = true;
+                churchPaymentVerifiedState = true;
+                
+                const verifyBtn = document.getElementById('verify-my-payment-btn');
+                const submitBtn = document.getElementById('srf-submit-btn');
+                const lockIcon = document.getElementById('srf-submit-lock-icon');
+
+                if(verifyBtn) {
+                    verifyBtn.className = "w-full py-2 bg-green-600 text-white rounded font-bold cursor-pointer text-xs transition";
+                    verifyBtn.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Payment Verified & Approved (SEEN)`;
+                }
+                if(submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.className = "w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold cursor-pointer transition flex items-center justify-center space-x-2";
+                    lockIcon.className = "fa-solid fa-paper-plane";
+                    submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane mr-2"></i> SUBMIT & GENERATE ID/NO`;
+                }
+
+                const cbSubmitBtn = document.getElementById('cb-submit-btn');
+                const cbLockIcon = document.getElementById('cb-submit-lock-icon');
+                const cbStatusBox = document.getElementById('cb-verification-status-box');
+
+                if(cbSubmitBtn) {
+                    cbSubmitBtn.disabled = false;
+                    cbSubmitBtn.className = "w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold cursor-pointer transition flex items-center justify-center space-x-2";
+                    if(cbLockIcon) cbLockIcon.className = "fa-solid fa-paper-plane";
+                    cbSubmitBtn.innerHTML = `<i class="fa-solid fa-paper-plane mr-2"></i> FORÚKỌ ỌMỌ IJỌ SILẸ (Verified & Approved)`;
+                }
+                if(cbStatusBox) {
+                    cbStatusBox.className = "p-2 bg-green-50 text-green-800 rounded border border-green-200 text-[11px] flex items-center";
+                    cbStatusBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Isanwo rẹ ti ni ifọwọsi (SEEN Clicked). O le tẹ forúkọ silẹ nísinsìnyí!`;
+                }
+
+                alert('Aṣeyọri! O ti tẹ SEEN. Verify my payment button ati church group registration bọtini ti tan green.');
+                handleAdminDropdownChange('verify_payment_mgr');
+            }
+        }
+
+        function sendPaymentErrorNotice(phone) {
+            const cleanPhone = String(phone).replace(/\D/g, '');
+            const msg = encodeURIComponent("A ko ri Ẹri Isanwo rẹ. Jọwọ tẹ Transaction ID ati banki to peye ranṣẹ si wa fun Iribọmi.");
+            window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
+        }
+
+        function superAdminSendMsgToChurchGroups() {
+            const input = document.getElementById('super-admin-msg-input');
+            if(!input) return;
+            const msgText = input.value.trim();
+            if(!msgText) { alert('Jọwọ kọ ifiranṣẹ mọ.'); return; }
+
+            churchGroupsList.forEach(cg => {
+                if(!cg.messages) cg.messages = [];
+                cg.messages.push({ sender: "Super Admin Control Center", text: msgText, date: new Date().toLocaleString() });
+            });
+            localStorage.setItem('vpatbe_church_groups', JSON.stringify(churchGroupsList));
+            alert('Aṣeyọri! A ti fi ifiranṣẹ ranṣẹ si gbogbo Church Group Admin dashboards.');
+            input.value = "";
+        }
+
+        function uploadDirectorSignature(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    directorSignatureData = e.target.result;
+                    localStorage.setItem('vpatbe_director_signature', directorSignatureData);
+                    alert('Aṣeyọri! A ti fi signature oludari pamọ.');
+                    handleAdminDropdownChange('certificate_engine');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function gradeStudentQuiz(index) {
+            const markEl = document.getElementById(`grade-input-${index}`);
+            const corrEl = document.getElementById(`correction-input-${index}`);
+            if(!markEl || !corrEl) return;
+            const mark = markEl.value;
+            const correction = corrEl.value;
+            if (!mark.trim()) { alert('Jọwọ kọ aami si ibi.'); return; }
+            
+            studentQuizSubmissions[index].graded = true;
+            studentQuizSubmissions[index].mark = mark;
+            studentQuizSubmissions[index].correction = correction;
+            localStorage.setItem('vpatbe_quiz_submissions', JSON.stringify(studentQuizSubmissions));
+            alert('Aṣeyọri! A ti fi mark ati atunṣe ranṣẹ si akẹkọ.');
+            handleAdminDropdownChange('student_quiz_grading');
+        }
+
+        function switchAdminContentType(type) {
+            activeContentType = type;
+            const textBox = document.getElementById('admin-text-box');
+            const videoBox = document.getElementById('admin-video-box');
+            if (type === 'text') {
+                if(textBox) textBox.classList.remove('hidden');
+                if(videoBox) videoBox.classList.add('hidden');
+            } else {
+                if(videoBox) videoBox.classList.remove('hidden');
+                if(textBox) textBox.classList.add('hidden');
+            }
+        }
+
+        function previewAdminVideo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                activeVideoUrl = URL.createObjectURL(file);
+            }
+        }
+
+        function saveVpatbeContentEngine(e) {
+            localStorage.setItem('vpatbe_content_type', activeContentType);
+            if (activeContentType === 'text') {
+                const payloadEl = document.getElementById('admin-text-payload');
+                if(payloadEl) {
+                    activeContentPayload = payloadEl.value;
+                    contentPages = activeContentPayload.split('\n\n').filter(p => p.trim() !== "");
+                    if (contentPages.length === 0) contentPages = [activeContentPayload];
+                    currentPageIndex = 0;
+                    localStorage.setItem('vpatbe_payload', activeContentPayload);
+                }
+            } else {
+                localStorage.setItem('vpatbe_video_url', activeVideoUrl);
+            }
+            alert('Aṣeyọri gidi! A ti gbe akoonu VPATBE kalẹ ati si Preview Space.');
+            renderVpatbeContent();
+        }
+
+        function addNewStoryItem() {
+            const titleEl = document.getElementById('new-story-title');
+            const contentEl = document.getElementById('new-story-content');
+            if(!titleEl || !contentEl) return;
+            const title = titleEl.value;
+            const content = contentEl.value;
+            if (!title || !content) { alert('Jọwọ kọ akọle ati akoonu itan naa.'); return; }
+            
+            storyButtonStories.push({ id: storyButtonStories.length + 1, title, content, week: 9 });
+            localStorage.setItem('vpatbe_story_database', JSON.stringify(storyButtonStories));
+            alert('Aṣeyọri! A ti fi itan kun eto naa.');
+            handleAdminDropdownChange('story_engine_mgr');
+        }
+
+        function reEditStoryItem(index) {
+            const st = storyButtonStories[index];
+            const newTitle = prompt("Yipada akọle itan:", st.title);
+            const newContent = prompt("Yipada akoonu itan:", st.content);
+            if (newTitle !== null && newContent !== null) {
+                storyButtonStories[index].title = newTitle;
+                storyButtonStories[index].content = newContent;
+                localStorage.setItem('vpatbe_story_database', JSON.stringify(storyButtonStories));
+                alert('Aṣeyọri! A ti se reEdit itan naa.');
+                handleAdminDropdownChange('story_engine_mgr');
+            }
+        }
+
+        function saveCompanyAccount() {
+            const accInput = document.getElementById('admin-company-acc-input');
+            if(!accInput) return;
+            companyAccountInfo = accInput.value;
+            localStorage.setItem('vpatbe_company_account', companyAccountInfo);
+            const displayEl = document.getElementById('srf-company-account-display');
+            if(displayEl) displayEl.innerText = companyAccountInfo;
+            alert('Aṣeyọri! A ti fi account company pamọ.');
+        }
+
+        function previewAdminCertificate(index) {
+            const st = studentsList[index];
+            document.getElementById('cert-display-name').innerText = st.name;
+            document.getElementById('cert-display-date').innerText = st.date || new Date().toISOString().split('T')[0];
+            document.getElementById('cert-display-ministry-title').innerText = currentMinistryName;
+            
+            const isChurchStudent = (st.church && st.church.toLowerCase() !== "independent" && st.church.toLowerCase() !== "n/a");
+            if (isChurchStudent) {
+                document.getElementById('cert-display-church-subtitle').innerText = `${currentMinistryName} pẹlu ifọwọsowọpọ (${st.church})`;
+                document.getElementById('cert-display-church-text').innerText = `(Church Group: ${st.church})`;
+            } else {
+                document.getElementById('cert-display-church-subtitle').innerText = "Solear Light of the Bible Network";
+                document.getElementById('cert-display-church-text').innerText = "(Church Group: Independent)";
+            }
+
+            if (st.passport) document.getElementById('cert-display-passport').src = st.passport;
+            if (directorSignatureData) {
+                const sig = document.getElementById('cert-saved-signature');
+                sig.src = directorSignatureData;
+                sig.style.display = 'block';
+            }
+            const el = document.getElementById('certificate-template');
+            el.classList.remove('hidden');
+            setTimeout(() => { el.classList.add('hidden'); }, 4000);
+            alert('Iwe-ẹri n bọ si oju-iwe fún akoko diẹ (Preview).');
+        }
+
+        function sendStudentCertificate(index) {
+            const currentDateStr = new Date().toISOString().split('T')[0];
+            studentsList[index].sent = true;
+            studentsList[index].date = currentDateStr;
+            localStorage.setItem('vpatbe_students', JSON.stringify(studentsList));
+
+            const student = studentsList[index];
+            const matchingChurch = churchGroupsList.find(cg => cg.name.toLowerCase() === (student.church || "").toLowerCase());
+            if (matchingChurch) {
+                if(!matchingChurch.certificates) matchingChurch.certificates = [];
+                matchingChurch.certificates.push({
+                    studentName: student.name,
+                    churchName: matchingChurch.name,
+                    passport: student.passport,
+                    date: currentDateStr,
+                    studentPhone: student.phone
+                });
+                localStorage.setItem('vpatbe_church_groups', JSON.stringify(churchGroupsList));
+            }
+
+            alert(`Aṣeyọri! A ti fi iwe-ẹri ranṣẹ si dashboard akẹkọ ${student.name} ati taara si Church Group Certificate Gallery.`);
+            handleAdminDropdownChange('certificate_engine');
+        }
+
+        function adminDownloadCertificatePDF(index) {
+            const st = studentsList[index];
+            document.getElementById('cert-display-name').innerText = st.name;
+            document.getElementById('cert-display-date').innerText = st.date || new Date().toISOString().split('T')[0];
+            document.getElementById('cert-display-ministry-title').innerText = currentMinistryName;
+            
+            const isChurchStudent = (st.church && st.church.toLowerCase() !== "independent" && st.church.toLowerCase() !== "n/a");
+            if (isChurchStudent) {
+                document.getElementById('cert-display-church-subtitle').innerText = `${currentMinistryName} pẹlu ifọwọsowọpọ (${st.church})`;
+                document.getElementById('cert-display-church-text').innerText = `(Church Group: ${st.church})`;
+            } else {
+                document.getElementById('cert-display-church-subtitle').innerText = "Solear Light of the Bible Network";
+                document.getElementById('cert-display-church-text').innerText = "(Church Group: Independent)";
+            }
+
+            if (st.passport) document.getElementById('cert-display-passport').src = st.passport;
+            if (directorSignatureData) {
+                const sigEl = document.getElementById('cert-saved-signature');
+                sigEl.src = directorSignatureData;
+                sigEl.style.display = 'block';
+            }
+            
+            const element = document.getElementById('certificate-template');
+            element.classList.remove('hidden');
+            const opt = {
+                margin: 1,
+                filename: `${st.name.replace(/\s+/g, '_')}_Baptism_Certificate.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'landscape' }
+            };
+            html2pdf().from(element).set(opt).save().then(() => {
+                element.classList.add('hidden');
+            });
+        }
+
+        async function initApp() {
+            updateDateTime();
+            
+            // Sync initial ministry title across UI
+            const topNavTitle = document.getElementById('top-navbar-ministry-title');
+            const authTitle = document.getElementById('auth-page-ministry-title');
+            if(topNavTitle) topNavTitle.innerText = currentMinistryName;
+            if(authTitle) authTitle.innerText = currentMinistryName;
+
+            // Register PWA Service Worker for Offline Mode
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then(reg => console.log('Service Worker Registered Successfully:', reg.scope))
+                        .catch(err => console.log('Service Worker Registration Failed:', err));
+                });
+            }
+
+            // Fetch latest data from Supabase Cloud
+            await fetchStudentsFromSupabase();
+
+            const savedAcc = localStorage.getItem('vpatbe_company_account');
+            if (savedAcc && document.getElementById('srf-company-account-display')) {
+                document.getElementById('srf-company-account-display').innerText = savedAcc;
+            }
+            setPaymentMode('full');
+            initAutomaticWeeklyMarker();
+            updateStudentVrmcButtonState();
+            
+            const sifirySpace = document.getElementById('student-sifiry-widget-space');
+            if(sifirySpace) {
+                sifirySpace.innerHTML = renderStudentSifiryWidget();
+            }
+
+            triggerWelcomePageAdvertPoll();
+            renderVpatbeContent();
+        }
+
+        function changeLanguage() {
+            const lang = document.getElementById('language-selector').value;
+            const welcomeTextEl = document.getElementById('welcome-text');
+            if(welcomeTextEl) {
+                if (lang === 'en') {
+                    welcomeTextEl.innerText = "Welcome, Beloved Baptism Student!";
+                } else {
+                    welcomeTextEl.innerText = "Kaabo, Akẹkọ Iribọmi Olufe!";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
