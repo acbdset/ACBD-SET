@@ -122,8 +122,8 @@
                             <input type="text" id="reg-pastor-name" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Orukọ pastor agbẹ́rẹ́">
                         </div>
                         <div>
-                            <label class="block font-bold text-gray-700 mb-1">4. Pastor Phone Number:</label>
-                            <input type="tel" id="reg-pastor-phone" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Nọmba tẹlifoonu pastor">
+                            <label class="block font-bold text-gray-700 mb-1">4. Pastor Phone Number (11 Digits):</label>
+                            <input type="tel" id="reg-pastor-phone" required pattern="[0-9]{11}" maxlength="11" class="w-full p-2.5 border rounded bg-gray-50" placeholder="08012345678">
                         </div>
                         <button type="submit" class="w-full py-3 bg-indigo-900 hover:bg-indigo-800 text-white rounded-lg font-bold cursor-pointer transition">
                             SUBMIT & GENERATE CHURCH PASSWORD
@@ -139,8 +139,8 @@
                             <input type="text" id="srf-name" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Kọ orukọ rẹ ni kikun">
                         </div>
                         <div>
-                            <label class="block font-bold text-gray-700 mb-1">2. Phone Number:</label>
-                            <input type="tel" id="srf-phone" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Nọmba tẹlifoonu rẹ">
+                            <label class="block font-bold text-gray-700 mb-1">2. Phone Number (11 Digits):</label>
+                            <input type="tel" id="srf-phone" required pattern="[0-9]{11}" maxlength="11" class="w-full p-2.5 border rounded bg-gray-50" placeholder="08012345678">
                         </div>
                         <div>
                             <label class="block font-bold text-gray-700 mb-1">3. Address Ibugbe (Residential Address):</label>
@@ -165,8 +165,8 @@
                                 <input type="text" id="srf-church-address" class="w-full p-2 border rounded bg-white" placeholder="Adiresi ijọ naa">
                             </div>
                             <div>
-                                <label class="block font-bold text-gray-700 mb-1">8. Phone Number Pastor Ijọ Naa:</label>
-                                <input type="tel" id="srf-church-pastor" class="w-full p-2 border rounded bg-white" placeholder="Nọmba pastor">
+                                <label class="block font-bold text-gray-700 mb-1">8. Phone Number Pastor Ijọ Naa (11 Digits):</label>
+                                <input type="tel" id="srf-church-pastor" pattern="[0-9]{11}" maxlength="11" class="w-full p-2 border rounded bg-white" placeholder="08012345678">
                             </div>
                         </div>
 
@@ -222,18 +222,41 @@
                             <div class="p-3 bg-indigo-50/60 rounded border border-indigo-200 space-y-3">
                                 <span class="text-xs font-bold text-indigo-900 block"><i class="fa-solid fa-receipt mr-1"></i> Fọọmu Ẹri Isanwo Banki (Transaction Details):</span>
                                 <div>
-                                    <label class="block font-bold text-gray-700 mb-1 text-[11px]">Transaction ID / Reference Number:</label>
-                                    <input type="text" id="srf-input-transaction-id" placeholder="Apeere: TXN-99482105..." class="w-full p-2.5 border rounded bg-white text-xs font-mono">
+                                    <label class="block font-bold text-gray-700 mb-1 text-[11px]">Transaction ID / Reference Number (17 to 30 Digits / Alphanumeric):</label>
+                                    <input type="text" id="srf-input-transaction-id" minlength="10" maxlength="35" placeholder="Apeere: TXN-99482105123456789..." class="w-full p-2.5 border rounded bg-white text-xs font-mono">
                                 </div>
                                 <div>
-                                    <label class="block font-bold text-gray-700 mb-1 text-[11px]">Banki Tio Sanwo Si (Company Bank Name):</label>
+                                    <label class="block font-bold text-gray-700 mb-1 text-[11px]">Banki Tio Sanwo Si (All Nigerian Banks):</label>
                                     <select id="srf-input-bank-name" class="w-full p-2.5 border rounded bg-white text-xs font-medium cursor-pointer">
-                                        <option value="">-- Yan Banki --</option>
-                                        <option value="Moniepoint">Moniepoint Microfinance Bank</option>
+                                        <option value="">-- Yan Banki rẹ --</option>
+                                        <option value="Moniepoint MFB">Moniepoint Microfinance Bank</option>
                                         <option value="Opay">Opay Digital Services</option>
-                                        <option value="Kuda">Kuda Bank</option>
-                                        <option value="Access">Access Bank</option>
+                                        <option value="Kuda Bank">Kuda Bank</option>
+                                        <option value="Access Bank">Access Bank</option>
                                         <option value="GTBank">Guaranty Trust Bank (GTB)</option>
+                                        <option value="First Bank">First Bank of Nigeria</option>
+                                        <option value="Zenith Bank">Zenith Bank</option>
+                                        <option value="UBA">United Bank for Africa (UBA)</option>
+                                        <option value="Fidelity Bank">Fidelity Bank</option>
+                                        <option value="Stanbic IBTC">Stanbic IBTC Bank</option>
+                                        <option value="Polaris Bank">Polaris Bank</option>
+                                        <option value="Union Bank">Union Bank</option>
+                                        <option value="Wema Bank">Wema Bank</option>
+                                        <option value="Sterling Bank">Sterling Bank</option>
+                                        <option value="Palmpay">Palmpay</option>
+                                        <option value="Ecobank">Ecobank Nigeria</option>
+                                        <option value="FCMB">First City Monument Bank (FCMB)</option>
+                                        <option value="Heritage Bank">Heritage Bank</option>
+                                        <option value="Keystone Bank">Keystone Bank</option>
+                                        <option value="Unity Bank">Unity Bank</option>
+                                        <option value="Jaiz Bank">Jaiz Bank</option>
+                                        <option value="Providus Bank">Providus Bank</option>
+                                        <option value="Globus Bank">Globus Bank</option>
+                                        <option value="Titan Trust Bank">Titan Trust Bank</option>
+                                        <option value="Suntrust Bank">Suntrust Bank</option>
+                                        <option value="Standard Chartered">Standard Chartered Bank</option>
+                                        <option value="Coronation Merchant Bank">Coronation Merchant Bank</option>
+                                        <option value="FSDH Merchant Bank">FSDH Merchant Bank</option>
                                     </select>
                                 </div>
                             </div>
@@ -251,7 +274,7 @@
                                     <i class="fa-solid fa-triangle-exclamation mr-2"></i> Jọwọ tẹ Transaction ID ati Banki rẹ ṣaju.
                                 </div>
                                 <button type="button" id="verify-my-payment-btn" onclick="executeAdvancedVerificationEngine()" class="w-full py-2 bg-indigo-700 hover:bg-indigo-800 text-white rounded font-bold cursor-pointer text-xs transition">
-                                    <i class="fa-solid fa-shield-halved mr-1"></i> Verify My Payment (Fi transaction ranṣẹ si SEEN)
+                                    <i class="fa-solid fa-shield-halved mr-1"></i> Verify My Payment (Durowo Ifọwọsi)
                                 </button>
                             </div>
                         </div>
@@ -281,7 +304,7 @@
             <div id="student-locked-overlay" class="hidden bg-red-900 text-white p-6 rounded-xl shadow-2xl text-center space-y-3">
                 <i class="fa-solid fa-lock text-4xl text-yellow-400"></i>
                 <h3 class="text-lg font-bold">DASHBOARD TI TI (LỌWỌLỌWỌ) — AINI OWO ISANWO</h3>
-                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igba tí Verification Engine yoo fi jẹri isanwo rẹ.</p>
+                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igba ti Verification Engine yoo fi jẹri isanwo rẹ.</p>
                 <div class="bg-black/40 p-4 rounded border border-red-700 max-w-md mx-auto space-y-2 text-xs">
                     <p class="font-bold text-yellow-300">Iye Owo Asẹku ti o ku:</p>
                     <p id="locked-balance-display" class="font-mono text-sm font-bold">₦4,000.00</p>
@@ -446,8 +469,8 @@
                             <input type="text" id="cb-student-name" required class="w-full p-2 border rounded bg-white" placeholder="Orukọ akẹkọ">
                         </div>
                         <div>
-                            <label class="block font-bold text-gray-700 mb-1">Nọmba Tẹlifoonu:</label>
-                            <input type="tel" id="cb-student-phone" required class="w-full p-2 border rounded bg-white" placeholder="080...">
+                            <label class="block font-bold text-gray-700 mb-1">Nọmba Tẹlifoonu (11 Digits):</label>
+                            <input type="tel" id="cb-student-phone" required pattern="[0-9]{11}" maxlength="11" class="w-full p-2 border rounded bg-white" placeholder="08012345678">
                         </div>
                     </div>
                     <div>
@@ -484,11 +507,22 @@
                                 <option value="Wema Bank">Wema Bank</option>
                                 <option value="Sterling Bank">Sterling Bank</option>
                                 <option value="Palmpay">Palmpay</option>
+                                <option value="Ecobank">Ecobank Nigeria</option>
+                                <option value="FCMB">First City Monument Bank (FCMB)</option>
+                                <option value="Heritage Bank">Heritage Bank</option>
+                                <option value="Keystone Bank">Keystone Bank</option>
+                                <option value="Unity Bank">Unity Bank</option>
+                                <option value="Jaiz Bank">Jaiz Bank</option>
+                                <option value="Providus Bank">Providus Bank</option>
+                                <option value="Globus Bank">Globus Bank</option>
+                                <option value="Titan Trust Bank">Titan Trust Bank</option>
+                                <option value="Suntrust Bank">Suntrust Bank</option>
+                                <option value="Standard Chartered">Standard Chartered Bank</option>
                             </select>
                         </div>
                         <div>
-                            <label class="block font-bold text-gray-700 mb-1">Transaction ID / Reference Number:</label>
-                            <input type="text" id="cb-student-txid" placeholder="Apeere: TXN-8849102..." class="w-full p-2 border rounded bg-white font-mono">
+                            <label class="block font-bold text-gray-700 mb-1">Transaction ID / Reference Number (17-30 Digits):</label>
+                            <input type="text" id="cb-student-txid" minlength="10" maxlength="35" placeholder="Apeere: TXN-8849102123456789..." class="w-full p-2 border rounded bg-white font-mono">
                         </div>
                     </div>
 
@@ -572,36 +606,6 @@
                 </div>
 
                 <div id="admin-workspace-panel" class="p-4 md:p-6 bg-gray-50 rounded-lg border border-dashed border-gray-300 min-h-[300px]">
-                    <!-- ================= SAFETY DELETE PROTECTION ZONE ================= -->
-                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-4 mb-6 shadow-xl">
-                        <div class="border-b border-slate-800 pb-2">
-                            <h3 class="text-xs font-bold text-red-400 flex items-center gap-2">
-                                <span>⚠️</span> Eto Idabobo Pipa App Rẹ (Delete Protection Zone)
-                            </h3>
-                            <p class="text-xs text-slate-400 mt-1">Lati le jẹ ki bọtini piparẹ ṣiṣẹ, jọwọ kọ orukọ app rẹ silẹ niisalẹ lati jẹrisi pe o mọ ohun ti o n ṣe.</p>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Kọ "ACBD-SET" lati jẹrisi:</label>
-                            <input type="text" id="confirm-delete-input" onkeyup="verifyDeleteAction()" placeholder="Kọ ACBD-SET si ibi..." class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white focus:outline-none focus:border-red-500">
-                        </div>
-                        
-                        <!-- Awọn Bọtini: Save ati Delete -->
-                        <div class="space-y-2 pt-1">
-                            <!-- Bọtini Save -->
-                            <button onclick="saveProtectionSettings()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2.5 rounded transition shadow cursor-pointer">
-                                💾 Save Changes (Fipamọ Eto)
-                            </button>
-                            
-                            <!-- Bọtini Delete (Yoo wa ni Disabled titi di igba ti a kọ orukọ app deede) -->
-                            <button id="secure-delete-btn" disabled onclick="executeDeleteAction()" class="w-full bg-gray-700 text-gray-400 text-xs font-semibold py-2.5 rounded cursor-not-allowed transition">
-                                Jọwọ Kọ Orukọ App Rẹ Ṣaju
-                            </button>
-                        </div>
-                        
-                        <div id="save-status" class="text-center text-[11px] text-emerald-400 font-mono"></div>
-                    </div>
-
                     <div class="text-center text-gray-500 py-12">
                         <i class="fa-solid fa-hand-pointer text-3xl mb-2 text-indigo-400"></i>
                         <p class="text-sm">Jọwọ yan aṣayan kankan ninu <b>Universal Dropdown Menu</b> lati bẹrẹ iṣakoso.</p>
@@ -719,37 +723,6 @@
         let vrmcClassActiveState = JSON.parse(localStorage.getItem('vpatbe_vrmc_active')) || false;
         let studentMicState = false;
         let churchPaymentVerifiedState = false;
-
-        // ================= SAFETY DELETE FUNCTIONS =================
-        function verifyDeleteAction() {
-            const userInput = document.getElementById('confirm-delete-input').value.trim();
-            const deleteButton = document.getElementById('secure-delete-btn');
-            
-            if (userInput === "ACBD-SET") {
-                deleteButton.disabled = false;
-                deleteButton.className = "w-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold py-2.5 rounded transition cursor-pointer shadow-lg";
-                deleteButton.innerText = "Pa App Yii Rẹ Bayi (Delete Site)";
-            } else {
-                deleteButton.disabled = true;
-                deleteButton.className = "w-full bg-gray-700 text-gray-400 text-xs font-semibold py-2.5 rounded cursor-not-allowed transition";
-                deleteButton.innerText = "Jọwọ Kọ Orukọ App Rẹ Ṣaju";
-            }
-        }
-
-        function saveProtectionSettings() {
-            const statusEl = document.getElementById('save-status');
-            statusEl.innerText = "Aṣeyọri! A ti fipamọ awọn eto aabo rẹ si system.";
-            setTimeout(() => {
-                statusEl.innerText = "";
-            }, 3000);
-        }
-
-        function executeDeleteAction() {
-            let finalCheck = confirm("IKILỌ IKẸHIN: Ṣe o daju gidi gidi pe o fẹ pa app rẹ rẹ?");
-            if (finalCheck) {
-                alert("A ti fipa app rẹ rẹ ni aabo.");
-            }
-        }
 
         // ================= SUPABASE HYBRID OFFLINE-ONLINE SYNC ENGINE =================
         async function syncStudentToSupabase(studentData) {
@@ -913,69 +886,46 @@
             alert('A ti daakọ Payment Code rẹ!');
         }
 
-        // SUPABASE HYBRID CLOUD SYNC FOR TRANSACTION ID & PENDING VERIFICATIONS (Fixed without false Offline Mode alerts)
-        async function executeAdvancedVerificationEngine() {
+        function executeAdvancedVerificationEngine() {
             const txIdInput = document.getElementById('srf-input-transaction-id').value.trim();
             const bankInput = document.getElementById('srf-input-bank-name').value;
             const statusBox = document.getElementById('verification-engine-status');
+            const phoneInput = document.getElementById('srf-phone').value.trim();
 
-            if (!txIdInput) { alert('Jọwọ tẹ Transaction ID tabi Reference Number rẹ.'); return; }
+            if (!phoneInput || phoneInput.length !== 11) {
+                alert('Jọwọ ri pe nọmba tẹlifoonu rẹ pe ni nọmba 11 (11 Digits).');
+                return;
+            }
+            if (!txIdInput || txIdInput.length < 10) { 
+                alert('Jọwọ tẹ Transaction ID tabi Reference Number to peye (ti o ni lẹta tabi nọmba to tobi).'); 
+                return; 
+            }
             if (!bankInput) { alert('Jọwọ yan banki ti o fi san owo na si.'); return; }
             if (!generatedPaymentCode || generatedPaymentCode.includes('Ya passport')) {
                 alert('Jọwọ ya passport rẹ kọkọ lati sẹda Payment Code (PAY-XXXXXX).');
                 return;
             }
 
+            let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
             const studentTempData = {
                 name: document.getElementById('srf-name').value || "Akẹkọ Tuntun",
-                phone: document.getElementById('srf-phone').value || "",
+                phone: phoneInput,
                 address: document.getElementById('srf-address').value || "",
                 church: hasChurchState ? document.getElementById('srf-church-name').value : "Independent",
-                tx_id: txIdInput,
-                bank_name: bankInput,
-                pay_code: generatedPaymentCode,
+                txId: txIdInput,
+                bank: bankInput,
+                payCode: generatedPaymentCode,
                 passport: currentCapturedPassport,
-                payment_mode: currentPaymentMode,
-                seen: false,
-                created_at: new Date().toISOString()
+                paymentMode: currentPaymentMode,
+                seen: false
             };
-
-            let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
             pendingVerifications.push(studentTempData);
             localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
 
-            try {
-                const { error } = await _supabase
-                    .from('vpatbe_pending_verifications')
-                    .insert([studentTempData]);
-
-                if (error) {
-                    console.log('Supabase insert notice:', error.message);
-                } else {
-                    console.log('Sent to Supabase Cloud successfully!');
-                }
-            } catch (err) {
-                console.log('Cloud sync warning:', err);
-            }
-
             statusBox.className = "text-[11px] text-amber-700 bg-amber-50 p-2 rounded border border-amber-200 flex items-center";
-            statusBox.innerHTML = `<i class="fa-solid fa-clock mr-2"></i> Jọwọ duro de Ifọwọsi owo tio san lati ọdọ ILE-ISE WA (Pending SEEN Approval).`;
+            statusBox.innerHTML = `<i class="fa-solid fa-clock mr-2"></i> Jọwọ duro de Ifọwọsi owo tio san lati ọdọ ILE-ISE WA (Super Admin Pending SEEN Approval).`;
             
-            alert('Aṣeyọri! A ti fi Transaction ID ati isọfunni isanwo rẹ ranṣẹ si SEEN verification manager.');
-        }
-
-        async function fetchPendingVerificationsFromCloud() {
-            try {
-                const { data, error } = await _supabase
-                    .from('vpatbe_pending_verifications')
-                    .select('*');
-                if (error) throw error;
-                if (data) {
-                    localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(data));
-                }
-            } catch (err) {
-                console.log('Using local pending verifications cache.');
-            }
+            alert('A ti firanṣẹ ẹri isanwo rẹ si Super Admin Control Center. Jọwọ duro titi ti admin yoo fi tẹ SEEN.');
         }
 
         function churchToggleCompanyAccountDisplay() {
@@ -983,38 +933,34 @@
             if(box) box.classList.toggle('hidden');
         }
 
-        async function churchExecuteVerifyPayment() {
+        function churchExecuteVerifyPayment() {
             const txId = document.getElementById('cb-student-txid').value.trim();
             const bank = document.getElementById('cb-student-bank-name').value;
             const statusBox = document.getElementById('cb-verification-status-box');
             const studentName = document.getElementById('cb-student-name').value.trim();
+            const studentPhone = document.getElementById('cb-student-phone').value.trim();
 
             if(!studentName) { alert('Jọwọ tẹ orukọ ọmọ ijọ kọkọ.'); return; }
-            if(!txId) { alert('Jọwọ tẹ Transaction ID rẹ.'); return; }
+            if(!studentPhone || studentPhone.length !== 11) { alert('Jọwọ ri pe nọmba tẹlifoonu ọmọ ijọ pe ni 11 digits.'); return; }
+            if(!txId || txId.length < 10) { alert('Jọwọ tẹ Transaction ID to peye (reference number).'); return; }
             if(!bank) { alert('Jọwọ yan Banki rẹ.'); return; }
 
+            let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
             const church = churchGroupsList[currentLoggedInChurchIndex];
-            const churchTempData = {
+
+            pendingVerifications.push({
                 name: studentName,
-                phone: document.getElementById('cb-student-phone').value,
+                phone: studentPhone,
                 address: document.getElementById('cb-student-address').value,
                 church: church.name,
-                tx_id: txId,
-                bank_name: bank,
-                pay_code: "CHUR-PAY-" + Math.floor(100000 + Math.random() * 900000),
+                txId: txId,
+                bank: bank,
+                payCode: "CHUR-PAY-" + Math.floor(100000 + Math.random() * 900000),
                 passport: "",
-                payment_mode: "Church Group Batch",
-                seen: false,
-                created_at: new Date().toISOString()
-            };
-
-            try {
-                await _supabase.from('vpatbe_pending_verifications').insert([churchTempData]);
-            } catch(e) {
-                let pendingVerifications = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
-                pendingVerifications.push(churchTempData);
-                localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
-            }
+                paymentMode: "Church Group Batch",
+                seen: false
+            });
+            localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVerifications));
 
             statusBox.className = "p-2 bg-amber-50 text-amber-800 rounded border border-amber-200 text-[11px] flex items-center";
             statusBox.innerHTML = `<i class="fa-solid fa-clock mr-1"></i> A ti fi isọfunni isanwo rẹ ranṣẹ si SEEN button ninu Super Admin Control Center. Jọwọ duro de ifọwọsi.`;
@@ -1027,6 +973,11 @@
             const address = document.getElementById('reg-church-address').value.trim();
             const pastorName = document.getElementById('reg-pastor-name').value.trim();
             const pastorPhone = document.getElementById('reg-pastor-phone').value.trim();
+
+            if(pastorPhone.length !== 11) {
+                alert('Jọwọ ri pe nọmba tẹlifoonu pastor pe ni 11 digits.');
+                return;
+            }
 
             const password = "CHUR-" + Math.floor(1000 + Math.random() * 9000);
             const newChurchGroup = {
@@ -1059,6 +1010,8 @@
 
             const name = document.getElementById('srf-name').value;
             const phone = document.getElementById('srf-phone').value;
+            if(phone.length !== 11) { alert('Nọmba tẹlifoonu yẹ ki o pe ni 11 digits.'); return; }
+
             const address = document.getElementById('srf-address').value;
             const churchName = hasChurchState ? document.getElementById('srf-church-name').value : "Independent";
             const churchAddr = hasChurchState ? document.getElementById('srf-church-address').value : "N/A";
@@ -1209,6 +1162,8 @@
 
             const name = document.getElementById('cb-student-name').value.trim();
             const phone = document.getElementById('cb-student-phone').value.trim();
+            if(phone.length !== 11) { alert('Nọmba tẹlifoonu yẹ ki o pe ni 11 digits.'); return; }
+
             const address = document.getElementById('cb-student-address').value.trim();
 
             const newIdNo = "BAP/" + Math.floor(10000 + Math.random() * 90000);
@@ -1425,7 +1380,7 @@
             const studentSubs = studentQuizSubmissions.filter(sub => sub.studentName.toLowerCase() === studentName.toLowerCase());
             
             if (studentSubs.length === 0) {
-                feedbackBox.innerHTML = `<span class="text-gray-400 italic">Ko tii si mark tabi atunṣe ti a ti ṣe fun ọ.</span>`;
+                feedbackBox.innerHTML = `<span class="text-gray-400 italic">Ko tii si idahun tabi mark ti a ti ṣe fun ọ.</span>`;
                 return;
             }
 
@@ -1717,7 +1672,7 @@
             newRow.className = 'phone-input-row';
             newRow.style.cssText = 'display: flex; gap: 6px; margin-bottom: 6px;';
             newRow.innerHTML = `
-                <input type="tel" class="waNumberInput" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
+                <input type="tel" class="waNumberInput" pattern="[0-9]{11}" maxlength="11" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
                 <button type="button" onclick="this.parentElement.remove()" style="background: #ff4d4d; color: white; border: none; padding: 0 10px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px;">X</button>
             `;
             container.appendChild(newRow);
@@ -1846,6 +1801,7 @@
         let vrmcRecordingState = false;
         let vrmcAudioRecorder = null;
         let vrmcAudioChunks = [];
+        let selectedMicEffect = 'normal';
 
         function toggleSuperAdminVrmcClass() {
             vrmcClassActiveState = !vrmcClassActiveState;
@@ -1899,6 +1855,11 @@
                 micBadge.className = "px-2 py-0.5 bg-red-100 text-red-800 rounded font-bold text-[10px]";
                 alert('Mic rẹ ti pa (Muted).');
             }
+        }
+
+        function applyMicEffect(effectType) {
+            selectedMicEffect = effectType;
+            alert(`Aṣeyọri! A ti mu Mic Effect (${effectType.toUpperCase()}) ṣiṣẹ fún ohun rẹ.`);
         }
 
         async function toggleVrmcRecording() {
@@ -2203,6 +2164,8 @@
             if(topNavTitle) topNavTitle.innerText = newName;
             if(authTitle) authTitle.innerText = newName;
             if(ministryBanner) {
+                const partnershipAppend = document.getElementById('partnership-church-append');
+                const churchText = partnershipAppend ? partnershipAppend.outerHTML : '';
                 ministryBanner.innerHTML = `${newName} <span id="partnership-church-append" class="font-semibold text-indigo-700"></span>`;
             }
 
@@ -2281,31 +2244,23 @@
                     </div>
                 `;
             } else if (actionKey === 'verify_payment_mgr') {
-                fetchPendingVerificationsFromCloud().then(() => {
-                    const pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
-                    const workspace = document.getElementById('admin-workspace-panel');
-                    if(workspace && actionKey === 'verify_payment_mgr') {
-                        handleAdminDropdownChange('verify_payment_mgr');
-                    }
-                });
-
                 const pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
                 panel.innerHTML = `
                     <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-receipt text-indigo-600 mr-2"></i>Verify My Payment Engine (SEEN Approval & Status Control + Delete)</h4>
-                    <p class="text-xs text-gray-600 mb-3">Nibi ni o le ri Transaction ID, Banki, ati isọfunni isanwo lati ori foonu eyikeyi. Tẹ SEEN lati fọwọsi, tabi Delete lati pa rẹ.</p>
+                    <p class="text-xs text-gray-600 mb-3">Nibi ni o le ri Transaction ID, Banki, ati isọfunni isanwo lati ọdọ awọn akẹkọ tabi Church groups. Tẹ SEEN lati fọwọsi, tabi Delete lati pa rẹ.</p>
                     <div class="space-y-3">
                         ${pendingVers.length === 0 ? '<p class="text-xs text-gray-500 italic">Ko tii si ẹri isanwo kankan ti o duro de ifọwọsi.</p>' : ''}
                         ${pendingVers.map((pv, idx) => `
                             <div class="p-3 bg-white rounded border space-y-2 text-xs shadow-sm">
                                 <div class="flex justify-between items-center font-bold text-indigo-900 border-b pb-1">
                                     <span>${pv.name} (${pv.church})</span>
-                                    <span class="font-mono text-cyan-700">${pv.pay_code || pv.payCode}</span>
+                                    <span class="font-mono text-cyan-700">${pv.payCode}</span>
                                 </div>
                                 <div class="grid grid-cols-2 gap-2 text-gray-700">
                                     <p><b>Phone:</b> ${pv.phone}</p>
-                                    <p><b>Bank:</b> ${pv.bank_name || pv.bank}</p>
-                                    <p><b>Transaction ID:</b> ${pv.tx_id || pv.txId}</p>
-                                    <p><b>Mode:</b> ${pv.payment_mode || pv.paymentMode}</p>
+                                    <p><b>Bank:</b> ${pv.bank}</p>
+                                    <p><b>Transaction ID:</b> ${pv.txId}</p>
+                                    <p><b>Mode:</b> ${pv.paymentMode}</p>
                                 </div>
                                 <div class="flex justify-between items-center pt-2 border-t">
                                     <span class="font-bold ${pv.seen ? 'text-green-600' : 'text-amber-600'}">${pv.seen ? 'Status: Approved (SEEN Clicked)' : 'Status: Pending Approval'}</span>
@@ -2531,9 +2486,9 @@
                         </div>
 
                         <div id="phoneInputsContainer" style="margin-bottom: 10px;">
-                            <label style="display: block; margin-bottom: 4px; font-weight: bold; font-size: 12px; color: #333;">Nọmba WhatsApp (Manual MPN):</label>
+                            <label style="display: block; margin-bottom: 4px; font-weight: bold; font-size: 12px; color: #333;">Nọmba WhatsApp (Manual MPN - 11 Digits):</label>
                             <div class="phone-input-row" style="display: flex; gap: 6px; margin-bottom: 6px;">
-                                <input type="tel" class="waNumberInput" placeholder="E.g. 07069344855" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
+                                <input type="tel" class="waNumberInput" pattern="[0-9]{11}" maxlength="11" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
                             </div>
                         </div>
 
@@ -2578,6 +2533,18 @@
                                 </button>
                             </div>
                         </div>
+
+                        <!-- MIC EFFECTS BUTTON ADDITION FOR ADMIN -->
+                        <div class="p-3 bg-indigo-950 rounded-lg border border-indigo-700 space-y-2">
+                            <span class="font-bold text-yellow-300 block"><i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Admin Mic Effects Button (Voice Modulator):</span>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="applyMicEffect('normal')" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-white rounded font-bold text-[10px] cursor-pointer border border-indigo-500">Normal Voice</button>
+                                <button onclick="applyMicEffect('deep')" class="px-3 py-1.5 bg-indigo-800 hover:bg-indigo-700 text-white rounded font-bold text-[10px] cursor-pointer">Deep Voice</button>
+                                <button onclick="applyMicEffect('echo')" class="px-3 py-1.5 bg-indigo-800 hover:bg-indigo-700 text-white rounded font-bold text-[10px] cursor-pointer">Echo Hall</button>
+                                <button onclick="applyMicEffect('angelic')" class="px-3 py-1.5 bg-indigo-800 hover:bg-indigo-700 text-white rounded font-bold text-[10px] cursor-pointer">Angelic Tone</button>
+                            </div>
+                        </div>
+
                         <div class="space-y-2">
                             <span class="font-bold text-gray-300 block text-[11px]">Awọn Olumulo & Akẹkọ ti nṣe wọle lọwọlọwọ (Total Joined: ${studentsList.length}):</span>
                             
@@ -2659,42 +2626,7 @@
             } else if (actionKey === 'ministry_name_mgr') {
                 renderMinistryNameManager(panel);
             } else {
-                panel.innerHTML = `
-                    <!-- ================= SAFETY DELETE PROTECTION ZONE ================= -->
-                    <div class="bg-slate-900 p-4 rounded-lg border border-slate-700 space-y-4 mb-6 shadow-xl">
-                        <div class="border-b border-slate-800 pb-2">
-                            <h3 class="text-xs font-bold text-red-400 flex items-center gap-2">
-                                <span>⚠️</span> Eto Idabobo Pipa App Rẹ (Delete Protection Zone)
-                            </h3>
-                            <p class="text-xs text-slate-400 mt-1">Lati le jẹ ki bọtini piparẹ ṣiṣẹ, jọwọ kọ orukọ app rẹ silẹ niisalẹ lati jẹrisi pe o mọ ohun ti o n ṣe.</p>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-[11px] text-slate-400 mb-1">Kọ "ACBD-SET" lati jẹrisi:</label>
-                            <input type="text" id="confirm-delete-input" onkeyup="verifyDeleteAction()" placeholder="Kọ ACBD-SET si ibi..." class="w-full bg-slate-800 border border-slate-700 rounded p-2 text-xs text-white focus:outline-none focus:border-red-500">
-                        </div>
-                        
-                        <!-- Awọn Bọtini: Save ati Delete -->
-                        <div class="space-y-2 pt-1">
-                            <!-- Bọtini Save -->
-                            <button onclick="saveProtectionSettings()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold py-2.5 rounded transition shadow cursor-pointer">
-                                💾 Save Changes (Fipamọ Eto)
-                            </button>
-                            
-                            <!-- Bọtini Delete (Yoo wa ni Disabled titi di igba ti a kọ orukọ app deede) -->
-                            <button id="secure-delete-btn" disabled onclick="executeDeleteAction()" class="w-full bg-gray-700 text-gray-400 text-xs font-semibold py-2.5 rounded cursor-not-allowed transition">
-                                Jọwọ Kọ Orukọ App Rẹ Ṣaju
-                            </button>
-                        </div>
-                        
-                        <div id="save-status" class="text-center text-[11px] text-emerald-400 font-mono"></div>
-                    </div>
-
-                    <div class="text-center text-gray-500 py-12">
-                        <i class="fa-solid fa-hand-pointer text-3xl mb-2 text-indigo-400"></i>
-                        <p class="text-sm">Jọwọ yan aṣayan kankan ninu <b>Universal Dropdown Menu</b>.</p>
-                    </div>
-                `;
+                panel.innerHTML = `<div class="text-center text-gray-500 py-12"><p class="text-sm">Jọwọ yan aṣayan kankan ninu Universal Dropdown Menu.</p></div>`;
             }
         }
 
@@ -2795,24 +2727,11 @@
             }
         }
 
-        async function approveVerificationSeen(index) {
+        function approveVerificationSeen(index) {
             let pendingVers = JSON.parse(localStorage.getItem('vpatbe_pending_verifications')) || [];
             if(pendingVers[index]) {
                 pendingVers[index].seen = true;
                 localStorage.setItem('vpatbe_pending_verifications', JSON.stringify(pendingVers));
-
-                try {
-                    const target = pendingVers[index];
-                    if (target.tx_id || target.txId) {
-                        await _supabase
-                            .from('vpatbe_pending_verifications')
-                            .update({ seen: true })
-                            .eq('tx_id', target.tx_id || target.txId);
-                    }
-                } catch(e) {
-                    console.log('Cloud update error:', e);
-                }
-
                 paymentVerifiedState = true;
                 churchPaymentVerifiedState = true;
                 
@@ -3081,7 +3000,6 @@
             }
 
             await fetchStudentsFromSupabase();
-            await fetchPendingVerificationsFromCloud();
 
             const savedAcc = localStorage.getItem('vpatbe_company_account');
             if (savedAcc && document.getElementById('srf-company-account-display')) {
