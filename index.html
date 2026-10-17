@@ -122,8 +122,8 @@
                             <input type="text" id="reg-pastor-name" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Orukọ pastor agbẹ́rẹ́">
                         </div>
                         <div>
-                            <label class="block font-bold text-gray-700 mb-1">4. Pastor Phone Number (11 Digits):</label>
-                            <input type="tel" id="reg-pastor-phone" required pattern="[0-9]{11}" maxlength="11" class="w-full p-2.5 border rounded bg-gray-50" placeholder="08012345678">
+                            <label class="block font-bold text-gray-700 mb-1">4. Pastor Phone Number (Naijiria 11 Digits nikan):</label>
+                            <input type="tel" id="reg-pastor-phone" required placeholder="08012345678" class="w-full p-2.5 border rounded bg-gray-50">
                         </div>
                         <button type="submit" class="w-full py-3 bg-indigo-900 hover:bg-indigo-800 text-white rounded-lg font-bold cursor-pointer transition">
                             SUBMIT & GENERATE CHURCH PASSWORD
@@ -139,8 +139,8 @@
                             <input type="text" id="srf-name" required class="w-full p-2.5 border rounded bg-gray-50" placeholder="Kọ orukọ rẹ ni kikun">
                         </div>
                         <div>
-                            <label class="block font-bold text-gray-700 mb-1">2. Phone Number (11 Digits):</label>
-                            <input type="tel" id="srf-phone" required pattern="[0-9]{11}" maxlength="11" class="w-full p-2.5 border rounded bg-gray-50" placeholder="08012345678">
+                            <label class="block font-bold text-gray-700 mb-1">2. Phone Number (Naijiria 11 Digits nikan - bẹrẹ pẹlu 0):</label>
+                            <input type="tel" id="srf-phone" required placeholder="08012345678" class="w-full p-2.5 border rounded bg-gray-50">
                         </div>
                         <div>
                             <label class="block font-bold text-gray-700 mb-1">3. Address Ibugbe (Residential Address):</label>
@@ -165,8 +165,8 @@
                                 <input type="text" id="srf-church-address" class="w-full p-2 border rounded bg-white" placeholder="Adiresi ijọ naa">
                             </div>
                             <div>
-                                <label class="block font-bold text-gray-700 mb-1">8. Phone Number Pastor Ijọ Naa (11 Digits):</label>
-                                <input type="tel" id="srf-church-pastor" pattern="[0-9]{11}" maxlength="11" class="w-full p-2 border rounded bg-white" placeholder="08012345678">
+                                <label class="block font-bold text-gray-700 mb-1">8. Phone Number Pastor Ijọ Naa (Naijiria 11 Digits nikan):</label>
+                                <input type="tel" id="srf-church-pastor" placeholder="08012345678" class="w-full p-2 border rounded bg-white">
                             </div>
                         </div>
 
@@ -467,8 +467,8 @@
                             <input type="text" id="cb-student-name" required class="w-full p-2 border rounded bg-white" placeholder="Orukọ akẹkọ">
                         </div>
                         <div>
-                            <label class="block font-bold text-gray-700 mb-1">Nọmba Tẹlifoonu (11 Digits):</label>
-                            <input type="tel" id="cb-student-phone" required pattern="[0-9]{11}" maxlength="11" class="w-full p-2 border rounded bg-white" placeholder="08012345678">
+                            <label class="block font-bold text-gray-700 mb-1">Nọmba Tẹlifoonu (Naijiria 11 Digits nikan):</label>
+                            <input type="tel" id="cb-student-phone" required placeholder="08012345678" class="w-full p-2 border rounded bg-white">
                         </div>
                     </div>
                     <div>
@@ -727,6 +727,15 @@
         let vrmcActiveSpeaker = localStorage.getItem('vpatbe_vrmc_speaker') || null;
         let silenceTimer = null;
 
+        // Strict Nigerian Phone Validator Function
+        function isValidNigerianPhone(phoneStr) {
+            const cleaned = String(phoneStr || "").trim();
+            // Accepts 08012345678 (11 digits starting with 0) or +2348012345678 (13 characters starting with +234)
+            const ngRegex1 = /^0[789][01]\d{8}$/; // Standard 11 digit NG numbers
+            const ngRegex2 = /^\+234[789][01]\d{8}$/; // International format +234
+            return ngRegex1.test(cleaned) || ngRegex2.test(cleaned);
+        }
+
         // ================= SUPABASE HYBRID OFFLINE-ONLINE SYNC ENGINE =================
         async function syncStudentToSupabase(studentData) {
             try {
@@ -896,8 +905,8 @@
             const phoneInput = document.getElementById('srf-phone').value.trim();
             const studentName = document.getElementById('srf-name').value.trim() || "Akẹkọ Tuntun";
 
-            if (!phoneInput || phoneInput.length !== 11) {
-                alert('Jọwọ ri pe nọmba tẹlifoonu rẹ pe ni nọmba 11 (11 Digits).');
+            if (!isValidNigerianPhone(phoneInput)) {
+                alert('Jọwọ tẹ nọmba tẹlifoonu Naijiria to peye (gbọdọ jẹ nọmba 11 bii 08012345678). A kò gba nọmba ti kii ṣe ti Naijiria!');
                 return;
             }
             if (!txIdInput || txIdInput.length < 10) { 
@@ -957,7 +966,7 @@
             const studentPhone = document.getElementById('cb-student-phone').value.trim();
 
             if(!studentName) { alert('Jọwọ tẹ orukọ ọmọ ijọ kọkọ.'); return; }
-            if(!studentPhone || studentPhone.length !== 11) { alert('Jọwọ ri pe nọmba tẹlifoonu ọmọ ijọ pe ni 11 digits.'); return; }
+            if(!isValidNigerianPhone(studentPhone)) { alert('Jọwọ tẹ nọmba tẹlifoonu Naijiria to peye (11 digits bii 080...). Nọmba miiran kii wọle.'); return; }
             if(!txId || txId.length < 10) { alert('Jọwọ tẹ Transaction ID to peye (reference number).'); return; }
             if(!bank) { alert('Jọwọ yan Banki rẹ.'); return; }
 
@@ -1016,8 +1025,8 @@
             const pastorName = document.getElementById('reg-pastor-name').value.trim();
             const pastorPhone = document.getElementById('reg-pastor-phone').value.trim();
 
-            if(pastorPhone.length !== 11) {
-                alert('Jọwọ ri pe nọmba tẹlifoonu pastor pe ni 11 digits.');
+            if(!isValidNigerianPhone(pastorPhone)) {
+                alert('Jọwọ tẹ nọmba tẹlifoonu pastor Naijiria to peye (11 digits). Nọmba ita kii wọle.');
                 return;
             }
 
@@ -1052,12 +1061,17 @@
 
             const name = document.getElementById('srf-name').value;
             const phone = document.getElementById('srf-phone').value;
-            if(phone.length !== 11) { alert('Nọmba tẹlifoonu yẹ ki o pe ni 11 digits.'); return; }
+            if(!isValidNigerianPhone(phone)) { alert('Nọmba tẹlifoonu yẹ ki o jẹ nọmba Naijiria to peye (11 digits bẹrẹ pẹlu 0).'); return; }
 
             const address = document.getElementById('srf-address').value;
             const churchName = hasChurchState ? document.getElementById('srf-church-name').value : "Independent";
             const churchAddr = hasChurchState ? document.getElementById('srf-church-address').value : "N/A";
             const pastorPhone = hasChurchState ? document.getElementById('srf-church-pastor').value : "N/A";
+
+            if (hasChurchState && pastorPhone && !isValidNigerianPhone(pastorPhone)) {
+                alert('Nọmba tẹlifoonu pastor ijọ ko tọ (o gbọdọ jẹ nọmba Naijiria 11 digits).');
+                return;
+            }
 
             const newIdNo = "BAP/" + Math.floor(10000 + Math.random() * 90000);
             const balanceDue = (currentPaymentMode === 'half') ? (srfTotalFee / 2) : 0;
@@ -1204,7 +1218,7 @@
 
             const name = document.getElementById('cb-student-name').value.trim();
             const phone = document.getElementById('cb-student-phone').value.trim();
-            if(phone.length !== 11) { alert('Nọmba tẹlifoonu yẹ ki o pe ni 11 digits.'); return; }
+            if(!isValidNigerianPhone(phone)) { alert('Nọmba tẹlifoonu yẹ ki o jẹ nọmba Naijiria to peye (11 digits).'); return; }
 
             const address = document.getElementById('cb-student-address').value.trim();
 
@@ -1714,7 +1728,7 @@
             newRow.className = 'phone-input-row';
             newRow.style.cssText = 'display: flex; gap: 6px; margin-bottom: 6px;';
             newRow.innerHTML = `
-                <input type="tel" class="waNumberInput" pattern="[0-9]{11}" maxlength="11" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
+                <input type="tel" class="waNumberInput" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
                 <button type="button" onclick="this.parentElement.remove()" style="background: #ff4d4d; color: white; border: none; padding: 0 10px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 11px;">X</button>
             `;
             container.appendChild(newRow);
@@ -2596,7 +2610,7 @@
                         <div id="phoneInputsContainer" style="margin-bottom: 10px;">
                             <label style="display: block; margin-bottom: 4px; font-weight: bold; font-size: 12px; color: #333;">Nọmba WhatsApp (Manual MPN - 11 Digits):</label>
                             <div class="phone-input-row" style="display: flex; gap: 6px; margin-bottom: 6px;">
-                                <input type="tel" class="waNumberInput" pattern="[0-9]{11}" maxlength="11" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
+                                <input type="tel" class="waNumberInput" placeholder="E.g. 08012345678" style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 6px; font-size: 12px;">
                             </div>
                         </div>
 
