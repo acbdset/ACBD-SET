@@ -26,6 +26,13 @@
         .modal-zoom-img:hover {
             transform: scale(1.05);
         }
+        @keyframes spin-slow {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin-custom {
+            animation: spin-slow 1.5s linear infinite;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans" onload="initApp()">
@@ -2370,7 +2377,7 @@
                     <div class="flex justify-between items-center mb-3">
                         <h4 class="font-bold text-indigo-900 text-sm md:text-base"><i class="fa-solid fa-receipt text-indigo-600 mr-2"></i>Verify My Payment Engine (SEEN Approval & Status Control + Delete)</h4>
                         <button onclick="handleAdminDropdownChange('verify_payment_mgr')" class="px-3 py-1.5 bg-indigo-900 hover:bg-indigo-800 text-white rounded font-bold text-xs cursor-pointer flex items-center space-x-1 shadow">
-                            <i class="fa-solid fa-rotate mr-1"></i> Ṣawari Tuntun (Refresh)
+                            <i class="fa-solid fa-rotate animate-spin-custom mr-1"></i> Ṣawari Tuntun (Refresh)
                         </button>
                     </div>
                     <p class="text-xs text-gray-600 mb-3">Nibi ni o le ri Transaction ID, Banki, ati isọfunni isanwo lati ọdọ awọn akẹkọ tabi Church groups. Tẹ SEEN lati fọwọsi, tabi Delete lati pa rẹ.</p>
