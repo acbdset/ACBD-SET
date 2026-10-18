@@ -302,7 +302,7 @@
             <div id="student-locked-overlay" class="hidden bg-red-900 text-white p-6 rounded-xl shadow-2xl text-center space-y-3">
                 <i class="fa-solid fa-lock text-4xl text-yellow-400"></i>
                 <h3 class="text-lg font-bold">DASHBOARD TI TI (LỌWỌLỌWỌ) — AINI OWO ISANWO</h3>
-                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igba ti Verification Engine yoo fi jẹri isanwo rẹ.</p>
+                <p class="text-xs" id="locked-reason-text">Akiyesi Verification Engine: O ti di Ọsẹ keje (Week 7), o si ni asẹku owo iribọmi ti ko tii san. Dashboard rẹ ti ni titi pa titi di igba tilapia Verification Engine yoo fi jẹri isanwo rẹ.</p>
                 <div class="bg-black/40 p-4 rounded border border-red-700 max-w-md mx-auto space-y-2 text-xs">
                     <p class="font-bold text-yellow-300">Iye Owo Asẹku ti o ku:</p>
                     <p id="locked-balance-display" class="font-mono text-sm font-bold">₦4,000.00</p>
@@ -1435,7 +1435,7 @@
             const studentSubs = studentQuizSubmissions.filter(sub => sub.studentName.toLowerCase() === studentName.toLowerCase());
             
             if (studentSubs.length === 0) {
-                feedbackBox.innerHTML = `<span class="text-gray-400 italic">Ko tii si idahun tabi mark ti a ti ṣe fun ọ.</span>`;
+                feedbackBox.innerHTML = `<span class="text-gray-400 italic">Ko tii si mark tabi atunṣe ti a ti ṣe fun ọ.</span>`;
                 return;
             }
 
@@ -2367,7 +2367,12 @@
             } else if (actionKey === 'verify_payment_mgr') {
                 const pendingVers = await fetchPendingVerificationsFromCloud();
                 panel.innerHTML = `
-                    <h4 class="font-bold text-indigo-900 text-sm md:text-base mb-2"><i class="fa-solid fa-receipt text-indigo-600 mr-2"></i>Verify My Payment Engine (SEEN Approval & Status Control + Delete)</h4>
+                    <div class="flex justify-between items-center mb-3">
+                        <h4 class="font-bold text-indigo-900 text-sm md:text-base"><i class="fa-solid fa-receipt text-indigo-600 mr-2"></i>Verify My Payment Engine (SEEN Approval & Status Control + Delete)</h4>
+                        <button onclick="handleAdminDropdownChange('verify_payment_mgr')" class="px-3 py-1.5 bg-indigo-900 hover:bg-indigo-800 text-white rounded font-bold text-xs cursor-pointer flex items-center space-x-1 shadow">
+                            <i class="fa-solid fa-rotate mr-1"></i> Ṣawari Tuntun (Refresh)
+                        </button>
+                    </div>
                     <p class="text-xs text-gray-600 mb-3">Nibi ni o le ri Transaction ID, Banki, ati isọfunni isanwo lati ọdọ awọn akẹkọ tabi Church groups. Tẹ SEEN lati fọwọsi, tabi Delete lati pa rẹ.</p>
                     <div class="space-y-3">
                         ${pendingVers.length === 0 ? '<p class="text-xs text-gray-500 italic">Ko tii si ẹri isanwo kankan ti o duro de ifọwọsi.</p>' : ''}
