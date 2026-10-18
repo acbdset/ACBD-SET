@@ -730,9 +730,8 @@
         // Strict Nigerian Phone Validator Function
         function isValidNigerianPhone(phoneStr) {
             const cleaned = String(phoneStr || "").trim();
-            // Accepts 08012345678 (11 digits starting with 0) or +2348012345678 (13 characters starting with +234)
-            const ngRegex1 = /^0[789][01]\d{8}$/; // Standard 11 digit NG numbers
-            const ngRegex2 = /^\+234[789][01]\d{8}$/; // International format +234
+            const ngRegex1 = /^0[789][01]\d{8}$/;
+            const ngRegex2 = /^\+234[789][01]\d{8}$/;
             return ngRegex1.test(cleaned) || ngRegex2.test(cleaned);
         }
 
